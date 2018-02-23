@@ -1,3 +1,4 @@
+import { ChatPage } from './../chat/chat';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -9,6 +10,10 @@ export class HomePage {
 
   constructor(public navCtrl: NavController) {
 
+  }
+
+  goToChatPage(){
+    this.navCtrl.push(ChatPage);
   }
 
 }
