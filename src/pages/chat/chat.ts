@@ -1,12 +1,9 @@
+import { Bot } from './../../model/bot/bot';
+import { MessageProvider } from './../../providers/message/message';
+import { Message } from './../../model/message';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ChatPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import 'rxjs/add/operator/finally';
 
 @IonicPage()
 @Component({
@@ -15,11 +12,37 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChatPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  bot:Bot;
+  sentMessages: Array<Message>;
+  currentMessage: string;
+  isSending: boolean;
+
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public messageProvider: MessageProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatPage');
+    this.bot= new Bot();
+    this.sentMessages= new Array<Message>();
+  }
+
+  sendMessage(){
+    let message = new Message(this.currentMessage, false);
+    this.showAndClearMessage(message);
+    this.messageProvider.send(message)
+                .subscribe( res =>{
+                            console.log(res);
+                            this.bot.setAction(res);
+                            this.sentMessages.push(this.bot.answer());
+                      })
+  }
+
+  private showAndClearMessage(message: Message){
+    this.sentMessages.push(message);
+    this.currentMessage="";
   }
 
 }

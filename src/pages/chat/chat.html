@@ -14,5 +14,28 @@
 
 
 <ion-content padding>
+  <ion-scroll class="sentMessagesContainer" scrollbar-y="true">
+    <div *ngFor="let msg of sentMessages"
+      class = "message"
+     [class.msgLeft]="msg.isBotMessage"
+     [class.msgRight]="!msg.isBotMessage" >
+      <p>{{msg.content}}</p>
 
+    </div>
+  </ion-scroll> 
 </ion-content>
+
+  <ion-footer class="currentMessageContainer" position="bottom">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-11>
+            <ion-textarea float [(ngModel)]="currentMessage"></ion-textarea>
+        </ion-col>
+        <ion-col col-1>
+            <button ion-button icon-only item-right (click)="sendMessage()">
+              <ion-icon name="send"></ion-icon>
+            </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-footer>
