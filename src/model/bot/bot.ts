@@ -1,20 +1,23 @@
+import { BotResources } from './botResources';
+import { GreetAction } from './botActions/greetAction';
+import { RasaProvider } from './../../providers/rasa/rasa';
+import { DefaultBotState } from './botStates/defaultBotState';
+import { BotState } from './botStates/botState';
 import { ActionFactory } from './actionFactory';
 import { ActionResponse } from './../actionResponse';
 import { Message } from './../message';
 import { Config } from './../../constants/config';
-import { Action } from './actions/action';
 export class Bot{
 
     name = Config.botName;
-    action: Action;
+    state :BotState;
 
-    setAction(actionResponse: ActionResponse){
-        console.log(actionResponse);
-        this.action=ActionFactory.createActionFromResponse(actionResponse);
+    constructor(messageList: Array<Message>, rasaProvider:RasaProvider){
+        this.state = new DefaultBotState(new BotResources(messageList, rasaProvider));
     }
 
-    answer(){
-        return this.action.execute();
+    readUserMessage(userMessage : Message){
+        this.state.processUserMessage(userMessage.content);
     }
 
 }

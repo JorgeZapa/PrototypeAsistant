@@ -3,5 +3,6 @@ const BASE_URL = "http://localhost:5005";
 
 export const Endpoints = {
 
-    SEND_MESSAGE : BASE_URL + "/conversations/{userId}/parse"
+    PARSE_TEXT : BASE_URL + "/conversations/{userId}/parse",
+    CONTINUE : BASE_URL + "/conversations/{userId}/continue"
 }

@@ -1,5 +1,5 @@
 import { Bot } from './../../model/bot/bot';
-import { MessageProvider } from './../../providers/message/message';
+import { RasaProvider } from './../../providers/rasa/rasa';
 import { Message } from './../../model/message';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -21,23 +21,18 @@ export class ChatPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public messageProvider: MessageProvider) {
+              public rasaProvider: RasaProvider) {
   }
 
   ionViewDidLoad() {
-    this.bot= new Bot();
     this.sentMessages= new Array<Message>();
+    this.bot = new Bot(this.sentMessages, this.rasaProvider);
   }
 
   sendMessage(){
     let message = new Message(this.currentMessage, false);
     this.showAndClearMessage(message);
-    this.messageProvider.send(message)
-                .subscribe( res =>{
-                            console.log(res);
-                            this.bot.setAction(res);
-                            this.sentMessages.push(this.bot.answer());
-                      })
+    this.bot.readUserMessage(message);
   }
 
   private showAndClearMessage(message: Message){

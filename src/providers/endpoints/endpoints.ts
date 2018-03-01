@@ -14,8 +14,12 @@ export class EndpointsProvider {
   constructor() {
   }
 
-  getSendMessageEndpoint(userId: number){
-    return Endpoints.SEND_MESSAGE.replace(/{.*}/g,String(userId))
+  getParseTextEndpoint(userId: number){
+    return Endpoints.PARSE_TEXT.replace(/{.*}/g,String(userId));
+  }
+
+  getContinueEndpoint(userId: number){
+    return Endpoints.CONTINUE.replace(/{.*}/g,String(userId));
   }
 
 }

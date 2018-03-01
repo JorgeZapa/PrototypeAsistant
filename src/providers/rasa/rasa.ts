@@ -13,19 +13,30 @@ import {Observable} from "rxjs/Observable";
   and Angular DI.
 */
 @Injectable()
-export class MessageProvider {
+export class RasaProvider {
 
   constructor(private http: HttpClient,
               private endpointsProvider:EndpointsProvider) {
   }
 
-  send(message: Message): Observable<ActionResponse>{
+  parse(text: string): Observable<ActionResponse>{
 
-    return this.http.post<ActionResponse>(this.endpointsProvider.getSendMessageEndpoint(1),{
-      query: message.content
+    return this.http.post<ActionResponse>(this.endpointsProvider.getParseTextEndpoint(1),{
+      query: text
     },{
       headers:{'Content-Type': 'application/x-www-form-urlencoded'}
     });
+  }
+
+  continue(lastExecutedAction: string): Observable<ActionResponse>{
+    return this.http.post<ActionResponse>(this.endpointsProvider.getContinueEndpoint(1),{
+      executed_action: lastExecutedAction,
+      events:[]
+    },{
+      headers:{'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+    
+
   }
 
 }
