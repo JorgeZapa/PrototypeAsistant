@@ -6,14 +6,18 @@ import { Message } from '../../message';
 
 export class GiveNumberAction extends BaseBotAction {
 
-    constructor(botResources: BotResources){
+    private phoneNumber: number;
+
+    constructor(botResources: BotResources, phoneNumber: number){
         super(botResources);
+        this.phoneNumber=phoneNumber;
     }
 
     getRasaEncodingName(): string {
         return Config.rasaSupportedActions.give_number;
     }
     execute() {
-        this.botResources.getMessageList().push(new Message("Thanks for the number!", true));
+        super.sendBotMessage("Interesting number!");
+        return null;
     }
 }

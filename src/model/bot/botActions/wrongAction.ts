@@ -9,10 +9,11 @@ export class WrongAction extends BaseBotAction {
         super(botResources);
     }
 
-    execute() {
-        this.botResources.getMessageList().push(new Message("Sorry, i didn't understand you...", true));
-    }
     getRasaEncodingName(): string {
         return Config.builtInActions.wrong;
+    }
+    execute() {
+        this.botResources.getMessageList().push(new Message("Sorry, i didn't understand you...", true));
+        return null;
     }
 }

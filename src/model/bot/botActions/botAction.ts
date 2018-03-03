@@ -1,4 +1,5 @@
+import { RasaEvent } from './../../rasaPetition/rasaEvent';
 export interface BotAction{
-    execute();
+    execute() : RasaEvent;
     getRasaEncodingName(): string;
 }

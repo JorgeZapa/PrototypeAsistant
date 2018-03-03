@@ -13,6 +13,7 @@ export class ListenAction extends BaseBotAction {
     }
     execute() {
         console.log("listen");
+        return null;
         //Desbloquear el text input.
     }
 }

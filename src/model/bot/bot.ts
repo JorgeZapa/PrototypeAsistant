@@ -4,20 +4,25 @@ import { RasaProvider } from './../../providers/rasa/rasa';
 import { DefaultBotState } from './botStates/defaultBotState';
 import { BotState } from './botStates/botState';
 import { ActionFactory } from './actionFactory';
-import { ActionResponse } from './../actionResponse';
+import { ActionResponse } from './../../model/rasaResponse/actionResponse';
 import { Message } from './../message';
 import { Config } from './../../constants/config';
+import { Content } from 'ionic-angular';
 export class Bot{
 
     name = Config.botName;
     state :BotState;
 
-    constructor(messageList: Array<Message>, rasaProvider:RasaProvider){
-        this.state = new DefaultBotState(new BotResources(messageList, rasaProvider));
+    constructor(messageList: Array<Message>, rasaProvider:RasaProvider, content: Content){
+        this.state = new DefaultBotState(new BotResources(messageList, rasaProvider, content));
     }
 
     readUserMessage(userMessage : Message){
         this.state.processUserMessage(userMessage.content);
+    }
+
+    welcomeUser(){
+        this.state.welcome();
     }
 
 }

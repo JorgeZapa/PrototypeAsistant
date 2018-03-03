@@ -13,6 +13,10 @@ export class GreetAction extends BaseBotAction {
         return Config.rasaSupportedActions.greet;
     }
     execute() {
-        this.botResources.getMessageList().push(new Message("Greetings", true));
+        super.sendBotMessage("Welcome!");
+        super.sendBotMessage("I am " + Config.botName + "!");
+        super.sendBotMessage("I know how hard is to remember things when you are a little bit clueless");
+        super.sendBotMessage("What is your name?");
+        return null;
     }
 }

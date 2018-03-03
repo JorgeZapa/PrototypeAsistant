@@ -7,4 +7,5 @@ export class Message{
         this.content= content;
         this.isBotMessage = isBotMessage;
     }
+    
 }

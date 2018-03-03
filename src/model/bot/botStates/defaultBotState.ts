@@ -2,11 +2,11 @@ import { GreetAction } from './../botActions/greetAction';
 import { BotResources } from './../botResources';
 import { WrongAction } from './../botActions/wrongAction';
 import { ListenAction } from './../botActions/listenAction';
-import { ActionResponse } from './../../actionResponse';
 import { ActionFactory } from './../actionFactory';
 import { RasaProvider } from './../../../providers/rasa/rasa';
 import { BotAction } from './../botActions/botAction';
 import { BotState } from './botState';
+import { ActionResponse } from '../../rasaResponse/actionResponse';
 export class DefaultBotState implements BotState {
 
     action: BotAction;
@@ -15,11 +15,11 @@ export class DefaultBotState implements BotState {
 
     constructor(botResources: BotResources){
         this.botResources = botResources;
-        this.welcome();
     }
 
     welcome(){
         this.action = new GreetAction(this.botResources);
+        this.action.execute();
         this.takeNextAction(this.action);
     }
 
@@ -41,7 +41,7 @@ export class DefaultBotState implements BotState {
     }
 
     takeNextAction(lastExecutedAction: BotAction){
-        this.botResources.getRasaProvider().continue(lastExecutedAction.getRasaEncodingName()).subscribe(res=>{
+        this.botResources.getRasaProvider().continue(lastExecutedAction.getRasaEncodingName(), null).subscribe(res=>{
             this.recursiveProcessAction(res);
         })
     }
@@ -52,7 +52,7 @@ export class DefaultBotState implements BotState {
             return;
         }
         this.action.execute();
-        this.botResources.getRasaProvider().continue(this.action.getRasaEncodingName()).subscribe(res=>{
+        this.botResources.getRasaProvider().continue(this.action.getRasaEncodingName(), null).subscribe(res=>{
             this.recursiveProcessAction(res);
         }
         )

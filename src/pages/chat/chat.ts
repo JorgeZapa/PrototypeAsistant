@@ -1,8 +1,8 @@
 import { Bot } from './../../model/bot/bot';
 import { RasaProvider } from './../../providers/rasa/rasa';
 import { Message } from './../../model/message';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import 'rxjs/add/operator/finally';
 
 @IonicPage()
@@ -18,6 +18,8 @@ export class ChatPage {
   currentMessage: string;
   isSending: boolean;
 
+  @ViewChild(Content) content: Content
+
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -26,7 +28,9 @@ export class ChatPage {
 
   ionViewDidLoad() {
     this.sentMessages= new Array<Message>();
-    this.bot = new Bot(this.sentMessages, this.rasaProvider);
+    this.bot = new Bot(this.sentMessages, this.rasaProvider, this.content);
+    this.bot.welcomeUser();
+    this.currentMessage="";
   }
 
   sendMessage(){
@@ -38,6 +42,11 @@ export class ChatPage {
   private showAndClearMessage(message: Message){
     this.sentMessages.push(message);
     this.currentMessage="";
+    this.content.scrollToBottom(300);
+  }
+
+  textAreaHasText(){
+    return this.currentMessage==undefined ||this.currentMessage.length!=0;
   }
 
 }

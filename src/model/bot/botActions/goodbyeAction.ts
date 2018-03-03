@@ -14,5 +14,6 @@ export class GoodbyeAction extends BaseBotAction {
     }
     execute(){
         this.botResources.getMessageList().push( new Message("Bye bye", true));
+        return null;
     }
 }

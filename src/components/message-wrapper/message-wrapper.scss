@@ -1,0 +1,88 @@
+message-wrapper {
+        $userMessageColor : rgb(218, 211, 211);
+        $botMessageColor : rgb(86, 55, 189);
+
+
+
+    img{
+        position: absolute;
+        border-radius: 45px;
+        width: 45px;
+        height: 45px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.36);
+    }
+
+    .messageContentContainer {
+        position: relative;
+        margin-top: 5px;
+        border-radius: 5px;
+        padding: 8px;
+        border: 1px solid #ddd;
+        color: #fff;
+        width: auto;
+        max-width: 80%;
+        span.triangle {
+          background-color: #fff;
+          border-radius: 2px;
+          height: 8px;
+          width: 8px;
+          top: 12px;
+          display: block;
+          border-style: solid;
+          border-color: #ddd;
+          border-width: 1px;
+          -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+          position: absolute;
+        }
+      }
+
+      .left {
+        .messageContentContainer {
+        padding-left: 10px;
+          margin-left: 60px;
+          background-color: $botMessageColor;
+        }
+        .img {
+          left: 0;
+        }
+        .messageContentContainer {
+          color: #f0eaea;
+          span.triangle {
+            border-top-width: 0;
+            border-right-width: 0;
+            left: -5px;
+            background-color: $botMessageColor;
+          }
+        }
+    }
+
+
+    .right{
+
+        .messageContentContainer {
+            background-color: $userMessageColor;
+          }
+          .messageContentContainer {
+            color: #343434;
+            span.triangle {
+                border-bottom-width: 0;
+                border-left-width: 0;
+                right: -5px;
+                background-color: $userMessageColor;
+            }
+          }
+
+    }
+    .content{
+      margin:4px;
+    }
+
+    .left p{
+        text-align: left;
+    }
+
+    .right p{
+        text-align: right;
+    }
+}

@@ -1,3 +1,4 @@
+import { MessageWrapperComponent } from './../components/message-wrapper/message-wrapper';
 import { ChatPage } from './../pages/chat/chat';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -16,7 +17,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   declarations: [
     MyApp,
     HomePage,
-    ChatPage
+    ChatPage, 
+    MessageWrapperComponent
   ],
   imports: [
     BrowserModule,

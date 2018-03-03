@@ -5,7 +5,7 @@ import { GiveNumberAction } from './botActions/giveNumberAction';
 import { BotResources } from './botResources';
 import { GreetAction } from './botActions/greetAction';
 import { Config } from './../../constants/config';
-import { ActionResponse } from './../actionResponse';
+import { ActionResponse } from './../rasaResponse/actionResponse';
 import { GoodbyeAction } from './botActions/goodbyeAction';
 import { GiveNameAction } from './botActions/giveNameAction';
 //import * as Actions from './actions/actions';
@@ -13,16 +13,16 @@ export class ActionFactory{
 
 
     static createActionFromResponse(actionResponse: ActionResponse, botResources: BotResources){
-        console.log(actionResponse.next_action);
+        console.log(actionResponse);
         switch(actionResponse.next_action){
             case "utter_greet":
                 return new GreetAction(botResources);
             case "utter_goodbye":
                 return new GoodbyeAction(botResources);
             case "utter_give_name":
-                return new GiveNameAction(botResources);
+                return new GiveNameAction(botResources, actionResponse.tracker.slots.name);
             case "utter_give_number":
-                return new GiveNumberAction(botResources);
+                return new GiveNumberAction(botResources, actionResponse.tracker.slots.number);
             case "utter_give_location":
                 return new GiveLocationAction(botResources);
             case "action_listen":
