@@ -18,6 +18,7 @@ export class GiveNumberAction extends BaseBotAction {
     }
     execute() {
         super.sendBotMessage("Interesting number!");
+        this.botResources.getUserProvider().getLoggedUser().setSosNumber(this.phoneNumber);
         return null;
     }
 }

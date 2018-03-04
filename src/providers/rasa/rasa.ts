@@ -25,7 +25,7 @@ export class RasaProvider {
   continue(lastExecutedAction: string, rasaEvent: RasaEvent): Observable<ActionResponse>{
     return this.http.post<ActionResponse>(this.endpointsProvider.getContinueEndpoint(1),{
       executed_action: lastExecutedAction,
-      events:rasaEvent==null?[]:rasaEvent
+      events:rasaEvent==null?[]:[rasaEvent]
     },{
       headers:{'Content-Type': 'application/x-www-form-urlencoded'}
     })

@@ -1,3 +1,4 @@
+import { UserProvider } from './../../providers/user/user';
 import { BotResources } from './botResources';
 import { GreetAction } from './botActions/greetAction';
 import { RasaProvider } from './../../providers/rasa/rasa';
@@ -13,8 +14,11 @@ export class Bot{
     name = Config.botName;
     state :BotState;
 
-    constructor(messageList: Array<Message>, rasaProvider:RasaProvider, content: Content){
-        this.state = new DefaultBotState(new BotResources(messageList, rasaProvider, content));
+    constructor(messageList: Array<Message>,
+                rasaProvider:RasaProvider,
+                content: Content,
+                userProvider: UserProvider){
+        this.state = new DefaultBotState(new BotResources(messageList, rasaProvider, content, userProvider));
     }
 
     readUserMessage(userMessage : Message){
