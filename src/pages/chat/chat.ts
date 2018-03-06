@@ -1,3 +1,4 @@
+import { LocationProvider } from './../../providers/location/location';
 import { UserProvider } from './../../providers/user/user';
 import { Bot } from './../../model/bot/bot';
 import { RasaProvider } from './../../providers/rasa/rasa';
@@ -25,13 +26,14 @@ export class ChatPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public rasaProvider: RasaProvider,
-              public userProvider: UserProvider) {
+              public userProvider: UserProvider,
+              public locationProvider: LocationProvider) {
   }
 
   ionViewDidLoad() {
     this.userProvider.logUserIn().subscribe(res=>{
       this.sentMessages= new Array<Message>();
-      this.bot = new Bot(this.sentMessages, this.rasaProvider, this.content, this.userProvider);
+      this.bot = new Bot(this.sentMessages, this.rasaProvider, this.content, this.userProvider, this.locationProvider);
       this.bot.welcomeUser();
       this.currentMessage="";
     });

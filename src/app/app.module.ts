@@ -7,6 +7,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 import {IonicStorageModule} from '@ionic/storage';
+import { Geolocation } from '@ionic-native/geolocation'
+import { SMS } from '@ionic-native/sms';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -15,7 +17,7 @@ import { EndpointsProvider } from '../providers/endpoints/endpoints';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { UserProvider } from '../providers/user/user';
 import { LocalDataProvider } from '../providers/local-data/local-data';
-
+import { LocationProvider } from '../providers/location/location';
 @NgModule({
   declarations: [
     MyApp,
@@ -42,7 +44,11 @@ import { LocalDataProvider } from '../providers/local-data/local-data';
     RasaProvider,
     EndpointsProvider,
     UserProvider,
-    LocalDataProvider
+    LocalDataProvider,
+    LocationProvider,
+    Geolocation,
+    SMS
+
   ]
 })
 export class AppModule {}

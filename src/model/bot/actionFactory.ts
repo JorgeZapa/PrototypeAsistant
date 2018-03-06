@@ -1,3 +1,5 @@
+import { DistanceAction } from './botActions/distanceAction';
+import { LostAction } from './botActions/lostAction';
 import { GiveLocationAction } from './botActions/giveLocationAction';
 import { BotAction } from './botActions/botAction';
 import { ListenAction } from './botActions/listenAction';
@@ -25,6 +27,10 @@ export class ActionFactory{
                 return new GiveNumberAction(botResources, actionResponse.tracker.slots.number);
             case "utter_give_location":
                 return new GiveLocationAction(botResources);
+            case "utter_lost":
+                return new LostAction(botResources);
+            case "utter_distance":
+                return new DistanceAction(botResources);
             case "action_listen":
                 return new ListenAction(botResources);
         }

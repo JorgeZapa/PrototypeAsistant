@@ -7,7 +7,9 @@ export const Config = {
         give_name: "utter_give_name",
         give_number:"utter_give_number",
         goodbye: "utter_goodbye",
-        listen: "action_listen"
+        listen: "action_listen",
+        lost: "utter_lost",
+        distance: "utter_distance"
     },
     builtInActions:{
         wrong: "wrong"

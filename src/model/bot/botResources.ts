@@ -1,3 +1,4 @@
+import { LocationProvider } from './../../providers/location/location';
 import { UserProvider } from './../../providers/user/user';
 import { RasaProvider } from './../../providers/rasa/rasa';
 import { Message } from './../message';
@@ -8,16 +9,19 @@ export class BotResources{
     private rasaProvider: RasaProvider;
     private content: Content;
     private storage: Storage;
-    private userProvider: UserProvider
+    private userProvider: UserProvider;
+    private locationProvider: LocationProvider;
 
     constructor(messageList: Array<Message>,
                 rasaProvider: RasaProvider,
                 content: Content,
-                userProvider: UserProvider){
+                userProvider: UserProvider,
+                locationProvider: LocationProvider){
         this.messageList = messageList;
         this.rasaProvider = rasaProvider;
         this.content = content;
         this.userProvider = userProvider;
+        this.locationProvider = locationProvider;
     }
 
     getMessageList() :Array<Message>{
@@ -34,6 +38,10 @@ export class BotResources{
 
     getUserProvider(){
         return this.userProvider;
+    }
+
+    getLocationProvider(){
+        return this.locationProvider;
     }
 
 
