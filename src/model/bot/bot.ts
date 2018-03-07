@@ -1,3 +1,4 @@
+import { SmsProvider } from './../../providers/sms/sms';
 import { LocationProvider } from './../../providers/location/location';
 import { UserProvider } from './../../providers/user/user';
 import { BotResources } from './botResources';
@@ -19,8 +20,10 @@ export class Bot{
                 rasaProvider:RasaProvider,
                 content: Content,
                 userProvider: UserProvider,
-                locationProvider: LocationProvider){
-        this.state = new DefaultBotState(new BotResources(messageList, rasaProvider, content, userProvider, locationProvider));
+                locationProvider: LocationProvider,
+                smsProvider: SmsProvider){
+        this.state = new DefaultBotState(new BotResources(messageList, rasaProvider, content,
+                                                         userProvider, locationProvider, smsProvider));
     }
 
     readUserMessage(userMessage : Message){

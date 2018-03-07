@@ -11,6 +11,7 @@ export class LostAction extends BaseBotAction {
 
     execute(): RasaEvent {
         super.sendBotMessage("Sending SOS message...");
+        this.botResources.getSmsProvider().sendSOSSMS();
         super.sendBotMessage("Please don't move from there, "
                              + this.botResources.getUserProvider().getLoggedUser().name);
         return null;

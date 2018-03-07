@@ -1,6 +1,6 @@
 export class User{
     name:string;
-    private sosNumber: number;
+    sosNumber: number;
     //Localizacion
 
     constructor(){

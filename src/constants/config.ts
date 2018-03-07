@@ -13,6 +13,9 @@ export const Config = {
     },
     builtInActions:{
         wrong: "wrong"
-    }
+    },
+    templateSMSMessage: "This is a message from Demencio. \n" +
+     "As this number was registered as SOS number we are sending you the coordinates of the lost client: \n"+
+     "Latitude: {lat} \nLongitude: {lon} ."
 
 }

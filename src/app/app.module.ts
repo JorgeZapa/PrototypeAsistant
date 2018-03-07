@@ -18,6 +18,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { UserProvider } from '../providers/user/user';
 import { LocalDataProvider } from '../providers/local-data/local-data';
 import { LocationProvider } from '../providers/location/location';
+import { SmsProvider } from '../providers/sms/sms';
 @NgModule({
   declarations: [
     MyApp,
@@ -47,7 +48,8 @@ import { LocationProvider } from '../providers/location/location';
     LocalDataProvider,
     LocationProvider,
     Geolocation,
-    SMS
+    SMS,
+    SmsProvider
 
   ]
 })

@@ -12,8 +12,7 @@ import { SimpleGeoposition } from '../../model/geolocation/simpleGeolocation';
 export class LocationProvider {
 
   constructor(private geolocation: Geolocation,
-              private localDataProvider: LocalDataProvider,
-              private platform: Platform) {
+              private localDataProvider: LocalDataProvider) {
   }
 
   getCurrentLocation(): Observable<Geoposition>{
@@ -100,9 +99,5 @@ export class LocationProvider {
     private deg2rad(deg) {
       return deg * (Math.PI/180)
     }
-
-  private isDevice(){
-    return this.platform.is('cordova');
-  }
 
 }
