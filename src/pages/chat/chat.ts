@@ -1,3 +1,4 @@
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { SmsProvider } from './../../providers/sms/sms';
 import { LocationProvider } from './../../providers/location/location';
 import { UserProvider } from './../../providers/user/user';
@@ -29,14 +30,16 @@ export class ChatPage {
               public rasaProvider: RasaProvider,
               public userProvider: UserProvider,
               public locationProvider: LocationProvider,
-              public smsProvider: SmsProvider) {
+              public smsProvider: SmsProvider,
+              public launchNavigator : LaunchNavigator) {
   }
 
   ionViewDidLoad() {
     this.userProvider.logUserIn().subscribe(res=>{
       this.sentMessages= new Array<Message>();
       this.bot = new Bot(this.sentMessages, this.rasaProvider, this.content,
-                   this.userProvider, this.locationProvider, this.smsProvider);
+                   this.userProvider, this.locationProvider, this.smsProvider,
+                   this.launchNavigator);
       this.bot.welcomeUser();
       this.currentMessage="";
     });

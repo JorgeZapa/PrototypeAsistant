@@ -87,4 +87,6 @@
     </plugin>
     <engine name="android" spec="~6.3.0" />
     <plugin name="cordova-sms-plugin" spec="^0.1.11" />
+    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.1.5" />
+    <plugin name="cordova-plugin-speechrecognition" spec="^1.2.0" />
 </widget>

@@ -1,3 +1,4 @@
+import { GoHomeAction } from './botActions/goHomeAction';
 import { DistanceAction } from './botActions/distanceAction';
 import { LostAction } from './botActions/lostAction';
 import { GiveLocationAction } from './botActions/giveLocationAction';
@@ -31,6 +32,8 @@ export class ActionFactory{
                 return new LostAction(botResources);
             case "utter_distance":
                 return new DistanceAction(botResources);
+            case "utter_go_home":
+                return new GoHomeAction(botResources); 
             case "action_listen":
                 return new ListenAction(botResources);
         }

@@ -1,3 +1,4 @@
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { SmsProvider } from './../../providers/sms/sms';
 import { LocationProvider } from './../../providers/location/location';
 import { UserProvider } from './../../providers/user/user';
@@ -21,9 +22,11 @@ export class Bot{
                 content: Content,
                 userProvider: UserProvider,
                 locationProvider: LocationProvider,
-                smsProvider: SmsProvider){
+                smsProvider: SmsProvider,
+                launchNavigator: LaunchNavigator){
         this.state = new DefaultBotState(new BotResources(messageList, rasaProvider, content,
-                                                         userProvider, locationProvider, smsProvider));
+                                                         userProvider, locationProvider, smsProvider,
+                                                         launchNavigator));
     }
 
     readUserMessage(userMessage : Message){

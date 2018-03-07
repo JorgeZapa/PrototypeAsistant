@@ -9,6 +9,7 @@ import { HttpModule } from '@angular/http';
 import {IonicStorageModule} from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation'
 import { SMS } from '@ionic-native/sms';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -49,7 +50,8 @@ import { SmsProvider } from '../providers/sms/sms';
     LocationProvider,
     Geolocation,
     SMS,
-    SmsProvider
+    SmsProvider,
+    LaunchNavigator
 
   ]
 })

@@ -9,7 +9,8 @@ export const Config = {
         goodbye: "utter_goodbye",
         listen: "action_listen",
         lost: "utter_lost",
-        distance: "utter_distance"
+        distance: "utter_distance",
+        go_home: "utter_go_home"
     },
     builtInActions:{
         wrong: "wrong"
