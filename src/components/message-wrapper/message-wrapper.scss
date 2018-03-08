@@ -2,7 +2,19 @@ message-wrapper {
         $userMessageColor : rgb(218, 211, 211);
         $botMessageColor : rgb(86, 55, 189);
 
+    .wrapper{
+      display: flex;
+    }
 
+    .right{
+      justify-content: flex-end;
+      .messageContentContainer{
+        order:2;
+      }
+      button{
+        order:1;
+      }
+    }
 
     img{
         position: absolute;

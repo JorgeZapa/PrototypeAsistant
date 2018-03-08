@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Message } from '../../model/message';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 @Component({
   selector: 'message-wrapper',
@@ -10,9 +11,13 @@ export class MessageWrapperComponent {
   @Input()
   message: Message;
 
-  private profileBotPicture = "./assets/imgs/wallie.jpg" 
+  private profileBotPicture = "./assets/imgs/wallie.jpg"; 
 
-  constructor() {
+  constructor(private textToSpeech: TextToSpeech) {
   }
 
+  readSpeech(){
+    this.textToSpeech.speak(this.message.content);
+  }
+  
 }

@@ -27,9 +27,10 @@
             <ion-textarea float [(ngModel)]="currentMessage"></ion-textarea>
         </ion-col>
         <ion-col col-2>
-            <button ion-button icon-only item-right (click)="sendMessage()" [disabled]="!textAreaHasText()">
+            <button ion-button icon-only item-right (click)="sendMessage()" *ngIf="textAreaHasText()">
               <ion-icon name="send"></ion-icon>
             </button>
+            <speech-button icon-only *ngIf="!textAreaHasText()" (getTextDestination)="updateCurrentMessage($event)" ></speech-button>
         </ion-col>
       </ion-row>
     </ion-grid>

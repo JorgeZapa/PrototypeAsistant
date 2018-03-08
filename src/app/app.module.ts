@@ -1,3 +1,4 @@
+import { SpeechButtonComponent } from './../components/speech-button/speech-button';
 import { MessageWrapperComponent } from './../components/message-wrapper/message-wrapper';
 import { ChatPage } from './../pages/chat/chat';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,6 +11,8 @@ import {IonicStorageModule} from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation'
 import { SMS } from '@ionic-native/sms';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { SpeechRecognition } from '@ionic-native/speech-recognition';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -20,18 +23,21 @@ import { UserProvider } from '../providers/user/user';
 import { LocalDataProvider } from '../providers/local-data/local-data';
 import { LocationProvider } from '../providers/location/location';
 import { SmsProvider } from '../providers/sms/sms';
+import { LongPressModule } from 'ionic-long-press';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ChatPage, 
-    MessageWrapperComponent
+    MessageWrapperComponent,
+    SpeechButtonComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    LongPressModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,8 +57,9 @@ import { SmsProvider } from '../providers/sms/sms';
     Geolocation,
     SMS,
     SmsProvider,
-    LaunchNavigator
-
+    LaunchNavigator,
+    SpeechRecognition,
+    TextToSpeech
   ]
 })
 export class AppModule {}
