@@ -18,8 +18,10 @@ export class GiveLocationAction extends BaseBotAction {
     execute() {
        super.sendBotMessage("Now i'll use my magic powers to get your location to help you get back when you get lost!");
        super.sendBotMessage("If you allow me, of course");
-       this.botResources.getLocationProvider().saveHomeLocation().subscribe();
-       this.botResources.getUserProvider().updateUser().subscribe();
+       this.botResources.getLocationProvider().saveHomeLocation().subscribe(ok=>{}, error=>{
+           console.log(error);
+           super.sendBotMessage("I couldn't use my magic at all. Something went wrong getting your location.");
+       });
        return null;
     }
     

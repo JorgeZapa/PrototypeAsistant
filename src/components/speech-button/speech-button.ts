@@ -1,4 +1,5 @@
-import { Platform } from "ionic-angular";
+import { Config } from "./../../constants/config";
+import { Platform, Events } from "ionic-angular";
 import {
   SpeechRecognition,
   SpeechRecognitionListeningOptions
@@ -11,18 +12,25 @@ import { Component, Input, EventEmitter, Output } from "@angular/core";
 })
 export class SpeechButtonComponent {
   private havePermision: boolean;
+  private hearing = false;
 
-  @Output() getTextDestination = new EventEmitter<string>();
+  @Output() textOutputEvent = new EventEmitter<string>();
 
   private options: SpeechRecognitionListeningOptions = {
     showPopup: false
-
   };
 
   constructor(
     private speechRecognition: SpeechRecognition,
-    private platform: Platform
+    private platform: Platform,
+    private events: Events
   ) {}
+
+  checkPermission() {
+    this.speechRecognition
+      .requestPermission()
+      .then(res => this.processSpeech());
+  }
 
   start() {
     /*if(!this.isDevice()){
@@ -44,15 +52,19 @@ export class SpeechButtonComponent {
         //alert aqui
         console.log("speechRecognition not available in this device");
       } else {
-        this.speechRecognition.startListening(this.options).subscribe(
+        this.hearing=true;
+        this.speechRecognition.startListening(this.options).finally(()=> this.hearing=false).subscribe(
           interpretedText => {
             console.log(interpretedText.join(" "));
-            let textDestination = interpretedText[0];
-            this.getTextDestination.emit(textDestination);
+            this.textOutputEvent.emit(interpretedText[0]);
           },
           error => {
             console.log("could not retireve text form speech");
             console.log(error);
+            this.events.publish(
+              Config.EventSend.SEND_BOT_MESSAGE,
+              "I can't hear you, you may need to accept the permissions!"
+            );
           }
         );
       }

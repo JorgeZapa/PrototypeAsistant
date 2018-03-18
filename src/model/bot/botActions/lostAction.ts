@@ -11,9 +11,16 @@ export class LostAction extends BaseBotAction {
 
     execute(): RasaEvent {
         super.sendBotMessage("Sending SOS message...");
-        this.botResources.getSmsProvider().sendSOSSMS();
-        super.sendBotMessage("Please don't move from there, "
+        this.botResources.getSmsProvider().sendSOSSMS().subscribe(ok=>{
+            super.sendBotMessage("SOS SENT!!!");
+            super.sendBotMessage("Please don't move from there, "
                              + this.botResources.getUserProvider().getLoggedUser().name);
+            
+        }, error=>{
+            console.log(error);
+            super.sendBotMessage("I couldn't send the SMS, maybe you need to acept the permissions");
+        });
+        
         return null;
     }
     getRasaEncodingName(): string {

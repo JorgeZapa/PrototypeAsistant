@@ -1,3 +1,4 @@
+import { TimeoutInterceptor } from './../interceptors/timeoutInterceptor';
 import { SpeechButtonComponent } from './../components/speech-button/speech-button';
 import { MessageWrapperComponent } from './../components/message-wrapper/message-wrapper';
 import { ChatPage } from './../pages/chat/chat';
@@ -18,12 +19,13 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RasaProvider } from '../providers/rasa/rasa';
 import { EndpointsProvider } from '../providers/endpoints/endpoints';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserProvider } from '../providers/user/user';
 import { LocalDataProvider } from '../providers/local-data/local-data';
 import { LocationProvider } from '../providers/location/location';
 import { SmsProvider } from '../providers/sms/sms';
 import { LongPressModule } from 'ionic-long-press';
+import { ErrorHanlderProvider } from '../providers/error-hanlder/error-hanlder';
 @NgModule({
   declarations: [
     MyApp,
@@ -59,7 +61,10 @@ import { LongPressModule } from 'ionic-long-press';
     SmsProvider,
     LaunchNavigator,
     SpeechRecognition,
-    TextToSpeech
+    TextToSpeech,
+    ErrorHanlderProvider,{
+      provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true 
+    }
   ]
 })
 export class AppModule {}

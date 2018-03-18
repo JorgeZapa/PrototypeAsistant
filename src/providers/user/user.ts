@@ -24,6 +24,7 @@ export class UserProvider {
           subscriber.complete();
         }
         else{
+          console.log(user);
           this.loggedUser=user;
           console.log("user was logged once before.");
           subscriber.next();

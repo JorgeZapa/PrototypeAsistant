@@ -1,4 +1,4 @@
 <!-- Generated template for the SpeechButtonComponent component -->
-<button ion-button ion-long-press [interval]=400 (onPressStart)="start()">
+<button class="speechButton" ion-button [disabled]="hearing" ion-long-press (onclick)="checkPermission()" [interval]=400 (onPressStart)="start()">
   <ion-icon name="mic"></ion-icon>
 </button>

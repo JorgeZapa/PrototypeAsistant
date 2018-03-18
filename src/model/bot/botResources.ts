@@ -1,3 +1,4 @@
+import { Events } from 'ionic-angular';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { SmsProvider } from './../../providers/sms/sms';
 import { LocationProvider } from './../../providers/location/location';
@@ -15,6 +16,7 @@ export class BotResources{
     private locationProvider: LocationProvider;
     private smsProvider: SmsProvider;
     private launchNavigator: LaunchNavigator;
+    private events : Events;
 
     constructor(messageList: Array<Message>,
                 rasaProvider: RasaProvider,
@@ -22,7 +24,8 @@ export class BotResources{
                 userProvider: UserProvider,
                 locationProvider: LocationProvider,
                 smsProvider: SmsProvider,
-                launchNavigator: LaunchNavigator){
+                launchNavigator: LaunchNavigator,
+                events: Events){
         this.messageList = messageList;
         this.rasaProvider = rasaProvider;
         this.content = content;
@@ -30,6 +33,7 @@ export class BotResources{
         this.locationProvider = locationProvider;
         this.smsProvider = smsProvider;
         this.launchNavigator = launchNavigator;
+        this.events=events;
     }
 
     getMessageList() :Array<Message>{
@@ -58,6 +62,10 @@ export class BotResources{
 
     getLaunchNavigator(){
         return this.launchNavigator;
+    }
+
+    getEvents(){
+        return this.events;
     }
 
 

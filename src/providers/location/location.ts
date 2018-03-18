@@ -39,7 +39,7 @@ export class LocationProvider {
           },
             error =>{
               console.log(error)
-              subscriber.complete();
+              subscriber.error(error);
             });
             
                                                                   
