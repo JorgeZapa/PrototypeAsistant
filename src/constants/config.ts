@@ -6,6 +6,9 @@ export const Config = {
   EventSend:{
     SEND_BOT_MESSAGE: "SEND_BOT_MESSAGE"
   },
+  EventChangeState:{
+    CHANGE_BOT_STATE: "CHANGE_BOT_STATE"
+  },
   rasaSupportedActions: {
     greet: "utter_greet",
     location: "utter_give_location",
@@ -21,6 +24,12 @@ export const Config = {
   },
   builtInActions: {
     wrong: "wrong"
+  },
+  StateBotAllowedActions:{
+    welcome:["utter_greet","utter_give_location",
+    "utter_give_name","utter_give_number", "utter_no_name",
+    "utter_no_number"],
+    default:["*"]
   },
   templateSMSMessage:
     "This is a message from Demencio. \n" +

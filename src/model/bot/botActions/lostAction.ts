@@ -1,3 +1,4 @@
+import { BotFlowController } from './../botFlow/botFlowController';
 import { Config } from './../../../constants/config';
 import { BotResources } from './../botResources';
 import { BaseBotAction } from "./baseBotAction";
@@ -5,8 +6,8 @@ import { RasaEvent } from '../../rasaPetition/rasaEvent';
 
 export class LostAction extends BaseBotAction {
 
-    constructor(botResources: BotResources){
-        super(botResources);
+    constructor(botResources: BotResources, botFlowController: BotFlowController){
+        super(botResources, botFlowController);
     }
 
     execute(): RasaEvent {

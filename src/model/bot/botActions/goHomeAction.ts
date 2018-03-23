@@ -1,10 +1,11 @@
+import { BotFlowController } from './../botFlow/botFlowController';
 import { Config } from "./../../../constants/config";
 import { BotResources } from "./../botResources";
 import { BaseBotAction } from "./baseBotAction";
 import { RasaEvent } from "../../rasaPetition/rasaEvent";
 export class GoHomeAction extends BaseBotAction {
-  constructor(botResources: BotResources) {
-    super(botResources);
+  constructor(botResources: BotResources, botFlowController: BotFlowController) {
+    super(botResources, botFlowController);
   }
 
   execute(): RasaEvent {
@@ -22,7 +23,7 @@ export class GoHomeAction extends BaseBotAction {
             position.coordinates.latitude,
             position.coordinates.longitude
           ];
-
+          
           super.sendBotMessage("This will lead you to the route to get home");
           this.botResources
             .getLaunchNavigator()

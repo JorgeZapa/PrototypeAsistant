@@ -1,17 +1,17 @@
-import { RasaEvent } from './../../rasaPetition/rasaEvent';
-import { Config } from './../../../constants/config';
+import { BotFlowController } from './../botFlow/botFlowController';
 import { BotResources } from './../botResources';
-import { BotAction } from "./botAction";
 import { BaseBotAction } from "./baseBotAction";
-import { Message } from '../../message';
+import { Config } from '../../../constants/config';
 import { RasaEvents } from '../../rasaPetition/rasaEvents';
+import { RasaEvent } from '../../rasaPetition/rasaEvent';
+
 
 export class GiveNumberAction extends BaseBotAction {
 
     private phoneNumber: number;
 
-    constructor(botResources: BotResources, phoneNumber: number){
-        super(botResources);
+    constructor(botResources: BotResources, botFlowController: BotFlowController, phoneNumber: number){
+        super(botResources, botFlowController);
         this.phoneNumber=phoneNumber;
     }
 

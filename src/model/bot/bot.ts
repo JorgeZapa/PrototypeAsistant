@@ -1,20 +1,19 @@
+import { botFlowControllerImpl } from './botFlow/botFlowControllerImpl';
+import { BotFlowController } from './botFlow/botFlowController';
 import { LaunchNavigator } from "@ionic-native/launch-navigator";
 import { SmsProvider } from "./../../providers/sms/sms";
 import { LocationProvider } from "./../../providers/location/location";
 import { UserProvider } from "./../../providers/user/user";
 import { BotResources } from "./botResources";
-import { GreetAction } from "./botActions/greetAction";
 import { RasaProvider } from "./../../providers/rasa/rasa";
-import { DefaultBotState } from "./botStates/defaultBotState";
-import { BotState } from "./botStates/botState";
 import { ActionFactory } from "./actionFactory";
 import { ActionResponse } from "./../../model/rasaResponse/actionResponse";
 import { Message } from "./../message";
 import { Config } from "./../../constants/config";
 import { Content, Events } from "ionic-angular";
-export class Bot {
+export class Bot{
   name = Config.botName;
-  state: BotState;
+  flowController: BotFlowController;
 
   constructor(
     messageList: Array<Message>,
@@ -24,9 +23,9 @@ export class Bot {
     locationProvider: LocationProvider,
     smsProvider: SmsProvider,
     launchNavigator: LaunchNavigator,
-    events: Events
+    private events: Events
   ) {
-    this.state = new DefaultBotState(
+    this.flowController = new botFlowControllerImpl(
       new BotResources(
         messageList,
         rasaProvider,
@@ -40,11 +39,13 @@ export class Bot {
     );
   }
 
+
+
   readUserMessage(userMessage: Message) {
-    this.state.processUserMessage(userMessage.content);
+    this.flowController.processUserMessage(userMessage.content);
   }
 
   welcomeUser() {
-    this.state.welcome();
+    this.flowController.welcome();
   }
 }

@@ -7,7 +7,7 @@ class Tracker{
     slots: Slots;
 }
 
-class Slots{
+export class Slots{
     name: string;
     number: number;
 }

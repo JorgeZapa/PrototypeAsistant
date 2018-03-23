@@ -1,3 +1,4 @@
+import { BotFlowController } from './../botFlow/botFlowController';
 import { Config } from './../../../constants/config';
 import { BotResources } from './../botResources';
 import { BotAction } from "./botAction";
@@ -6,8 +7,8 @@ import { Message } from '../../message';
 
 export class GoodbyeAction extends BaseBotAction {
 
-    constructor(botResources: BotResources){
-        super(botResources)
+    constructor(botResources: BotResources, botFlowController: BotFlowController){
+        super(botResources, botFlowController)
     }
     getRasaEncodingName(): string {
         return Config.rasaSupportedActions.goodbye;

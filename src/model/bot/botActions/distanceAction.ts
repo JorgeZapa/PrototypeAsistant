@@ -1,3 +1,4 @@
+import { BotFlowController } from './../botFlow/botFlowController';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import { Config } from './../../../constants/config';
@@ -7,8 +8,8 @@ import { BaseBotAction } from "./baseBotAction";
 
 export class DistanceAction extends BaseBotAction {
 
-    constructor(botResources: BotResources){
-        super(botResources);
+    constructor(botResources: BotResources, botFlowController: BotFlowController){
+        super(botResources,botFlowController);
     }
 
     execute(): RasaEvent {

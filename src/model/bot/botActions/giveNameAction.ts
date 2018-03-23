@@ -1,3 +1,4 @@
+import { BotFlowController } from './../botFlow/botFlowController';
 import { Config } from './../../../constants/config';
 import { BotResources } from './../botResources';
 import { BotAction } from "./botAction";
@@ -9,8 +10,8 @@ export class GiveNameAction extends BaseBotAction {
 
     name: string;
 
-    constructor(botResources: BotResources,name: string ){
-        super(botResources);
+    constructor(botResources: BotResources, botFlowController: BotFlowController,name: string ){
+        super(botResources, botFlowController);
         this.name=name;
     }
 

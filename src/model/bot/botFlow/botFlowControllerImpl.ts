@@ -1,20 +1,27 @@
-import { GoodbyeAction } from "./../botActions/goodbyeAction";
-import { Config } from "./../../../constants/config";
-import { RasaEvent } from "./../../rasaPetition/rasaEvent";
-import { GreetAction } from "./../botActions/greetAction";
-import { BotResources } from "./../botResources";
-import { WrongAction } from "./../botActions/wrongAction";
-import { ListenAction } from "./../botActions/listenAction";
-import { ActionFactory } from "./../actionFactory";
-import { RasaProvider } from "./../../../providers/rasa/rasa";
-import { BotAction } from "./../botActions/botAction";
-import { BotState } from "./botState";
-import { ActionResponse } from "../../rasaResponse/actionResponse";
-import { RasaEvents } from "../../rasaPetition/rasaEvents";
-export class DefaultBotState implements BotState {
+import { DefaultFlowConfig } from './botFlowConfig/defaultFlowConfig';
+import { BotFlowConfig } from './botFlowConfig/botFlowConfig';
+import { ListenAction } from './../botActions/listenAction';
+import { BotAction } from './../botActions/botAction';
+import { BotResources } from '../botResources';
+import { RasaEvent } from '../../rasaPetition/rasaEvent';
+import { RasaEvents } from '../../rasaPetition/rasaEvents';
+import { Config } from '../../../constants/config';
+import { ActionResponse } from '../../rasaResponse/actionResponse';
+import { ActionFactory } from '../actionFactory';
+import { BotFlowController } from './botFlowController';
+
+export class botFlowControllerImpl implements BotFlowController {
   action: BotAction;
-  initialAction: BotAction;
   botResources: BotResources;
+  botFlowConfig: BotFlowConfig = new DefaultFlowConfig();
+
+
+  setBotFlowConfig(botFlowConfig: BotFlowConfig) {
+    this.botFlowConfig = botFlowConfig;
+  }
+  getBotFlowConfig(): BotFlowConfig {
+    return this.botFlowConfig;
+  }
 
   constructor(botResources: BotResources) {
     this.botResources = botResources;
@@ -24,11 +31,11 @@ export class DefaultBotState implements BotState {
     this.botResources
       .getRasaProvider()
       .continue(
-        new GoodbyeAction(this.botResources).getRasaEncodingName(),
+        Config.rasaSupportedActions.goodbye,
         new RasaEvent(RasaEvents.restart)
       )
       .subscribe(res => {
-        this.action = new GreetAction(this.botResources);
+        this.action = ActionFactory.createActionFromName(Config.rasaSupportedActions.greet ,this.botResources, this,null);
         let rEvent = this.action.execute();
         this.takeNextAction(this.action, rEvent);
       });
@@ -42,12 +49,13 @@ export class DefaultBotState implements BotState {
         res => {
           this.action = ActionFactory.createActionFromResponse(
             res,
-            this.botResources
+            this.botResources,
+            this
           );
 
-          if (this.action instanceof ListenAction) {
-            //If twice ListenAction -> we didn't understand
-            new WrongAction(this.botResources).execute();
+          if (!this.checkActionAllowed(this.action)) {
+            //If the action is not allowed -> we didn't understand
+            ActionFactory.createActionFromName(Config.builtInActions.wrong, this.botResources, this, null).execute();
             return;
           }
           let rEvent = this.action.execute();
@@ -59,6 +67,13 @@ export class DefaultBotState implements BotState {
             .getEvents()
             .publish(Config.EventErrors.NO_CONNECTION, "BZZZ, NO CONECTION")
       );
+  }
+
+  private checkActionAllowed(action: BotAction) {
+    console.log(this.botFlowConfig.getAllowedActions())
+    console.log(this.botFlowConfig.getAllowedActions().indexOf(this.action.getRasaEncodingName()))
+    return (this.botFlowConfig.getAllowedActions().indexOf(this.action.getRasaEncodingName()) !=-1 
+      ||  this.botFlowConfig.getAllowedActions().indexOf("*") != -1);
   }
 
   takeNextAction(lastExecutedAction: BotAction, rEvent: RasaEvent) {
@@ -79,7 +94,8 @@ export class DefaultBotState implements BotState {
   recursiveProcessAction(actResponse: ActionResponse) {
     this.action = ActionFactory.createActionFromResponse(
       actResponse,
-      this.botResources
+      this.botResources,
+      this
     );
     if (this.action instanceof ListenAction) {
       return;

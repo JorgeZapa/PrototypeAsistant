@@ -1,11 +1,12 @@
+import { BotFlowController } from './../botFlow/botFlowController';
 import { RasaEvent } from "./../../rasaPetition/rasaEvent";
 import { BotResources } from "./../botResources";
 import { BaseBotAction } from "./baseBotAction";
 import { Config } from "../../../constants/config";
 
 export class NoNumberAction extends BaseBotAction {
-  constructor(botResouces: BotResources) {
-    super(botResouces);
+  constructor(botResources: BotResources, botFlowController: BotFlowController) {
+    super(botResources, botFlowController);
   }
 
   execute(): RasaEvent {
