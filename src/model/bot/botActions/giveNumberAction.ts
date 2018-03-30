@@ -1,9 +1,8 @@
+import { RasaRestartSlotsEvent } from './../../rasaPetition/Events/rasaRestartSlotsEvent';
 import { BotFlowController } from './../botFlow/botFlowController';
 import { BotResources } from './../botResources';
 import { BaseBotAction } from "./baseBotAction";
 import { Config } from '../../../constants/config';
-import { RasaEvents } from '../../rasaPetition/rasaEvents';
-import { RasaEvent } from '../../rasaPetition/rasaEvent';
 
 
 export class GiveNumberAction extends BaseBotAction {
@@ -25,6 +24,6 @@ export class GiveNumberAction extends BaseBotAction {
             console.log(error);
             super.sendBotMessage("I couldn't save your data, when you come back i might not remember you...");
         });
-        return new RasaEvent(RasaEvents.resetSlots);
+        return new RasaRestartSlotsEvent();
     }
 }

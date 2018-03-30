@@ -1,7 +1,7 @@
+import { RasaSetSlotEvent } from './../../rasaPetition/Events/rasaSetSlotEvent';
+import { RasaRestartEvent } from './../../rasaPetition/Events/rasaRestartEvent';
 import { WelcomeFlowConfig } from './../botFlow/botFlowConfig/welcomeFlowConfig';
 import { BotFlowController } from './../botFlow/botFlowController';
-import { RasaEvents } from "./../../rasaPetition/rasaEvents";
-import { RasaEvent } from "./../../rasaPetition/rasaEvent";
 import { BotResources } from "./../botResources";
 import { Config } from "./../../../constants/config";
 import { BotAction } from "./botAction";
@@ -25,7 +25,7 @@ export class GreetAction extends BaseBotAction {
       this.botFlowController.setBotFlowConfig(new WelcomeFlowConfig());
     } else {
       this.usualGreetings(loggedUser);
-      resultingEvent = new RasaEvent(RasaEvents.restart);
+      resultingEvent = new RasaRestartEvent();
     }
     return resultingEvent;
   }
@@ -45,4 +45,5 @@ export class GreetAction extends BaseBotAction {
     super.sendBotMessage("Amazing, right?");
     super.sendBotMessage("How can i help you today?");
   }
+
 }

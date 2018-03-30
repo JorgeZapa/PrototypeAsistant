@@ -1,10 +1,10 @@
+import { RasaRestartEvent } from './../../rasaPetition/Events/rasaRestartEvent';
+import { RasaEvent } from './../../rasaPetition/Events/rasaEvent';
 import { DefaultFlowConfig } from './botFlowConfig/defaultFlowConfig';
 import { BotFlowConfig } from './botFlowConfig/botFlowConfig';
 import { ListenAction } from './../botActions/listenAction';
 import { BotAction } from './../botActions/botAction';
 import { BotResources } from '../botResources';
-import { RasaEvent } from '../../rasaPetition/rasaEvent';
-import { RasaEvents } from '../../rasaPetition/rasaEvents';
 import { Config } from '../../../constants/config';
 import { ActionResponse } from '../../rasaResponse/actionResponse';
 import { ActionFactory } from '../actionFactory';
@@ -12,6 +12,7 @@ import { BotFlowController } from './botFlowController';
 
 export class botFlowControllerImpl implements BotFlowController {
   action: BotAction;
+  previousAction: BotAction;
   botResources: BotResources;
   botFlowConfig: BotFlowConfig = new DefaultFlowConfig();
 
@@ -27,31 +28,44 @@ export class botFlowControllerImpl implements BotFlowController {
     this.botResources = botResources;
   }
 
+  private changeAction(action: BotAction){
+    this.previousAction = this.action;
+    this.action = action;
+  }
+
   welcome() {
     this.botResources
       .getRasaProvider()
       .continue(
         Config.rasaSupportedActions.goodbye,
-        new RasaEvent(RasaEvents.restart)
+        new RasaRestartEvent()
       )
       .subscribe(res => {
-        this.action = ActionFactory.createActionFromName(Config.rasaSupportedActions.greet ,this.botResources, this,null);
+        this.changeAction(ActionFactory.createActionFromName(Config.rasaSupportedActions.greet ,this.botResources, this,null))
         let rEvent = this.action.execute();
         this.takeNextAction(this.action, rEvent);
       });
   }
 
   processUserMessage(message: string) {
+
+    let rEventBeforeParse = this.action.doBeforeParsing(message, this.previousAction);
+
+    if(rEventBeforeParse!=null){
+      this.botResources.getRasaProvider().sendSetSlotsEvent(rEventBeforeParse).subscribe()
+      message = "My name is C0m0D1N";
+    }
+
     this.botResources
       .getRasaProvider()
       .parse(message)
       .subscribe(
         res => {
-          this.action = ActionFactory.createActionFromResponse(
+          this.changeAction(ActionFactory.createActionFromResponse(
             res,
             this.botResources,
             this
-          );
+          ));
 
           if (!this.checkActionAllowed(this.action)) {
             //If the action is not allowed -> we didn't understand
@@ -92,11 +106,11 @@ export class botFlowControllerImpl implements BotFlowController {
   }
 
   recursiveProcessAction(actResponse: ActionResponse) {
-    this.action = ActionFactory.createActionFromResponse(
+    this.changeAction(ActionFactory.createActionFromResponse(
       actResponse,
       this.botResources,
       this
-    );
+    ));
     if (this.action instanceof ListenAction) {
       return;
     }

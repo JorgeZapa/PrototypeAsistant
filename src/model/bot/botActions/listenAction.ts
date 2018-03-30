@@ -1,8 +1,11 @@
+import { NoNameAction } from './noNameAction';
+import { GreetAction } from './greetAction';
 import { BotFlowController } from './../botFlow/botFlowController';
 import { Config } from './../../../constants/config';
 import { BotResources } from './../botResources';
 import { BotAction } from './botAction';
 import { BaseBotAction } from './baseBotAction';
+import { RasaSetSlotEvent } from '../../rasaPetition/Events/rasaSetSlotEvent';
 export class ListenAction extends BaseBotAction {
 
     constructor(botResources: BotResources, botFlowController: BotFlowController){
@@ -15,6 +18,15 @@ export class ListenAction extends BaseBotAction {
     execute() {
         console.log("listen");
         return null;
-        //Desbloquear el text input.
+    }
+
+    doBeforeParsing(messageContent: string, previousAction: BotAction){
+    let loggedUser = this.botResources.getUserProvider().getLoggedUser();
+    if (loggedUser.name == null && messageContent.split(" ").length==1
+            && (previousAction instanceof GreetAction || previousAction instanceof NoNameAction)) {
+      return new RasaSetSlotEvent("PERSON",messageContent);
+    }
+    return null;
+
     }
 }

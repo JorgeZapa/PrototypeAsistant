@@ -14,12 +14,16 @@ export class EndpointsProvider {
   constructor() {
   }
 
-  getParseTextEndpoint(userId: number){
-    return Endpoints.PARSE_TEXT.replace(/{.*}/g,String(userId));
+  getParseTextEndpoint(deviceId: string){
+    return Endpoints.PARSE_TEXT.replace(/{.*}/g, deviceId);
   }
 
-  getContinueEndpoint(userId: number){
-    return Endpoints.CONTINUE.replace(/{.*}/g,String(userId));
+  getContinueEndpoint(deviceId: string){
+    return Endpoints.CONTINUE.replace(/{.*}/g, deviceId);
+  }
+
+  getSendEventEndpoint(deviceId: string){
+    return Endpoints.SEND_EVENT.replace(/{.*}/g, deviceId);
   }
 
 }

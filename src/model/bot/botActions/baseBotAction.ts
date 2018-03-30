@@ -1,5 +1,5 @@
+import { RasaEvent } from './../../rasaPetition/Events/rasaEvent';
 import { BotFlowController } from './../botFlow/botFlowController';
-import { RasaEvent } from './../../rasaPetition/rasaEvent';
 import { BotAction } from './botAction';
 import { BotResources } from './../botResources';
 import { Message } from '../../message';
@@ -26,5 +26,9 @@ export abstract class BaseBotAction implements BotAction{
     }
     
     abstract getRasaEncodingName(): string;
+
+    doBeforeParsing(messageContent: string, previousAction: BotAction){
+        return null;
+    }
     
 }

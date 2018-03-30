@@ -14,6 +14,7 @@ import { SMS } from '@ionic-native/sms';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -62,6 +63,7 @@ import { ErrorHanlderProvider } from '../providers/error-hanlder/error-hanlder';
     LaunchNavigator,
     SpeechRecognition,
     TextToSpeech,
+    UniqueDeviceID,
     ErrorHanlderProvider,{
       provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true 
     }

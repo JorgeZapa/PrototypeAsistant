@@ -1,8 +1,8 @@
 import { BotFlowController } from './../botFlow/botFlowController';
-import { RasaEvent } from "./../../rasaPetition/rasaEvent";
 import { BotResources } from "./../botResources";
 import { BaseBotAction } from "./baseBotAction";
 import { Config } from "../../../constants/config";
+import { RasaEvent } from '../../rasaPetition/Events/rasaEvent';
 
 export class NoNumberAction extends BaseBotAction {
   constructor(botResources: BotResources, botFlowController: BotFlowController) {

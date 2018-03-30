@@ -2,9 +2,9 @@ import { BotFlowController } from './../botFlow/botFlowController';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import { Config } from './../../../constants/config';
-import { RasaEvent } from './../../rasaPetition/rasaEvent';
 import { BotResources } from './../botResources';
 import { BaseBotAction } from "./baseBotAction";
+import { RasaEvent } from '../../rasaPetition/Events/rasaEvent';
 
 export class DistanceAction extends BaseBotAction {
 
