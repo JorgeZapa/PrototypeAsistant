@@ -8,6 +8,6 @@ class Tracker{
 }
 
 export class Slots{
-    name: string;
+    PERSON: string;
     number: number;
 }

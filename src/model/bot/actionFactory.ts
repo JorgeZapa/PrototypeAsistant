@@ -33,7 +33,7 @@ export class ActionFactory {
         return new GoodbyeAction(botResources, botFlowController);
       case "utter_give_name":
         return new GiveNameAction(
-          botResources, botFlowController,slots.name);
+          botResources, botFlowController,slots.PERSON);
       case "utter_no_name":
         return new NoNameAction(botResources, botFlowController);
       case "utter_give_number":

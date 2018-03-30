@@ -26,7 +26,7 @@ export const Config = {
     wrong: "wrong"
   },
   StateBotAllowedActions:{
-    welcome:["utter_greet","utter_give_location",
+    welcome:["utter_give_location",
     "utter_give_name","utter_give_number", "utter_no_name",
     "utter_no_number"],
     default:["*"]

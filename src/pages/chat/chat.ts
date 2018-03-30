@@ -52,6 +52,8 @@ export class ChatPage {
       this.bot.welcomeUser();
     });
     this.currentMessage = "";
+
+    window.addEventListener('native.keyboardshow', ()=> this.content.scrollToBottom().then(()=> console.log("toBottom")));
   }
 
   sendMessage() {
@@ -63,7 +65,6 @@ export class ChatPage {
   private showAndClearMessage(message: Message) {
     this.sentMessages.push(message);
     this.currentMessage = "";
-    this.content.scrollToBottom(300);
   }
 
   textAreaHasText() {
@@ -78,6 +79,8 @@ export class ChatPage {
   }
 
   goToBottomMessages(){
+
+    this.content.scrollToBottom(100);
 
   }
 

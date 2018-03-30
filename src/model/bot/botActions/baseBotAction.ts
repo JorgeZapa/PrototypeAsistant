@@ -22,7 +22,7 @@ export abstract class BaseBotAction implements BotAction{
 
     sendBotMessage(messageContent: string){
         this.botResources.getMessageList().push(new Message(messageContent, true));
-        this.botResources.getContent().scrollToBottom(300);
+        setTimeout(() => this.botResources.getContent().scrollToBottom(300), 300);
     }
     
     abstract getRasaEncodingName(): string;
