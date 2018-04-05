@@ -8,7 +8,7 @@ import { Bot } from "./../../model/bot/bot";
 import { RasaProvider } from "./../../providers/rasa/rasa";
 import { Message } from "./../../model/message";
 import { Component, ViewChild, NgZone } from "@angular/core";
-import { IonicPage, NavController, NavParams, Content, Events } from "ionic-angular";
+import { IonicPage, NavController, NavParams, Content, Events, AlertController } from "ionic-angular";
 import "rxjs/add/operator/finally";
 
 @IonicPage()
@@ -33,7 +33,8 @@ export class ChatPage {
     private smsProvider: SmsProvider,
     private launchNavigator: LaunchNavigator,
     private events: Events,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private alertController: AlertController
   ) {}
 
   ionViewDidLoad() {
@@ -48,7 +49,9 @@ export class ChatPage {
         this.locationProvider,
         this.smsProvider,
         this.launchNavigator,
-        this.events);
+        this.events,
+        this.alertController
+      );
       this.bot.welcomeUser();
     });
     this.currentMessage = "";

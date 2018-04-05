@@ -35,6 +35,7 @@ export class LocationProvider {
           this.localDataProvider.saveHomeLocation(new SimpleGeoposition(geoposition))
             .subscribe(res=>{
             console.log("savePosition ok");
+            subscriber.next();
             subscriber.complete();
           },
             error =>{

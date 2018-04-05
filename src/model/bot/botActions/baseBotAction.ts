@@ -1,3 +1,4 @@
+import { Alert } from 'ionic-angular';
 import { RasaEvent } from './../../rasaPetition/Events/rasaEvent';
 import { BotFlowController } from './../botFlow/botFlowController';
 import { BotAction } from './botAction';
@@ -29,6 +30,26 @@ export abstract class BaseBotAction implements BotAction{
 
     doBeforeParsing(messageContent: string, previousAction: BotAction){
         return null;
+    }
+
+    createConfirmAlert(title: string, message:string, functionOk: ()=> void, functionCancel: ()=>void): Alert{
+        return this.botResources.getAlertController().create({
+            title: title,
+            message: message,
+            buttons:[{
+                text:"I don't want to",
+                role: "cancel",
+                handler: ()=>{
+                    functionCancel();
+                }
+            },{
+                text: "Yes",
+                handler: () =>{
+                    functionOk();
+                }
+            }
+        ]
+    })
     }
     
 }

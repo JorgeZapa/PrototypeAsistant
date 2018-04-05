@@ -23,6 +23,7 @@ export class UserProvider {
           this.uniqueDeviceID
             .get()
             .then(res => {
+              console.log(res);
               this.loggedUser.deviceId = res;
               console.log("no user was logged.");
               subscriber.next();

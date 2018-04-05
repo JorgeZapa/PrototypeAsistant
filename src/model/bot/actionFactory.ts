@@ -1,3 +1,4 @@
+import { ChangeLocationAction } from './botActions/changeLocationAction';
 import { BotFlowController } from './botFlow/botFlowController';
 import { NoNameAction } from "./botActions/noNameAction";
 import { NoNumberAction } from "./botActions/noNumberAction";
@@ -27,32 +28,34 @@ export class ActionFactory {
 
   static createActionFromName(actionName: string, botResources: BotResources, botFlowController: BotFlowController, slots : Slots): BotAction{
     switch (actionName) {
-      case "utter_greet":
+      case Config.rasaSupportedActions.greet:
         return new GreetAction(botResources, botFlowController);
-      case "utter_goodbye":
+      case Config.rasaSupportedActions.goodbye:
         return new GoodbyeAction(botResources, botFlowController);
-      case "utter_give_name":
+      case Config.rasaSupportedActions.give_name:
         return new GiveNameAction(
           botResources, botFlowController,slots.PERSON);
-      case "utter_no_name":
+      case Config.rasaSupportedActions.no_name:
         return new NoNameAction(botResources, botFlowController);
-      case "utter_give_number":
+      case Config.rasaSupportedActions.give_number:
         return new GiveNumberAction(
           botResources, botFlowController,slots.number);
-      case "utter_no_number":
+      case Config.rasaSupportedActions.no_number:
         return new NoNumberAction(botResources, botFlowController);
-      case "utter_give_location":
+      case Config.rasaSupportedActions.location:
         return new GiveLocationAction(botResources, botFlowController);
-      case "utter_lost":
+      case Config.rasaSupportedActions.lost:
         return new LostAction(botResources, botFlowController);
-      case "utter_distance":
+      case Config.rasaSupportedActions.distance:
         return new DistanceAction(botResources, botFlowController);
-      case "utter_go_home":
+      case Config.rasaSupportedActions.go_home:
         return new GoHomeAction(botResources, botFlowController);
-      case "wrong":
+      case Config.builtInActions.wrong:
           return new WrongAction(botResources, botFlowController);
-      case "action_listen":
+      case Config.rasaSupportedActions.listen:
         return new ListenAction(botResources, botFlowController);
+      case Config.rasaSupportedActions.change_location:
+        return new ChangeLocationAction(botResources, botFlowController);
     }
   }
 }

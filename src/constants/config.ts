@@ -20,7 +20,8 @@ export const Config = {
     listen: "action_listen",
     lost: "utter_lost",
     distance: "utter_distance",
-    go_home: "utter_go_home"
+    go_home: "utter_go_home",
+    change_location: "utter_change_location",
   },
   builtInActions: {
     wrong: "wrong"

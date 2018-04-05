@@ -10,7 +10,7 @@ import { ActionFactory } from "./actionFactory";
 import { ActionResponse } from "./../../model/rasaResponse/actionResponse";
 import { Message } from "./../message";
 import { Config } from "./../../constants/config";
-import { Content, Events } from "ionic-angular";
+import { Content, Events, AlertController } from "ionic-angular";
 export class Bot{
   name = Config.botName;
   flowController: BotFlowController;
@@ -23,7 +23,8 @@ export class Bot{
     locationProvider: LocationProvider,
     smsProvider: SmsProvider,
     launchNavigator: LaunchNavigator,
-    private events: Events
+    private events: Events,
+    private alertController: AlertController
   ) {
     this.flowController = new botFlowControllerImpl(
       new BotResources(
@@ -34,7 +35,8 @@ export class Bot{
         locationProvider,
         smsProvider,
         launchNavigator,
-        events
+        events,
+        alertController
       )
     );
   }
