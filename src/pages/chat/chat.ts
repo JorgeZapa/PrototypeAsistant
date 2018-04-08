@@ -20,7 +20,7 @@ export class ChatPage {
   bot: Bot;
   sentMessages: Array<Message>;
   currentMessage: string;
-  isSending: boolean;
+  processing = true;
 
   @ViewChild(Content) content: Content;
 
@@ -61,6 +61,7 @@ export class ChatPage {
 
   sendMessage() {
     let message = new Message(this.currentMessage, false);
+    this.processing = true;
     this.showAndClearMessage(message);
     this.bot.readUserMessage(message);
   }
@@ -93,6 +94,7 @@ export class ChatPage {
 
   initEvents(){
     this.events.subscribe(Config.EventSend.SEND_BOT_MESSAGE, (text: string)=> this.showMessageFromText(text));
+    this.events.subscribe(Config.EventFinishProcessing.FINISH_PROCESSING, ()=> this.processing=false);
   }
 
   

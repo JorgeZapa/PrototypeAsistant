@@ -1,3 +1,4 @@
+import { Config } from './../../../constants/config';
 import { Alert } from 'ionic-angular';
 import { RasaEvent } from './../../rasaPetition/Events/rasaEvent';
 import { BotFlowController } from './../botFlow/botFlowController';
@@ -41,6 +42,7 @@ export abstract class BaseBotAction implements BotAction{
                 role: "cancel",
                 handler: ()=>{
                     functionCancel();
+                    this.notifyFinished();
                 }
             },{
                 text: "Yes",
@@ -50,6 +52,10 @@ export abstract class BaseBotAction implements BotAction{
             }
         ]
     })
+    }
+
+    notifyFinished(){
+        this.botResources.getEvents().publish(Config.EventFinishProcessing.FINISH_PROCESSING);
     }
     
 }

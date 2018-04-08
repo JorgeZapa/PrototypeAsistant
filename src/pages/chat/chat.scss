@@ -1,17 +1,26 @@
 page-chat {
-    button{
+     ion-footer button{
         padding:20%;
+        height:100%;
+        width:100%;
+        background-color:#F2F7F9 !important;
     }
 
     ion-footer{
         border-top: 1px;
-        height:15%;
+        background-color: #F2F7F9;
+    }
+
+    ion-footer button:enabled ion-icon{
+        color:#488aff;
     }
 
     .sentMessagesContainer{
         padding: 0 10px;
     }
-
+    ion-spinner{
+        height: 100%;
+    }
     
 
 }

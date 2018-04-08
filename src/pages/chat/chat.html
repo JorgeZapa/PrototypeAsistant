@@ -11,13 +11,14 @@
     <ion-grid>
       <ion-row>
         <ion-col col-10>
-            <ion-textarea float [(ngModel)]="currentMessage"></ion-textarea>
+            <ion-textarea placeholder="How can i help?" float [(ngModel)]="currentMessage"></ion-textarea>
         </ion-col>
         <ion-col col-2>
-            <button ion-button icon-only item-right (click)="sendMessage()" *ngIf="textAreaHasText()">
+            <ion-spinner *ngIf="processing" name="bubbles"></ion-spinner>
+            <button ion-button icon-only item-right (click)="sendMessage()" *ngIf=" !processing && textAreaHasText()">
               <ion-icon name="send"></ion-icon>
             </button>
-            <speech-button icon-only *ngIf="!textAreaHasText()" (textOutputEvent)="updateCurrentMessage($event)" ></speech-button>
+            <speech-button icon-only *ngIf="!processing && !textAreaHasText()" (textOutputEvent)="updateCurrentMessage($event)" ></speech-button>
         </ion-col>
       </ion-row>
     </ion-grid>

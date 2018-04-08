@@ -15,6 +15,7 @@ export class WrongAction extends BaseBotAction {
     }
     execute() {
         this.botResources.getMessageList().push(new Message("Sorry, i didn't understand you...", true));
+        super.notifyFinished();
         return null;
     }
 }

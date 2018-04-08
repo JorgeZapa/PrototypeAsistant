@@ -23,6 +23,7 @@ export class GiveNameAction extends BaseBotAction {
        super.sendBotMessage("Nice to meet you "+ this.name +"!");
        super.sendBotMessage("Now i need to know a number to call in case anything bad happens!");
        this.botResources.getUserProvider().getLoggedUser().name=this.name;
+       super.notifyFinished();
        return null;
     }
 }

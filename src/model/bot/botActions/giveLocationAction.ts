@@ -24,8 +24,10 @@ export class GiveLocationAction extends BaseBotAction {
     this.botResources
       .getLocationProvider()
       .saveHomeLocation()
-      .finally(() =>
-        this.getBotFlowController().setBotFlowConfig(new DefaultFlowConfig())
+      .finally(() =>{
+        this.getBotFlowController().setBotFlowConfig(new DefaultFlowConfig());
+        super.notifyFinished();
+      }
       )
       .subscribe(
         ok => {},

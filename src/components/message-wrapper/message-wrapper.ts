@@ -11,7 +11,7 @@ export class MessageWrapperComponent {
   @Input()
   message: Message;
 
-  private profileBotPicture = "./assets/imgs/wallie.jpg"; 
+  private profileBotPicture = "./assets/imgs/dedisco.png"; 
 
   constructor(private textToSpeech: TextToSpeech) {
   }

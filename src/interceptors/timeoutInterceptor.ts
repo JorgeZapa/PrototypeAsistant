@@ -1,3 +1,4 @@
+import { NoConnectionModalComponent } from './../components/no-connection-modal/no-connection-modal';
 import { ChatPage } from "./../pages/chat/chat";
 import { Config } from "./../constants/config";
 import { Events } from "ionic-angular";
@@ -25,6 +26,8 @@ export class TimeoutInterceptor implements HttpInterceptor {
     public alertController: AlertController
   ) {}
 
+  secToRepeat = 50;
+
   repeateRequest: boolean;
    intercept(
     req: HttpRequest<any>,
@@ -37,7 +40,10 @@ export class TimeoutInterceptor implements HttpInterceptor {
         event => {},
         err => {
           console.log(err);
-          this.errorConfirmation(5000).then();
+          let modal = this.modalctl.create(NoConnectionModalComponent, {
+            countdown:this.secToRepeat
+          }, {enableBackdropDismiss: false})
+          modal.present();
           console.log("hey");
           /*this.events.publish(
             Config.EventSend.SEND_BOT_MESSAGE,
@@ -45,35 +51,9 @@ export class TimeoutInterceptor implements HttpInterceptor {
           );*/
         }
       ).retryWhen(error =>{
-        return error.delay(5100);
+        return error.delay(this.secToRepeat*1000+15);
       } );
 
       return request;
   }
-
-   async errorConfirmation(delayTime: number): Promise<any> {
-    return new Promise(async (resolve, reject) => {
-
-        let alert = this.alertController.create({
-            title: "An error has ocurred",
-            message:
-              "I can't access my brain at all! you lack internet connection!\n"
-               + "I am going to try again in " + delayTime/1000 +" seconds!"
-          });
-
-          alert.present();
-
-          await this.delay(delayTime);
-
-          alert.dismiss();
-
-          resolve();
-
-    });
-    
-  }
-
-  async delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 }

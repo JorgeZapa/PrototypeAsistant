@@ -1,3 +1,4 @@
+import { NoConnectionModalComponent } from './../components/no-connection-modal/no-connection-modal';
 import { TimeoutInterceptor } from './../interceptors/timeoutInterceptor';
 import { SpeechButtonComponent } from './../components/speech-button/speech-button';
 import { MessageWrapperComponent } from './../components/message-wrapper/message-wrapper';
@@ -33,7 +34,8 @@ import { ErrorHanlderProvider } from '../providers/error-hanlder/error-hanlder';
     HomePage,
     ChatPage, 
     MessageWrapperComponent,
-    SpeechButtonComponent
+    SpeechButtonComponent,
+    NoConnectionModalComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { ErrorHanlderProvider } from '../providers/error-hanlder/error-hanlder';
   entryComponents: [
     MyApp,
     HomePage,
-    ChatPage
+    ChatPage,
+    NoConnectionModalComponent
   ],
   providers: [
     StatusBar,

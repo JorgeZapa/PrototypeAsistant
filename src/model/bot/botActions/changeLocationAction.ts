@@ -14,7 +14,7 @@ export class ChangeLocationAction extends BaseBotAction {
     }
 
     changeHomeLocation(){
-        this.botResources.getLocationProvider().saveHomeLocation().subscribe(res=>{
+        this.botResources.getLocationProvider().saveHomeLocation().finally(()=> super.notifyFinished()).subscribe(res=>{
             this.sendBotMessage("New home location saved!");
         }, error=>{
             console.log(error);

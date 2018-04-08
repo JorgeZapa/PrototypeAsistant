@@ -11,6 +11,7 @@ export class NoNameAction extends BaseBotAction {
   execute(): RasaEvent {
     super.sendBotMessage("I didn't understand your name...");
     super.sendBotMessage("Can you repeat it again?");
+    super.notifyFinished();
     return null;
   }
   getRasaEncodingName(): string {

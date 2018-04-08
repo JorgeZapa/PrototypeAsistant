@@ -12,6 +12,7 @@ export class NoNumberAction extends BaseBotAction {
   execute(): RasaEvent {
     super.sendBotMessage("I can't get your number...");
     super.sendBotMessage("Can you repeat it again?");
+    super.notifyFinished();
     return null;
   }
   getRasaEncodingName(): string {

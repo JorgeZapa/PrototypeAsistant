@@ -20,7 +20,7 @@ export class GiveNumberAction extends BaseBotAction {
     execute() {
         super.sendBotMessage("Interesting number!");
         this.botResources.getUserProvider().getLoggedUser().sosNumber=this.phoneNumber;
-        this.botResources.getUserProvider().updateUser().subscribe(ok=>{},error=>{
+        this.botResources.getUserProvider().updateUser().finally(()=> this.notifyFinished()).subscribe(ok=>{},error=>{
             console.log(error);
             super.sendBotMessage("I couldn't save your data, when you come back i might not remember you...");
         });

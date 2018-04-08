@@ -17,6 +17,7 @@ export class ListenAction extends BaseBotAction {
     }
     execute() {
         console.log("listen");
+        this.notifyFinished();
         return null;
     }
 

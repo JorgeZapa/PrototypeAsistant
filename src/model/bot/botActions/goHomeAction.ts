@@ -38,7 +38,7 @@ export class GoHomeAction extends BaseBotAction {
             super.sendBotMessage("I couldn't get your current location!");
         }
       );
-
+      this.notifyFinished();
     return null;
   }
   getRasaEncodingName(): string {

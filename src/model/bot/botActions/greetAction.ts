@@ -27,6 +27,7 @@ export class GreetAction extends BaseBotAction {
       this.usualGreetings(loggedUser);
       resultingEvent = new RasaRestartEvent();
     }
+    this.notifyFinished();
     return resultingEvent;
   }
 

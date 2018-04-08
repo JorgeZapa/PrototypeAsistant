@@ -17,7 +17,6 @@ export class SpeechButtonComponent {
   @Output() textOutputEvent = new EventEmitter<string>();
 
   private options: SpeechRecognitionListeningOptions = {
-    showPopup: false
   };
 
   constructor(

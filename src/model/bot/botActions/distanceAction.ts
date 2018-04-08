@@ -15,7 +15,7 @@ export class DistanceAction extends BaseBotAction {
     execute(): RasaEvent {
     Observable.forkJoin(this.botResources.getLocationProvider().getCurrentLocation(),
                         this.botResources.getLocationProvider().retrieveHomeLocation())
-                .subscribe(results=>{
+                .finally(()=> this.notifyFinished()).subscribe(results=>{
                     console.log(results[0]);
                     console.log(results[1]);
                     let distanceMeters = this.botResources.getLocationProvider().distanceBetweenPositions(results[1],results[0]);

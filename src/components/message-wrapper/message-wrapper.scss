@@ -1,6 +1,6 @@
 message-wrapper {
-        $userMessageColor : rgb(218, 211, 211);
-        $botMessageColor : rgb(86, 55, 189);
+        $userMessageColor : #F2F7F9;
+        $botMessageColor : #00D1E5;
 
     .wrapper{
       display: flex;
@@ -16,18 +16,22 @@ message-wrapper {
       }
     }
 
+    button{
+      padding:16px !important;
+    }
+
     img{
         position: absolute;
         border-radius: 45px;
         width: 45px;
         height: 45px;
-        box-shadow: 0 0 2px rgba(0, 0, 0, 0.36);
     }
 
     .messageContentContainer {
         position: relative;
         margin-top: 5px;
-        border-radius: 5px;
+        border:0px !important;
+        border-radius: 15px;
         padding: 8px;
         border: 1px solid #ddd;
         color: #fff;
@@ -59,7 +63,7 @@ message-wrapper {
           left: 0;
         }
         .messageContentContainer {
-          color: #f0eaea;
+          color: black;
           span.triangle {
             border-top-width: 0;
             border-right-width: 0;

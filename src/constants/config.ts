@@ -1,5 +1,5 @@
 export const Config = {
-  botName: "demencio",
+  botName: "dedisco",
   EventErrors: {
     NO_CONNECTION: "NO_CONNECTION"
   },
@@ -8,6 +8,9 @@ export const Config = {
   },
   EventChangeState:{
     CHANGE_BOT_STATE: "CHANGE_BOT_STATE"
+  },
+  EventFinishProcessing:{
+    FINISH_PROCESSING: "FINISH_PROCESSING"
   },
   rasaSupportedActions: {
     greet: "utter_greet",
