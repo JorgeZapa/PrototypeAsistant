@@ -72,6 +72,12 @@ export class botFlowControllerImpl implements BotFlowController {
             ActionFactory.createActionFromName(Config.builtInActions.wrong, this.botResources, this, null).execute();
             return;
           }
+          console.log(res.tracker.latest_message);
+          if(res.tracker.latest_message.intent.confidence < (Config.ConfidenceThreshold/100)){
+            ActionFactory.createActionFromName(Config.builtInActions.converse, this.botResources, this, res.tracker).execute();
+            return;
+          }
+
           let rEvent = this.action.execute();
 
           this.takeNextAction(this.action, rEvent);

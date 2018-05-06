@@ -1,0 +1,19 @@
+! version = 2.0
+
++ hello bot
+- Hello human.
+
++ i love you
+- oh, you are so sweet. I love you too!
+
++ i love *
+- Tell me more about <star>
+
++ i hate you
+- oh, I am so sorry to hear that. I do my best to help you anyway. Sorry if it is not enough
+
++ it is a kind of *
+- i love <star>, can you tell me another example of <star>?
+
++*
+- I can't understand you...

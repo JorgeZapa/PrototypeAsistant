@@ -27,8 +27,10 @@ export const Config = {
     change_location: "utter_change_location",
   },
   builtInActions: {
-    wrong: "wrong"
+    wrong: "wrong",
+    converse: "converse"
   },
+  ConfidenceThreshold: 40,
   StateBotAllowedActions:{
     welcome:["utter_give_location",
     "utter_give_name","utter_give_number", "utter_no_name",
