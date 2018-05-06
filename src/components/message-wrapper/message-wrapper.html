@@ -1,12 +1,11 @@
 <div class= "wrapper" [class.left]="message.isBotMessage"
 [class.right] = "!message.isBotMessage">
 
-<img *ngIf="message.isBotMessage"  [src]="profileBotPicture">
   <div class="messageContentContainer">
   <span class="triangle"></span>
-   <p class= "content">{{message?.content}}</p>
+  <p class="content">  {{message?.content}}</p>
+  <button  ion-button round="true" (click)=readSpeech()>
+    <ion-icon name="headset"></ion-icon>
+  </button>
   </div>
-<button ion-button round="true" (click)=readSpeech()>
-     <ion-icon name="headset"></ion-icon>
-</button>
 </div>

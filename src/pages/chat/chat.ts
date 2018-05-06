@@ -21,6 +21,7 @@ export class ChatPage {
   sentMessages: Array<Message>;
   currentMessage: string;
   processing = true;
+  botName= Config.botName;
 
   @ViewChild(Content) content: Content;
 

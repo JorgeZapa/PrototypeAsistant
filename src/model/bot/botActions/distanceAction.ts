@@ -18,8 +18,14 @@ export class DistanceAction extends BaseBotAction {
                 .finally(()=> this.notifyFinished()).subscribe(results=>{
                     console.log(results[0]);
                     console.log(results[1]);
-                    let distanceMeters = this.botResources.getLocationProvider().distanceBetweenPositions(results[1],results[0]);
-                    super.sendBotMessage("You are "+ distanceMeters +" meters from home!");
+                    let distance = this.botResources.getLocationProvider().distanceBetweenPositions(results[1],results[0]);
+                    if(distance>1200){
+                        distance= distance/1000;
+                        super.sendBotMessage("You are "+ distance.toFixed(2) +" kms from home!");
+                    }
+                    else{
+                        super.sendBotMessage("You are "+ distance.toFixed(2) +" kilometers from home!");
+                    }
                 }, error=>{
                     super.sendBotMessage("I wasn't able to calcualte the distance, seems like there is an error");
                 })

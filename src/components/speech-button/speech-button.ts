@@ -17,6 +17,7 @@ export class SpeechButtonComponent {
   @Output() textOutputEvent = new EventEmitter<string>();
 
   private options: SpeechRecognitionListeningOptions = {
+    prompt:"hello"
   };
 
   constructor(

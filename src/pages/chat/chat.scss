@@ -1,4 +1,29 @@
 page-chat {
+
+    ion-header{
+        height:85px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: rgb(202, 217, 219);
+        img{
+            margin-left:35px;
+            width: 60px;
+            height: 60px;
+            border-radius: 45px;
+            background-color:white;
+        }
+        .description{
+            margin-left: 15px;
+            display: flex;
+            flex-direction: column;
+            .name{
+                font-size: 24px;
+            }
+        }
+    }
+
+
      ion-footer button{
         padding:20%;
         height:100%;

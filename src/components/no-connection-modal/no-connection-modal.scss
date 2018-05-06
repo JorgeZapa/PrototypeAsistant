@@ -1,5 +1,8 @@
 no-connection-modal {
 
+    ion-content {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
 
     ion-icon {
         font-size: 60px; //Preferred size here
@@ -8,7 +11,8 @@ no-connection-modal {
     }
 
     h1{
-        font-size: 14px;
+        padding-top:15px;
+        font-size: 24px;
         margin: 5px;
         font-weight: 600;
         line-height: 21px;
@@ -18,18 +22,12 @@ no-connection-modal {
     }
 
     h2{
+        padding-top:25px !important;
         font-size: 14px;
         line-height: 25px;
         text-align: center;
         color:grey;
         padding: 0 20px 20px 20px;
-    }
-
-    .countdown p{
-        display:inline-block; 
-    }
-    .ion-spinner{
-        margin: auto;
     }
 
 

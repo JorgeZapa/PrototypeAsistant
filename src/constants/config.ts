@@ -1,5 +1,5 @@
 export const Config = {
-  botName: "dedisco",
+  botName: "Dedisco",
   EventErrors: {
     NO_CONNECTION: "NO_CONNECTION"
   },

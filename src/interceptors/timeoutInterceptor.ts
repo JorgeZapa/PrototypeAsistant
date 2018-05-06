@@ -26,7 +26,7 @@ export class TimeoutInterceptor implements HttpInterceptor {
     public alertController: AlertController
   ) {}
 
-  secToRepeat = 50;
+  secToRepeat = 5;
 
   repeateRequest: boolean;
    intercept(

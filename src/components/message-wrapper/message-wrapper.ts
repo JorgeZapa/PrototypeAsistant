@@ -17,7 +17,7 @@ export class MessageWrapperComponent {
   }
 
   readSpeech(){
-    this.textToSpeech.speak(this.message.content);
+    this.textToSpeech.speak(this.message.content)
   }
   
 }

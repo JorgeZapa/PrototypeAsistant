@@ -1,8 +1,17 @@
 
+<ion-header>
+  <div name="botPic">
+    <img src="assets/imgs/happyDedisco.png" />
+  </div>
+  <div class="description">
+    <div class="name">{{botName}}</div>
+  </div>
+</ion-header>
+
 
 <ion-content padding>
   <div class="sentMessagesContainer">
-    <message-wrapper *ngFor="let msg of sentMessages" [message]="msg">
+    <message-wrapper *ngFor="let msg of sentMessages" id="messages" [message]="msg">
     </message-wrapper>
   </div> 
 </ion-content>
@@ -11,11 +20,11 @@
     <ion-grid>
       <ion-row>
         <ion-col col-10>
-            <ion-textarea placeholder="How can i help?" float [(ngModel)]="currentMessage"></ion-textarea>
+            <ion-textarea id="messageInput" placeholder="How can i help?" float [(ngModel)]="currentMessage"></ion-textarea>
         </ion-col>
         <ion-col col-2>
             <ion-spinner *ngIf="processing" name="bubbles"></ion-spinner>
-            <button ion-button icon-only item-right (click)="sendMessage()" *ngIf=" !processing && textAreaHasText()">
+            <button id="buttonSend" ion-button icon-only item-right (click)="sendMessage()" *ngIf=" !processing && textAreaHasText()">
               <ion-icon name="send"></ion-icon>
             </button>
             <speech-button icon-only *ngIf="!processing && !textAreaHasText()" (textOutputEvent)="updateCurrentMessage($event)" ></speech-button>
