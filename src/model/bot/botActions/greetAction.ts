@@ -35,15 +35,13 @@ export class GreetAction extends BaseBotAction {
     super.sendBotMessage("Welcome!");
     super.sendBotMessage("I am " + Config.botName + "!");
     super.sendBotMessage(
-      "I know how hard is to remember things when you are a little bit clueless"
+      "I am a bot specialized in help you remember things!!"
     );
     super.sendBotMessage("What is your name?");
   }
 
   usualGreetings(user: User) {
-    super.sendBotMessage("Hey " + user.name + "!");
-    super.sendBotMessage("Did you know that 11% of people are left handed");
-    super.sendBotMessage("Amazing, right?");
+    super.sendBotMessage("Hello again, " + user.name + "!");
     super.sendBotMessage("How can i help you today?");
   }
 

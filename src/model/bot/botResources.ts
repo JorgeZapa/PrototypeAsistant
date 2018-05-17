@@ -1,3 +1,4 @@
+import { RiveProvider } from './../../providers/rive/rive';
 import { AlertController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
@@ -19,6 +20,7 @@ export class BotResources{
     private launchNavigator: LaunchNavigator;
     private events : Events;
     private alertController: AlertController;
+    private riveProvider: RiveProvider;
 
     constructor(messageList: Array<Message>,
                 rasaProvider: RasaProvider,
@@ -28,7 +30,8 @@ export class BotResources{
                 smsProvider: SmsProvider,
                 launchNavigator: LaunchNavigator,
                 events: Events,
-                alertController: AlertController){
+                alertController: AlertController,
+                riveProvider: RiveProvider){
 
         this.messageList = messageList;
         this.rasaProvider = rasaProvider;
@@ -39,6 +42,7 @@ export class BotResources{
         this.launchNavigator = launchNavigator;
         this.events=events;
         this.alertController=alertController;
+        this.riveProvider = riveProvider
     }
 
     getMessageList() :Array<Message>{
@@ -75,6 +79,10 @@ export class BotResources{
 
     getAlertController(){
         return this.alertController;
+    }
+
+    getRiveProvider(){
+        return this.riveProvider;
     }
 
 

@@ -30,7 +30,21 @@ export const Config = {
     wrong: "wrong",
     converse: "converse"
   },
-  ConfidenceThreshold: 40,
+  confidenceThreshold:{
+    utter_greet: 61,
+    utter_give_location: 0,
+    utter_give_name: 0,
+    utter_no_name: 0,
+    utter_give_number: 0,
+    utter_no_number: 0,
+    utter_goodbye: 0,
+    action_listen: 0,
+    utter_lost: 49,
+    utter_distance: 25,
+    utter_go_home: 20,
+    utter_change_location: 20,
+
+  },
   StateBotAllowedActions:{
     welcome:["utter_give_location",
     "utter_give_name","utter_give_number", "utter_no_name",

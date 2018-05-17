@@ -12,7 +12,7 @@ export class GiveNameAction extends BaseBotAction {
 
     constructor(botResources: BotResources, botFlowController: BotFlowController,name: string ){
         super(botResources, botFlowController);
-        this.name=name;
+        this.name=this.capitalizeFirstLetter(name);
     }
 
     getRasaEncodingName(): string {
@@ -25,5 +25,9 @@ export class GiveNameAction extends BaseBotAction {
        this.botResources.getUserProvider().getLoggedUser().name=this.name;
        super.notifyFinished();
        return null;
+    }
+
+    private capitalizeFirstLetter(string): string {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 }

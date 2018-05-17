@@ -4,8 +4,7 @@ import { BotResources } from "../botResources";
 import { BotFlowController } from "../botFlow/botFlowController";
 import { Config } from "../../../constants/config";
 
-const RiveScript = require('rivescript');
-const riveBot = new RiveScript();
+
 export class ConverseAction extends BaseBotAction {
 
     text;
@@ -17,20 +16,15 @@ export class ConverseAction extends BaseBotAction {
 
 
     execute(): RasaEvent {
-        
-        riveBot.loadFile('assets/general_data.rive', ()=>{
-            console.log("training data read")
-            riveBot.sortReplies();
-            var reply: string = riveBot.reply('local-user', this.text);
 
-            var messages = reply.split(".");
+        let messages = this.botResources.getRiveProvider()
+                                        .reply(this.text)
+                                        .split("|");
+        for(let message of messages){
+            super.sendBotMessage(message);
+        }
 
-            for(let message of messages){
-                super.sendBotMessage(message);
-            }
-
-            super.notifyFinished();
-        }  );
+        super.notifyFinished();
 
         return null;
     }

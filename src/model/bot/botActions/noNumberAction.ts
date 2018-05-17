@@ -10,8 +10,9 @@ export class NoNumberAction extends BaseBotAction {
   }
 
   execute(): RasaEvent {
-    super.sendBotMessage("I can't get your number...");
-    super.sendBotMessage("Can you repeat it again?");
+    super.sendBotMessage("I am not able to understand your SOS number...");
+    super.sendBotMessage("May your repeat it again?");
+    super.sendBotMessage("Maybe there was a mistake in it, remember that it contains 9 numbers");
     super.notifyFinished();
     return null;
   }

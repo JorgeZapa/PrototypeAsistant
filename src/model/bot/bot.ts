@@ -1,3 +1,4 @@
+import { RiveProvider } from './../../providers/rive/rive';
 import { botFlowControllerImpl } from './botFlow/botFlowControllerImpl';
 import { BotFlowController } from './botFlow/botFlowController';
 import { LaunchNavigator } from "@ionic-native/launch-navigator";
@@ -24,7 +25,8 @@ export class Bot{
     smsProvider: SmsProvider,
     launchNavigator: LaunchNavigator,
     private events: Events,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private riveProvider: RiveProvider
   ) {
     this.flowController = new botFlowControllerImpl(
       new BotResources(
@@ -36,7 +38,8 @@ export class Bot{
         smsProvider,
         launchNavigator,
         events,
-        alertController
+        alertController,
+        riveProvider
       )
     );
   }

@@ -21,7 +21,7 @@ export class DistanceAction extends BaseBotAction {
                     let distance = this.botResources.getLocationProvider().distanceBetweenPositions(results[1],results[0]);
                     if(distance>1200){
                         distance= distance/1000;
-                        super.sendBotMessage("You are "+ distance.toFixed(2) +" kms from home!");
+                        super.sendBotMessage("You are "+ distance.toFixed(2) +" meters from home!");
                     }
                     else{
                         super.sendBotMessage("You are "+ distance.toFixed(2) +" kilometers from home!");

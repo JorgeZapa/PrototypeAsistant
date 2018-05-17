@@ -1,3 +1,4 @@
+import { RiveProvider } from './../../providers/rive/rive';
 import { ErrorHanlderProvider } from './../../providers/error-hanlder/error-hanlder';
 import { Config } from './../../constants/config';
 import { LaunchNavigator } from "@ionic-native/launch-navigator";
@@ -35,7 +36,8 @@ export class ChatPage {
     private launchNavigator: LaunchNavigator,
     private events: Events,
     private ngZone: NgZone,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private riveProvider: RiveProvider
   ) {}
 
   ionViewDidLoad() {
@@ -51,7 +53,8 @@ export class ChatPage {
         this.smsProvider,
         this.launchNavigator,
         this.events,
-        this.alertController
+        this.alertController,
+        this.riveProvider
       );
       this.bot.welcomeUser();
     });

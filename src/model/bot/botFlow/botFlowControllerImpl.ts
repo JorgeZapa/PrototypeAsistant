@@ -73,9 +73,13 @@ export class botFlowControllerImpl implements BotFlowController {
             return;
           }
           console.log(res.tracker.latest_message);
-          if(res.tracker.latest_message.intent.confidence < (Config.ConfidenceThreshold/100)){
-            ActionFactory.createActionFromName(Config.builtInActions.converse, this.botResources, this, res.tracker).execute();
-            return;
+          if(res.tracker.latest_message.intent.confidence < (Config.confidenceThreshold[res.next_action]/100)){
+            let converstationAction= ActionFactory.createActionFromName(Config.builtInActions.converse, this.botResources, this, res.tracker);
+            if(this.checkActionAllowed(converstationAction)){
+              converstationAction.execute();
+              return;
+            }
+            
           }
 
           let rEvent = this.action.execute();
@@ -91,8 +95,8 @@ export class botFlowControllerImpl implements BotFlowController {
 
   private checkActionAllowed(action: BotAction) {
     console.log(this.botFlowConfig.getAllowedActions())
-    console.log(this.botFlowConfig.getAllowedActions().indexOf(this.action.getRasaEncodingName()))
-    return (this.botFlowConfig.getAllowedActions().indexOf(this.action.getRasaEncodingName()) !=-1 
+    console.log(this.botFlowConfig.getAllowedActions().indexOf(action.getRasaEncodingName()))
+    return (this.botFlowConfig.getAllowedActions().indexOf(action.getRasaEncodingName()) !=-1 
       ||  this.botFlowConfig.getAllowedActions().indexOf("*") != -1);
   }
 

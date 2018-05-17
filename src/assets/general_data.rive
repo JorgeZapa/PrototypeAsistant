@@ -1,19 +1,98 @@
 ! version = 2.0
 
-+ hello bot
-- Hello human.
+// Substitutions
+//    I
+! sub i'm     = i am
+! sub i'd     = i would
+! sub i've    = i have
+! sub i'll    = i will
+//    HE
+! sub he's    = he is
+! sub he'd    = he would
+! sub he've   = he have
+! sub he'll   = he will
+//    SHE
+! sub she's   = she is
+! sub she'd   = she would
+! sub she've  = she have
+//    OTHERS
+! sub she'll  = she will
+! sub don't   = do not
+! sub isn't   = is not
+//    YOU
+! sub you'd   = you would
+! sub you're  = you are
+! sub you've  = you have
+! sub you'll  = you will
+//    QUESTIONS
+! sub what's  = what is
+! sub whats   = what is
+! sub what're = what are
+! sub what've = what have
+! sub what'll = what will
+! sub who's   = who is
+//    RELATIVES
+! sub granny = grandmother
+! sub granpa = grandfather
+// ARRAYS
+! array relatives = mother father
+^ dad mum
+^ husband wife
+^ brother sister
+^ grandmother grandfather
+^ son daughter
+^ aunt uncle
+^ cousin nephew
+^ niece
+^ grandson granddaughter
 
-+ i love you
-- oh, you are so sweet. I love you too!
+//Simple flows topic random
 
-+ i love *
-- Tell me more about <star>
++ i am bored
+- I am bored too|Do you
+^ want to talk?
+- I think i can fix that!|Let us talk about something
 
-+ i hate you
-- oh, I am so sorry to hear that. I do my best to help you anyway. Sorry if it is not enough
++ my (@relatives) is not coming *
+- <set relative=<star>> Don't worry, relax.|Let's talk about it
+^ |Tell me about him... How is <get relative=<star>.{topic=family}
 
-+ it is a kind of *
-- i love <star>, can you tell me another example of <star>?
++ i don not know here my (@relatives) is
+- <set relative=<star>> Relax, he sure is comming, tell a bit more about your <star>.{topic=family}
 
-+*
-- I can't understand you...
++ *
+- I didn't understand that, can your repeat it?
+
+> topic family
++ (he|she) is *
+- Wow, really?
+- To be honest, my creator also is <star2>
+- Why do you think of your <get relative>
+
++ (he|she) likes to *
+- I wish i could <star2> too.|Do you like it too?
+- That sounds really cool.|What about you, do you like it too?
+
++ yes
+% *do you like it too*
+- you two sure have a lot in common!
+
++ no
+% *do you like it too*
+- well, you may have to give it a try, you may find it fun!
+
++ (he|she) usually talks about *
+- Humm... i am not an expert on <star2>
+
++ i forgot what we were talking about
+- hmmmm... I think we were talking about <get topic>, want to keep talking about that?
+- Nothing important, we can talk about another thing.{topic=random}
+
++ yes
+% * keep talking about *
+- Okay, let us keep talking about that!
+
++ no
+% * keep talking about *
+- Sure! Let us talk abut anything else!{topic=random}
+< topic

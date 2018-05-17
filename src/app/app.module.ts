@@ -28,6 +28,7 @@ import { LocationProvider } from '../providers/location/location';
 import { SmsProvider } from '../providers/sms/sms';
 import { LongPressModule } from 'ionic-long-press';
 import { ErrorHanlderProvider } from '../providers/error-hanlder/error-hanlder';
+import { RiveProvider } from '../providers/rive/rive';
 @NgModule({
   declarations: [
     MyApp,
@@ -40,7 +41,10 @@ import { ErrorHanlderProvider } from '../providers/error-hanlder/error-hanlder';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+      driverOrder: ['websql', 'sqlite', 'indexeddb']
+      }),
     HttpClientModule,
     LongPressModule
   ],
@@ -69,7 +73,8 @@ import { ErrorHanlderProvider } from '../providers/error-hanlder/error-hanlder';
     UniqueDeviceID,
     ErrorHanlderProvider,{
       provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true 
-    }
+    },
+    RiveProvider
   ]
 })
 export class AppModule {}
