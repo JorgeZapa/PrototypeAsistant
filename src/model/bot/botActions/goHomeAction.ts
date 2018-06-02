@@ -16,7 +16,7 @@ export class GoHomeAction extends BaseBotAction {
       .subscribe(
         position => {
           if(position== null){
-            super.sendBotMessage("I don't have your home poisition, i can't make you the route");
+            super.sendTextBotMessage("I don't have your home poisition, i can't make you the route");
             return;
           }
           let coordinates = [
@@ -24,18 +24,18 @@ export class GoHomeAction extends BaseBotAction {
             position.coordinates.longitude
           ];
           
-          super.sendBotMessage("This will lead you to the route to get home");
+          super.sendTextBotMessage("This will lead you to the route to get home");
           this.botResources
             .getLaunchNavigator()
             .navigate(coordinates)
             .catch(error => {
                 console.log(error);
-                super.sendBotMessage("I couldn't open the navigation, do you have google maps installed?");
+                super.sendTextBotMessage("I couldn't open the navigation, do you have google maps installed?");
             });
         },
         error => {
             console.log(error);
-            super.sendBotMessage("I couldn't get your current location!");
+            super.sendTextBotMessage("I couldn't get your current location!");
         }
       );
       this.notifyFinished();

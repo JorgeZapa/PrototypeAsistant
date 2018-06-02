@@ -1,5 +1,4 @@
-//localhost
-const BASE_URL = "http://192.168.0.29:5005";
+const BASE_URL = "http://192.168.0.31:5005";
 
 export const Endpoints = {
 

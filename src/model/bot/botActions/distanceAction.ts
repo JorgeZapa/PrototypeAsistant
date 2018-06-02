@@ -21,13 +21,13 @@ export class DistanceAction extends BaseBotAction {
                     let distance = this.botResources.getLocationProvider().distanceBetweenPositions(results[1],results[0]);
                     if(distance>1200){
                         distance= distance/1000;
-                        super.sendBotMessage("You are "+ distance.toFixed(2) +" meters from home!");
+                        super.sendTextBotMessage("You are "+ distance.toFixed(2) +" meters from home!");
                     }
                     else{
-                        super.sendBotMessage("You are "+ distance.toFixed(2) +" kilometers from home!");
+                        super.sendTextBotMessage("You are "+ distance.toFixed(2) +" kilometers from home!");
                     }
                 }, error=>{
-                    super.sendBotMessage("I wasn't able to calcualte the distance, seems like there is an error");
+                    super.sendTextBotMessage("I wasn't able to calcualte the distance, seems like there is an error");
                 })
        
         //do something or other depending on distance

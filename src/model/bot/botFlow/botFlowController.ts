@@ -1,5 +1,4 @@
 import { BotFlowConfig } from './botFlowConfig/botFlowConfig';
-import { Message } from './../../message';
 export interface BotFlowController{
 
    processUserMessage(message:string);

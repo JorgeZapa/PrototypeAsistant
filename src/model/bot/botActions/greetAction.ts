@@ -5,7 +5,7 @@ import { BotFlowController } from './../botFlow/botFlowController';
 import { BotResources } from "./../botResources";
 import { Config } from "./../../../constants/config";
 import { BotAction } from "./botAction";
-import { Message } from "../../message";
+import { Message } from "../../messages/message";
 import { BaseBotAction } from "./baseBotAction";
 import { User } from "../../User/User";
 
@@ -32,17 +32,17 @@ export class GreetAction extends BaseBotAction {
   }
 
   welcome() {
-    super.sendBotMessage("Welcome!");
-    super.sendBotMessage("I am " + Config.botName + "!");
-    super.sendBotMessage(
+    super.sendTextBotMessage("Welcome!");
+    super.sendTextBotMessage("I am " + Config.botName + "!");
+    super.sendTextBotMessage(
       "I am a bot specialized in help you remember things!!"
     );
-    super.sendBotMessage("What is your name?");
+    super.sendTextBotMessage("What is your name?");
   }
 
   usualGreetings(user: User) {
-    super.sendBotMessage("Hello again, " + user.name + "!");
-    super.sendBotMessage("How can i help you today?");
+    super.sendTextBotMessage("Hello again, " + user.name + "!");
+    super.sendTextBotMessage("How can i help you today?");
   }
 
 }

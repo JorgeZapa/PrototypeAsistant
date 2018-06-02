@@ -7,10 +7,11 @@ import { LocationProvider } from "./../../providers/location/location";
 import { UserProvider } from "./../../providers/user/user";
 import { Bot } from "./../../model/bot/bot";
 import { RasaProvider } from "./../../providers/rasa/rasa";
-import { Message } from "./../../model/message";
+import { Message } from "./../../model/messages/message";
 import { Component, ViewChild, NgZone } from "@angular/core";
 import { IonicPage, NavController, NavParams, Content, Events, AlertController } from "ionic-angular";
 import "rxjs/add/operator/finally";
+import { TextMessage } from '../../model/messages/textMessage';
 
 @IonicPage()
 @Component({
@@ -64,7 +65,7 @@ export class ChatPage {
   }
 
   sendMessage() {
-    let message = new Message(this.currentMessage, false);
+    let message = new TextMessage(this.currentMessage, false);
     this.processing = true;
     this.showAndClearMessage(message);
     this.bot.readUserMessage(message);
@@ -93,7 +94,7 @@ export class ChatPage {
   }
 
   showMessageFromText(text: string){
-    this.sentMessages.push(new Message(text,true));
+    this.sentMessages.push(new TextMessage(text,true));
   }
 
   initEvents(){

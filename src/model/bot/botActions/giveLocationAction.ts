@@ -4,7 +4,6 @@ import { Config } from "./../../../constants/config";
 import { BotResources } from "./../botResources";
 import { BotAction } from "./botAction";
 import { BaseBotAction } from "./baseBotAction";
-import { Message } from "../../message";
 import { User } from "../../User/User";
 
 export class GiveLocationAction extends BaseBotAction {
@@ -17,10 +16,10 @@ export class GiveLocationAction extends BaseBotAction {
   }
 
   execute() {
-    super.sendBotMessage(
+    super.sendTextBotMessage(
       "Now i'll get your current location to help you get back when you get lost!"
     );
-    super.sendBotMessage("If you allow me, of course");
+    super.sendTextBotMessage("If you allow me, of course");
     this.botResources
       .getLocationProvider()
       .saveHomeLocation()
@@ -31,15 +30,15 @@ export class GiveLocationAction extends BaseBotAction {
       )
       .subscribe(
         ok => {
-          super.sendBotMessage("We are all set!");
-          super.sendBotMessage("You can now tell me if you are lost, or if you want to get home or converse with me!");
+          super.sendTextBotMessage("We are all set!");
+          super.sendTextBotMessage("You can now tell me if you are lost, or if you want to get home or converse with me!");
         },
         error => {
           console.log(error);
-          super.sendBotMessage(
+          super.sendTextBotMessage(
             "Something went wrong getting your location."
           );
-          super.sendBotMessage(
+          super.sendTextBotMessage(
             "Tell me if you want to set again your location and i'll try it again!"
           );
           super.notifyFinished();

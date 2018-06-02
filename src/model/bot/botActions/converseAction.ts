@@ -21,7 +21,7 @@ export class ConverseAction extends BaseBotAction {
                                         .reply(this.text)
                                         .split("|");
         for(let message of messages){
-            super.sendBotMessage(message);
+            super.sendTextBotMessage(message);
         }
 
         super.notifyFinished();

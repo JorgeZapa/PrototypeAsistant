@@ -17,8 +17,6 @@ export class NoConnectionModalComponent {
   title: string;
   message: string;
 
-  //bgImage = "./assets/imgs/errorFace.png"
-
   constructor(navParams: NavParams, public viewController: ViewController) {
     this.countdown = navParams.get("countdown");
     this.title = "oh oh..."

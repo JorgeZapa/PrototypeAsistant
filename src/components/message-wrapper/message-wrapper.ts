@@ -1,5 +1,6 @@
+import { ImageMessage } from './../../model/messages/imageMessage';
 import { Component, Input } from '@angular/core';
-import { Message } from '../../model/message';
+import { Message } from '../../model/messages/message';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 @Component({
@@ -10,14 +11,17 @@ export class MessageWrapperComponent {
 
   @Input()
   message: Message;
-
-  private profileBotPicture = "./assets/imgs/dedisco.png"; 
+ 
 
   constructor(private textToSpeech: TextToSpeech) {
   }
 
   readSpeech(){
-    this.textToSpeech.speak(this.message.content)
+    this.textToSpeech.speak(this.message.getContent());
+  }
+
+  isImage(): boolean{
+    return this.message instanceof ImageMessage;
   }
   
 }

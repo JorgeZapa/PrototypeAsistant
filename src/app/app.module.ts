@@ -29,6 +29,7 @@ import { SmsProvider } from '../providers/sms/sms';
 import { LongPressModule } from 'ionic-long-press';
 import { ErrorHanlderProvider } from '../providers/error-hanlder/error-hanlder';
 import { RiveProvider } from '../providers/rive/rive';
+import { SpeechModalComponent } from '../components/speech-modal/speech-modal';
 @NgModule({
   declarations: [
     MyApp,
@@ -36,7 +37,8 @@ import { RiveProvider } from '../providers/rive/rive';
     ChatPage, 
     MessageWrapperComponent,
     SpeechButtonComponent,
-    NoConnectionModalComponent
+    NoConnectionModalComponent,
+    SpeechModalComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { RiveProvider } from '../providers/rive/rive';
     MyApp,
     HomePage,
     ChatPage,
-    NoConnectionModalComponent
+    NoConnectionModalComponent,
+    SpeechModalComponent
   ],
   providers: [
     StatusBar,

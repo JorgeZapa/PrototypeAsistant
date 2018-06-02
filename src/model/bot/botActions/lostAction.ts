@@ -11,9 +11,9 @@ export class LostAction extends BaseBotAction {
     }
 
     execute(): RasaEvent {
-        super.sendBotMessage("Sending SOS message...");
+        super.sendTextBotMessage("Sending SOS message...");
         let confirmAlert = super.createConfirmAlert("Send SMS", "I am about to send an SMS are you sure you want to send it?",
-                    ()=>this.sendSOS(),()=>this.sendBotMessage("Okay i won't"))
+                    ()=>this.sendSOS(),()=>this.sendTextBotMessage("Okay i won't"))
         confirmAlert.present();
         
         return null;
@@ -21,12 +21,12 @@ export class LostAction extends BaseBotAction {
 
     private sendSOS(){
         this.botResources.getSmsProvider().sendSOSSMS() .finally(()=> this.notifyFinished()).subscribe(ok=>{
-            super.sendBotMessage("SOS SENT!!!");
-            super.sendBotMessage("Please don't move from there, "
+            super.sendTextBotMessage("SOS SENT!!!");
+            super.sendTextBotMessage("Please don't move from there, "
                              + this.botResources.getUserProvider().getLoggedUser().name);
         }, error=>{
             console.log(error);
-            super.sendBotMessage("I couldn't send the SMS, maybe you need to acept the permissions");
+            super.sendTextBotMessage("I couldn't send the SMS, maybe you need to acept the permissions");
         });
     }
     getRasaEncodingName(): string {

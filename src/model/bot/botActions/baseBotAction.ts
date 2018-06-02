@@ -4,7 +4,9 @@ import { RasaEvent } from './../../rasaPetition/Events/rasaEvent';
 import { BotFlowController } from './../botFlow/botFlowController';
 import { BotAction } from './botAction';
 import { BotResources } from './../botResources';
-import { Message } from '../../message';
+import { Message } from '../../messages/message';
+import { ImageMessage } from '../../messages/imageMessage';
+import { TextMessage } from '../../messages/textMessage';
 export abstract class BaseBotAction implements BotAction{
 
     botResources: BotResources;
@@ -22,8 +24,13 @@ export abstract class BaseBotAction implements BotAction{
 
     abstract execute() :RasaEvent;
 
-    sendBotMessage(messageContent: string){
-        this.botResources.getMessageList().push(new Message(messageContent, true));
+    sendTextBotMessage(messageContent: string){
+        this.botResources.getMessageList().push(new TextMessage(messageContent, true));
+        setTimeout(() => this.botResources.getContent().scrollToBottom(300), 300);
+    }
+
+    sendImageBotMessage(imageName: string){
+        this.botResources.getMessageList().push(new ImageMessage("assets/imgs/" + imageName, true));
         setTimeout(() => this.botResources.getContent().scrollToBottom(300), 300);
     }
     

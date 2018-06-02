@@ -3,7 +3,6 @@ import { Config } from './../../../constants/config';
 import { BotResources } from './../botResources';
 import { BotAction } from './botAction';
 import { BaseBotAction } from './baseBotAction';
-import { Message } from '../../message';
 export class WrongAction extends BaseBotAction {
 
     constructor(botResources: BotResources, botFlowController: BotFlowController){
@@ -14,7 +13,7 @@ export class WrongAction extends BaseBotAction {
         return Config.builtInActions.wrong;
     }
     execute() {
-        this.botResources.getMessageList().push(new Message("Sorry, i didn't understand you...", true));
+        super.sendTextBotMessage("I didn't understand that");
         super.notifyFinished();
         return null;
     }

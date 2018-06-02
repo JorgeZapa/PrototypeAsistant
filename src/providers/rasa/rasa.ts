@@ -5,7 +5,7 @@ import { EndpointsProvider } from "./../endpoints/endpoints";
 import { Endpoints } from "./../../constants/endpoints";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Message } from "../../model/message";
+import { Message } from "../../model/messages/message";
 import { Observable } from "rxjs/Observable";
 import { RasaSetSlotEvent } from "../../model/rasaPetition/Events/rasaSetSlotEvent";
 

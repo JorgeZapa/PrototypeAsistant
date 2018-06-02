@@ -9,7 +9,7 @@ import { BotResources } from "./botResources";
 import { RasaProvider } from "./../../providers/rasa/rasa";
 import { ActionFactory } from "./actionFactory";
 import { ActionResponse } from "./../../model/rasaResponse/actionResponse";
-import { Message } from "./../message";
+import { Message } from "./../messages/message";
 import { Config } from "./../../constants/config";
 import { Content, Events, AlertController } from "ionic-angular";
 export class Bot{
@@ -47,7 +47,7 @@ export class Bot{
 
 
   readUserMessage(userMessage: Message) {
-    this.flowController.processUserMessage(userMessage.content);
+    this.flowController.processUserMessage(userMessage.getContent());
   }
 
   welcomeUser() {

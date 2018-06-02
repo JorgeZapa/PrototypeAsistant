@@ -3,8 +3,11 @@
 
   <div class="messageContentContainer">
   <span class="triangle"></span>
-  <p class="content">  {{message?.content}}</p>
-  <button  ion-button round="true" (click)=readSpeech()>
+  <div class="content">
+    <p *ngIf="!isImage()">{{message?.getContent()}}</p> 
+    <img [src]="message?.getContent()" *ngIf="isImage()"/>
+  </div>
+  <button *ngIf="!isImage()" ion-button round="true" (click)=readSpeech()>
     <ion-icon name="headset"></ion-icon>
   </button>
   </div>
