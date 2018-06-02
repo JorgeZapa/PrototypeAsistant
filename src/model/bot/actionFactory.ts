@@ -13,7 +13,6 @@ import { BotResources } from "./botResources";
 import { GreetAction } from "./botActions/greetAction";
 import { Config } from "./../../constants/config";
 import { ActionResponse, Slots } from "./../rasaResponse/actionResponse";
-import { GoodbyeAction } from "./botActions/goodbyeAction";
 import { GiveNameAction } from "./botActions/giveNameAction";
 import { WrongAction } from "./botActions/wrongAction";
 import { ConverseAction } from './botActions/converseAction';
@@ -32,8 +31,6 @@ export class ActionFactory {
     switch (actionName) {
       case Config.rasaSupportedActions.greet:
         return new GreetAction(botResources, botFlowController);
-      case Config.rasaSupportedActions.goodbye:
-        return new GoodbyeAction(botResources, botFlowController);
       case Config.rasaSupportedActions.give_name:
         return new GiveNameAction(
           botResources, botFlowController,tracker.slots.PERSON);

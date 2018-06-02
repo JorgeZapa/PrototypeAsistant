@@ -37,7 +37,7 @@ export class botFlowControllerImpl implements BotFlowController {
     this.botResources
       .getRasaProvider()
       .continue(
-        Config.rasaSupportedActions.goodbye,
+        Config.rasaSupportedActions.distance,
         new RasaRestartEvent()
       )
       .subscribe(res => {
