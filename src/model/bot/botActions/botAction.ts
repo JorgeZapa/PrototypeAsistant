@@ -6,6 +6,7 @@ export interface BotAction{
 
     execute() : RasaEvent;
     getRasaEncodingName(): string;
+    getIntentName(): string;
     getBotFlowController(): BotFlowController;
     doBeforeParsing(messageContent : string, previousAction : BotAction): RasaSetSlotEvent;
 }

@@ -67,19 +67,23 @@ export class botFlowControllerImpl implements BotFlowController {
             this
           ));
 
-          if (!this.checkActionAllowed(this.action)) {
-            //If the action is not allowed -> we didn't understand
-            ActionFactory.createActionFromName(Config.builtInActions.wrong, this.botResources, this, null).execute();
-            return;
-          }
-          console.log(res.tracker.latest_message);
-          if(res.tracker.latest_message.intent.confidence < (Config.confidenceThreshold[res.next_action]/100)){
+          if(!this.checkActionAllowed(this.action) ||
+            !this.checkIntentConfidence(res)){
             let converstationAction= ActionFactory.createActionFromName(Config.builtInActions.converse, this.botResources, this, res.tracker);
             if(this.checkActionAllowed(converstationAction)){
               converstationAction.execute();
               return;
             }
             
+
+          if (!this.checkActionAllowed(this.action)) {
+            //If the action is not allowed -> we didn't understand
+            if(this.checkActionAllowed)
+
+            ActionFactory.createActionFromName(Config.builtInActions.wrong, this.botResources, this, null).execute();
+            return;
+          }
+          
           }
 
           let rEvent = this.action.execute();
@@ -98,6 +102,13 @@ export class botFlowControllerImpl implements BotFlowController {
     console.log(this.botFlowConfig.getAllowedActions().indexOf(action.getRasaEncodingName()))
     return (this.botFlowConfig.getAllowedActions().indexOf(action.getRasaEncodingName()) !=-1 
       ||  this.botFlowConfig.getAllowedActions().indexOf("*") != -1);
+  }
+
+  private checkIntentConfidence(actionResponse: ActionResponse){
+    if(Config.confidenceThreshold[actionResponse.tracker.latest_message.intent.name]){
+      return Config.confidenceThreshold[actionResponse.tracker.latest_message.intent.name]<actionResponse.tracker.latest_message.intent.confidence
+    }
+    return false
   }
 
   takeNextAction(lastExecutedAction: BotAction, rEvent: RasaEvent) {
@@ -121,7 +132,7 @@ export class botFlowControllerImpl implements BotFlowController {
       this.botResources,
       this
     ));
-    if (this.action instanceof ListenAction) {
+    if (this.action instanceof ListenAction || this.action==null) {
       return;
     }
     let rEvent = this.action.execute();

@@ -19,7 +19,6 @@ export class GiveLocationAction extends BaseBotAction {
     super.sendTextBotMessage(
       "Now i'll get your current location to help you get back when you get lost!"
     );
-    super.sendTextBotMessage("If you allow me, of course");
     this.botResources
       .getLocationProvider()
       .saveHomeLocation()
@@ -31,7 +30,13 @@ export class GiveLocationAction extends BaseBotAction {
       .subscribe(
         ok => {
           super.sendTextBotMessage("We are all set!");
-          super.sendTextBotMessage("You can now tell me if you are lost, or if you want to get home or converse with me!");
+          super.sendTextBotMessage("Want to know what i can do?")
+          super.sendTextBotMessage("-> Change your home location");
+          super.sendTextBotMessage("-> Show you the distance to your home location")
+          super.sendTextBotMessage("-> Show you the route to your home location")
+          super.sendTextBotMessage("-> Send an SOS numer to the number you registered if you get lost");
+          super.sendTextBotMessage("Just let me know, now that we are all set...");
+          super.sendTextBotMessage("Have you played any videogame today?");
         },
         error => {
           console.log(error);
@@ -41,6 +46,7 @@ export class GiveLocationAction extends BaseBotAction {
           super.sendTextBotMessage(
             "Tell me if you want to set again your location and i'll try it again!"
           );
+          super.sendTextBotMessage("Otherwise i won't be able to help you if you are lost!");
           super.notifyFinished();
         }
       );

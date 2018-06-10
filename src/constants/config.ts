@@ -30,24 +30,18 @@ export const Config = {
     converse: "converse"
   },
   confidenceThreshold:{
-    utter_greet: 61,
-    utter_give_location: 0,
-    utter_give_name: 0,
-    utter_no_name: 0,
-    utter_give_number: 0,
-    utter_no_number: 0,
-    action_listen: 0,
-    utter_lost: 49,
-    utter_distance: 25,
-    utter_go_home: 20,
-    utter_change_location: 20,
+    listen: 0,
+    lost: 0.50,
+    distance: 0.38,
+    go_home: 0.48,
+    change_location: 0.31,
 
   },
   StateBotAllowedActions:{
     welcome:["utter_give_location",
     "utter_give_name","utter_give_number", "utter_no_name",
     "utter_no_number"],
-    default:["*"]
+    default:["action_listen", "utter_lost", "utter_distance","converse",  "utter_change_location", "utter_go_home"]
   },
   templateSMSMessage:
     "This is a message from Demencio. \n" +

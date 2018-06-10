@@ -64,5 +64,9 @@ export abstract class BaseBotAction implements BotAction{
     notifyFinished(){
         this.botResources.getEvents().publish(Config.EventFinishProcessing.FINISH_PROCESSING);
     }
+
+    getIntentName(){
+        return this.getRasaEncodingName().substr(6);
+    }
     
 }

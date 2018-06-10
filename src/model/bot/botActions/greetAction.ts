@@ -13,6 +13,9 @@ export class GreetAction extends BaseBotAction {
   constructor(botResources: BotResources, botFlowController: BotFlowController) {
     super(botResources, botFlowController);
   }
+
+
+
   getRasaEncodingName(): string {
     return Config.rasaSupportedActions.greet;
   }
@@ -32,17 +35,17 @@ export class GreetAction extends BaseBotAction {
   }
 
   welcome() {
-    super.sendTextBotMessage("Welcome!");
+    super.sendTextBotMessage("Hey there!");
     super.sendTextBotMessage("I am " + Config.botName + "!");
     super.sendTextBotMessage(
-      "I am a bot specialized in help you remember things!!"
+      "i'm really into videogames, even though i am a chatbot!!"
     );
-    super.sendTextBotMessage("What is your name?");
+    super.sendTextBotMessage("What's your name?");
   }
 
   usualGreetings(user: User) {
     super.sendTextBotMessage("Hello again, " + user.name + "!");
-    super.sendTextBotMessage("How can i help you today?");
+    super.sendTextBotMessage("Let us talk about videogames!");
   }
 
 }
