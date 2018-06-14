@@ -47,6 +47,7 @@ export class GiveLocationAction extends BaseBotAction {
             "Tell me if you want to set again your location and i'll try it again!"
           );
           super.sendTextBotMessage("Otherwise i won't be able to help you if you are lost!");
+          super.sendTextBotMessage("Have you played any videogame today?");
           super.notifyFinished();
         }
       );

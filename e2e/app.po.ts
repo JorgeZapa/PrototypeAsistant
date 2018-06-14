@@ -27,7 +27,7 @@ export class Page {
     return element.all(by.id('messages')).count();
   }
 
-  sendMessage(message: string){
+  sendMessage(message: string): Promise<String>{
     return new Promise((resolve, reject)=>{
       let textArea = element(by.css("#messageInput textArea"));
       textArea.sendKeys(message).then(()=>{
@@ -39,7 +39,19 @@ export class Page {
     )})
   }
 
-  sendMessageGetLastOne(message:string){
+  sendMessageWithTime(message: string, time: number){
+    return new Promise((resolve, reject)=>{
+      let textArea = element(by.css("#messageInput textArea"));
+      textArea.sendKeys(message).then(()=>{
+        let buttonSend = element(by.id("buttonSend"));
+        buttonSend.click().then(()=>{
+          browser.sleep(time).then(()=>resolve());
+        });
+      }
+    )})
+  }
+
+  sendMessageGetLastOne(message:string): Promise<String>{
     return new Promise((resolve, reject) =>{
       this.sendMessage(message).then(()=>{
         this.getLastMessage().then(content=>{
