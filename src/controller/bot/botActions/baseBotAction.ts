@@ -4,9 +4,9 @@ import { RasaEvent } from './../../rasaPetition/Events/rasaEvent';
 import { BotFlowController } from './../botFlow/botFlowController';
 import { BotAction } from './botAction';
 import { BotResources } from './../botResources';
-import { Message } from '../../messages/message';
-import { ImageMessage } from '../../messages/imageMessage';
-import { TextMessage } from '../../messages/textMessage';
+import { Message } from '../../../model/messages/message';
+import { ImageMessage } from '../../../model/messages/imageMessage';
+import { TextMessage } from '../../../model/messages/textMessage';
 export abstract class BaseBotAction implements BotAction{
 
     botResources: BotResources;

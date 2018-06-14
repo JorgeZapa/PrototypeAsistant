@@ -53,7 +53,7 @@ export class botFlowControllerImpl implements BotFlowController {
 
     if(rEventBeforeParse!=null){
       this.botResources.getRasaProvider().sendSetSlotsEvent(rEventBeforeParse).subscribe()
-      message = "My name is C0m0D1N";
+      message = "My name is a<afxawer>a";
     }
 
     this.botResources

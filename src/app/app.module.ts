@@ -18,7 +18,6 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { RasaProvider } from '../providers/rasa/rasa';
 import { EndpointsProvider } from '../providers/endpoints/endpoints';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -33,7 +32,6 @@ import { SpeechModalComponent } from '../components/speech-modal/speech-modal';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     ChatPage, 
     MessageWrapperComponent,
     SpeechButtonComponent,
@@ -53,7 +51,6 @@ import { SpeechModalComponent } from '../components/speech-modal/speech-modal';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     ChatPage,
     NoConnectionModalComponent,
     SpeechModalComponent

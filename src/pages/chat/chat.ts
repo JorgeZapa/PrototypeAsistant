@@ -5,7 +5,7 @@ import { LaunchNavigator } from "@ionic-native/launch-navigator";
 import { SmsProvider } from "./../../providers/sms/sms";
 import { LocationProvider } from "./../../providers/location/location";
 import { UserProvider } from "./../../providers/user/user";
-import { Bot } from "./../../model/bot/bot";
+import { Bot } from "./../../controller/bot/bot";
 import { RasaProvider } from "./../../providers/rasa/rasa";
 import { Message } from "./../../model/messages/message";
 import { Component, ViewChild, NgZone } from "@angular/core";

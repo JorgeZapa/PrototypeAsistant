@@ -4,7 +4,7 @@ import { Config } from "./../../../constants/config";
 import { BotResources } from "./../botResources";
 import { BotAction } from "./botAction";
 import { BaseBotAction } from "./baseBotAction";
-import { User } from "../../User/User";
+import { User } from "../../../model/User/User";
 
 export class GiveLocationAction extends BaseBotAction {
   constructor(botResources: BotResources, botFlowController: BotFlowController) {

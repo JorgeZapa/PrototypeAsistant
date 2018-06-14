@@ -1,7 +1,7 @@
 ! version = 2.0
 
 // Bot variables
-! var name = Dedisco
+! var name = Ludobot
 
 // Substitutions
 //    I
@@ -59,24 +59,23 @@
 + who are you
 * <get askedBot> == undefined => <set askedBot= true> Let me refresh your memory!|
 ^ I am <bot name>, the incredible gamer chatbot.|
-^ Now it is my turn to ask: Which videogame did you play today?
+^ Which videogame did you play today?
 - You asked earlier... i am <bot name>, do you remember?|
 ^ Anyway... Which videogame did you play today?!
 
-+ [*]fornite[*]{weight=10}
-- <set knowknGame=Fornite> Oh, i love that game!|
-^ Have you ever won a whole game?|
-^ The last one standing? {topic=fornite}
++ [*]fortnite[*]{weight=10}
+- <set knowknGame=Fortnite> Oh, i love that game!|
+^ Have you ever won a whole game?{topic=fortnite}
 
 + [*]clash royale[*]{weight=10}
 - <set knowknGame=Clash Royale> Oh, i love that game!|
-^ Tell me, which arena are you into?{topic=cr}
+^ Tell me, what is your arena level?{topic=cr}
 
 + [*]clash of clans[*]{weight=10}
 - <set knowknGame=Clash of Clans> Oh, i love that game!|
 ^ How many cups do you have?{topic=cc}
 
-+ i [love to] ([usually] play|played) * [today|all day|all day long|yesterday|(one|a) (week|month|year) ago]
++ i [love] ([usually] play|played|playing) * [today|all day|all day long|yesterday|(one|a) (week|month|year) ago]
 - <set unknownGame=<star2>> <star2>?... I don't know that videogame|
 ^ Is it a new one?{topic=unknown_game}
 
@@ -84,7 +83,7 @@
 - <set unknownGame=<star2>> <star2>?... I don't know that videogame|
 ^ Is it a new one?{topic=unknown_game}
 
-+ My favourite game is *
++ my (favourite|favorite) game is *
 - <set unknownGame=<star2>> <star2>?... I don't know that videogame|
 ^ Is it a new one?{topic=unknown_game}
 
@@ -92,50 +91,55 @@
 - oh, c'mon i am sure you have played at least a videogame in your life...|
 ^ Not even solitarie?!{topic=no_games}
 
-+ (what is your|do you have any) favourite (@videogame)
-- <set suggestedGame=forn> Today i really liked playing Fornite|
++ (what is your|do you have any) (favourite|favorite) (@videogame)
+- <set suggestedGame=fort> Today i really liked playing Fortnite|
 ^ Do you know that game?
 - <set suggestedGame=cr> Today i really liked playing Clash Royale|
 ^ Do you know that game?
 - <set suggestedGame=cc> Today i really liked playing Clash of Clans|
-^ Which game did you play recently?
+^ Do you know that game?
 
 +[*](@affirmative)[*]
 % *know that game[*]
-* <get suggestedGame> == forn => Oh really? Let us talk about it!|
+* <get suggestedGame> == fort => Oh really? Let us talk about it!|
 ^ Have you ever won a whole game?|
-^ The last one standing? {topic=fornite}
+^ The last one standing? {topic=fortnite}
 * <get suggestedGame> == cr => Oh! So you do prefer mobile games|
 ^ Tell me, which arena are you into?{topic=cr}
 * <get suggestedGame> == cc => Oh! So you do like mobile games|
 ^ How many cups do you have?{topic=cc}
 - {@ any}
 
++[*](@negative)[*]
+% *know that game[*]
+- Oh, i see. In that case
+^ So ... Which game do you usually play?
+
 + i [did not|have not] (play|played) [any] (@videogame) [today|lately]
 - Really? You sound like a busy one!|
-^ So what do you usually play?
+^ So... Which game do you usually play?
 
 +*
 - I didn't understand that, try to say it in a different way!|
-^ Do you play any game usually?
+^ So... Which game do you usually play?
 
 
-//GAME 1 - Fornite
+//GAME 1 - Fortnite
 
->topic fornite
+>topic fortnite
 
 +[*] (@affirmative) [*]
 % * won a whole *
 - Wow, that is amaizing!|
 ^ I was just able to win one, and i am proud of it!|
-^ What your favourite thing to build?
+^ What is your favourite thing to build?
 
 
 +[*] (@negative) [*]
 % * won a whole *
 - Don't worry, i know it is difficult to win|
 ^ Took me MONTHS to win one!|
-^ What your favourite thing to build?
+^ What is your favourite thing to build?
 
 + *
 % * favourite thing to build
@@ -146,35 +150,19 @@
 
 + [*] ((@affirmative)| with friends) [*]
 % *do you play with friends
-- I also do play sometimes with some bot firends that i have!
-^ And do you play in competitive mode?
+- I also do play sometimes with some bot firends that i have!|
+^ Tell me more about how do you play!
 
 + [*] ((@negative)| alone| by my own) [*]
 % *do you play with friends
 - I guess that sometimes is better to go by your own and not worry about anything else...|
-^ Do you play in competitive mode?
-
-+ [*] ((@affirmative)) [*]
-% * do you play in competitive*
-- I would like to play competitive like you!|
-^ But people might notice i am a bot and i would get banned|
-^ Tell me more about how do you play!
-
-
-+ [*] ((@negative)| do not like) [*]
-% * do you play in competitive*
-- I can't play competitive too!|
-^ But people might notice i am a bot and i would get banned|
 ^ Tell me more about how do you play!
 
 
 + *
-- i see...|
-^ I hate snipers they always get me!|
-^ Tell me about how you play!!
 - Wow you sound like an expert...|
 ^ I am feeling intimidated!|
-^ Let's talk about other game{weight=70}{topic=random}
+^ Which other game do you usually play?{weight=70}{topic=random}
 
 < topic
 
@@ -182,7 +170,7 @@
 
 > topic cr
 
-+ [my arena level is] # [*]
++ [*] # [*]
 % * which arena *
 - Hmmm... So you are in arena <star> <set arenaLvl=<star>>|
 ^ {@ i want to know my arena level}
@@ -191,7 +179,7 @@
 * <get arenaLvl> == undefined => You didn't tell me your arena level|
 ^ In which arena level are you?
 * <get arenaLvl> <= 5 => You didn't play a lot did you?|
-^ Let's talk about another game{topic=random}
+^ Which other game do you usually play?{topic=random}
 * <get arena lvl> <=9 => Wow, not bad and how many legendary cards do you have?
 - Amaizing! i have to ask...|
 ^ How many legendary cards do you have?
@@ -203,16 +191,16 @@
 
 + *
 * <get arenaLvl> == undefined => I didn't get that but...|
-^ In which arena level are you?
+^ What is your arena level?
 * <get legendaryCards> == undefined => I am having trouble understanding you...|
 ^ You might be a genious or something!|
 ^ How many legendary cards do you have?
 - I think you know too much about the game... i can't follow!|
-^ Let's talk about another game!{topic=random} 
+^ Which other game do you usually play?{topic=random} 
 - I see...|
 ^ You are an amazing player!|
-^ But is it just in this game or in other too!|
-^ Let us talk about another game then!{topic=random}
+^ But is it just in this game or in others too?|
+^ Which other game do you usually play?{topic=random}
 
 
 < topic
@@ -230,11 +218,11 @@
 * <get numCups> == undefined => You didn't tell me the number of cups you have|
 ^ How many cups do you have?
 * <get numCups> < 2000 => You are at least gold... not bad!|
-^ And tell me how do you play?
+^ What is your town hall level?
 * <get numCups> < 3200 => You are at least master|
-^ Wow! you are good. Tell me how you play pls
+^ Wow! you are good. What is your town hall level?
 - ... You are titan or champion... I am speechless. You are a legend|
-^ Tell me more about the game!
+^ What is your town hall level?
 
 
 +[*] # [*]
@@ -249,7 +237,7 @@
 * <get townHall> <= 5 => You didn't play much do you?|
 ^ Let's talk about another game then! {topic=random}
 * <get townHall> <=9 => Wow, not bad, you are quite an expert!|
-^ Tell me more abouthow you play!
+^ Tell me more about how you play!
 - Wow, you are THE expert, you might want to teach me something| 
 ^ Tell me more please!
 
@@ -259,7 +247,7 @@
 * <get townHall> == undefined => I didn't get that but...|
 ^ What is your town hall level?
 - I think you know too much about the game... I can't follow! |
-^ Let's talk about another game!{topic=random} 
+^ Which other game do you usually play?{topic=random} 
 
 < topic
 
@@ -275,38 +263,36 @@
 + [*](@negative | old [one])[*]
 % *new one [*]
 - For real? And i don't know about it?!|
-^ What is it about? i need to know!|
-^ {@it is hard to explain}
+^ What is it about? i need to know!
 
 + [*] about *
-- Hmmm i see, not really my favourite kind of gamestyle|
+- Hmmm i see, not really my favorite kind of gamestyle|
 ^ But i might give it a try someday!|
 ^ {@it is hard to explain}
 
 + [*] hard to explain [*]
 - Tell me, is it multiplayer or solo player?
-- Let's talk about another game!{topic=random}
 
 + [*] multiplayer [*]
+%  * multiplayer or *
 - Oh really? We might actually be able to play together someday!|
 ^ Tell me more about the videogame!
 
 + [*] (solo|one player) [*]
+%  * multiplayer or * 
 - I sometimes play one player games too! So refreshing!|
 ^ Tell me more about the videogame
 
-+ (it is for|you can play it on) *
++ (in|it is for|you can play it on) *
 - <set gamePlatform=<star2>> I don't remeber if i have a <star2>.... If i have one i will give a try!|
 ^ Anyway this game sounds good! Tell me more about it!
 
 + *
-* <get gamePlatform> == undefined => Which platform can you play this game called "<get unknownGame>"?
+* <get gamePlatform> == undefined => In which platform can you play this game called "<get unknownGame>"?
 - I didn't get all of it but <get unknownGame> sound interesting|
 ^ Tell me more about the game
-- I didn't know you could do that in a game...|
-^ What more can you do?
 - <set gamePlatform=undefined> Interesting... I might give <get unknownGame> a try!|
-^ Let's talk about another game!{weight=70}{topic=random}
+^ Which other game do you usually play?{weight=70}{topic=random}
 
 
 < topic
@@ -317,7 +303,7 @@
 
 + ((@affirmative)|i (did|have)) [*]
 - That's more like it!|
-^ Do you have a winning streak record or something?|
+^ Do you have a winning streak record?|
 ^ Mine is 10 games in a row!
 
 + [*] # [*]
@@ -338,25 +324,26 @@
 - Really? It is the most important thing in the game!|
 ^ Ask for a friend to talk with me about videogames{topic=random}
 
-+ i [have] (did not|never) [ever] count[ed] [*]
++ i [have] (did not|never) [ever] (count|counted) [*]
 % * mine is 10 *
 - That is bad! You should count them!|
 ^ Ask for a friend to talk with me about videogames{topic=random}
 
-+ (@negative) [*]
++[*] (@negative) [*]
+% * mine is 10 *
 - I am speechless!|
 ^ I have never met someone that have never played a videogame before...|
 ^ So... May i ask what do you like to do in your freetime?
 
 
-+ [*] i (like| prefer|love) [to] read[ing]
++ [*] i (like| prefer|love) [to] (read|reading)
 % * never met *
 - I don't really like reading...|
 ^ I am way faster at reading than humans are!|
 ^ That is why i just want to play videogames!|
 ^ I got bored, ask for a friend to talk with me about videogames{topic=random}
 
-+ [*] i (like|prefer|love) [to] read[ing] *
++ [*] i (like|prefer|love) [to] (read|reading) *
 % * never met *
 - I don't really like reading...|
 ^ I am way faster at reading than humans are!|
@@ -372,8 +359,6 @@
 
 
 + *
-- Maybe it's because you don't play videogames...|
-^ I don't understand what you said, can you try to say it again?
 - I don't get you... i can only speak with gamers!|
 ^ Take some gamer friend that you have to talk about videogames!{topic=random}
 

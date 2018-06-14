@@ -18,7 +18,7 @@ export class ChangeLocationAction extends BaseBotAction {
             this.sendTextBotMessage("New home location saved!");
         }, error=>{
             console.log(error);
-            super.sendTextBotMessage("I couldn't get your new position");
+            super.sendTextBotMessage("I couldn't get your current location!");
         } )
     }
 

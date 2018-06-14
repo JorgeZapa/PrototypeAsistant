@@ -1,4 +1,5 @@
 import { browser, by, element } from 'protractor';
+import { reject } from 'q';
 
 export class Page {
 
@@ -18,6 +19,10 @@ export class Page {
     return element.all(by.id('messages')).get(messageNumber).getText();
   }
 
+  getLastMessage(){
+    return element.all(by.id('messages')).last().getText();
+  }
+
   getMessagesCount(){
     return element.all(by.id('messages')).count();
   }
@@ -32,6 +37,26 @@ export class Page {
         });
       }
     )})
+  }
+
+  sendMessageGetLastOne(message:string){
+    return new Promise((resolve, reject) =>{
+      this.sendMessage(message).then(()=>{
+        this.getLastMessage().then(content=>{
+          resolve(content);
+        })
+      })
+    })
+  }
+
+  endWelcome(){
+      return new Promise((resolve, reject)=>{
+        this.sendMessage("My name is Jorge").then(()=>{
+          this.sendMessage("987456132").then(()=>{
+            resolve();
+          }) 
+        })
+      })
   }
 
 }

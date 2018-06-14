@@ -29,7 +29,15 @@ export class LocalDataProvider {
   }
 
   getHomeLocation():Observable<SimpleGeoposition>{
-    return fromPromise(this.storage.get(this.HOME_LOCATION_STORAGE_KEY));
+    return new Observable((subscriber)=>{
+      this.storage.get(this.HOME_LOCATION_STORAGE_KEY).then(res=>{
+        console.log(res);
+        subscriber.next(res);
+        subscriber.complete();
+      }).catch(error=>{
+        subscriber.error(error);
+      })
+    });
   }
 
   saveHomeLocation(geolocation: SimpleGeoposition):Observable<any>{

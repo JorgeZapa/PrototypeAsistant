@@ -15,12 +15,26 @@ export class LocationProvider {
               private localDataProvider: LocalDataProvider) {
   }
 
+  options={
+    timeout:4000,
+    enableHighAccuracy: true
+  }
+
   getCurrentLocation(): Observable<Geoposition>{
     /*if(!this.isDevice()){
       console.log("GEOLOCATION: you are on not on a device");
       return new Observable<Geoposition>();
     }*/
-    return fromPromise(this.geolocation.getCurrentPosition());
+    return new Observable((subscriber)=>{
+      this.geolocation.getCurrentPosition(this.options).then((res)=>{
+        subscriber.next(res);
+        subscriber.complete();
+      },
+    error=>{
+      subscriber.error(error);
+    })
+      
+    });
   }
 
   saveHomeLocation():Observable<void>{
@@ -44,6 +58,9 @@ export class LocationProvider {
             });
             
                                                                   
+    }, error =>{
+      console.log(error);
+      subscriber.error(error);
     })
         })
   }
@@ -53,15 +70,8 @@ export class LocationProvider {
       console.log("GEOLOCATION: you are on not on a device");
       return new Observable<Geoposition>();
     }*/
-    return new Observable<SimpleGeoposition>(subscriber =>{
-      this.localDataProvider.getHomeLocation()
-      .subscribe(homePosition=>{
-        console.log("homePosition");
-        console.log(homePosition);
-        subscriber.next(homePosition);
-        subscriber.complete();
-      })
-    });
+    console.log("YOLO");
+   return this.localDataProvider.getHomeLocation();
 
   }
 

@@ -10,6 +10,7 @@ export class NoNameAction extends BaseBotAction {
 
   execute(): RasaEvent {
     super.sendTextBotMessage("I didn't understand your name...");
+    super.sendTextBotMessage("If you tell me your name and nothing else i'll take it as it is!")
     super.sendTextBotMessage("Can you repeat it again?");
     super.notifyFinished();
     return null;

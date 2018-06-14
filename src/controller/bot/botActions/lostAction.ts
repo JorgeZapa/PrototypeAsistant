@@ -1,3 +1,4 @@
+import { UserProvider } from './../../../providers/user/user';
 import { BotFlowController } from './../botFlow/botFlowController';
 import { Config } from './../../../constants/config';
 import { BotResources } from './../botResources';
@@ -26,7 +27,8 @@ export class LostAction extends BaseBotAction {
                              + this.botResources.getUserProvider().getLoggedUser().name);
         }, error=>{
             console.log(error);
-            super.sendTextBotMessage("I couldn't send the SMS, maybe you need to acept the permissions");
+            super.sendTextBotMessage("I couldn't send the SMS");
+            super.sendTextBotMessage("Please try to call to the SOS number: " + this.botResources.getUserProvider().getLoggedUser().getSosNumber());
         });
     }
     getRasaEncodingName(): string {

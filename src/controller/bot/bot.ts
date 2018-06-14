@@ -8,8 +8,8 @@ import { UserProvider } from "./../../providers/user/user";
 import { BotResources } from "./botResources";
 import { RasaProvider } from "./../../providers/rasa/rasa";
 import { ActionFactory } from "./actionFactory";
-import { ActionResponse } from "./../../model/rasaResponse/actionResponse";
-import { Message } from "./../messages/message";
+import { ActionResponse } from "./../../controller/rasaResponse/actionResponse";
+import { Message } from "./../../model/messages/message";
 import { Config } from "./../../constants/config";
 import { Content, Events, AlertController } from "ionic-angular";
 export class Bot{

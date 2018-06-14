@@ -3,8 +3,8 @@ import { Config } from './../../../constants/config';
 import { BotResources } from './../botResources';
 import { BotAction } from "./botAction";
 import { BaseBotAction } from "./baseBotAction";
-import { Message } from '../../messages/message';
-import { User } from '../../User/User';
+import { Message } from '../../../model/messages/message';
+import { User } from '../../../model/User/User';
 
 export class GiveNameAction extends BaseBotAction {
 
@@ -21,7 +21,7 @@ export class GiveNameAction extends BaseBotAction {
 
     execute() {
        super.sendTextBotMessage("Nice to meet you "+ this.name +"!");
-       super.sendTextBotMessage("Now i need to know a number to call in case anything bad happens!");
+       super.sendTextBotMessage("Now i need to know a number to send a SOS to in case you get lost!");
        this.botResources.getUserProvider().getLoggedUser().name=this.name;
        super.notifyFinished();
        return null;

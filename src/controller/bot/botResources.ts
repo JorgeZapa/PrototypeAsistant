@@ -6,7 +6,7 @@ import { SmsProvider } from './../../providers/sms/sms';
 import { LocationProvider } from './../../providers/location/location';
 import { UserProvider } from './../../providers/user/user';
 import { RasaProvider } from './../../providers/rasa/rasa';
-import { Message } from './../messages/message';
+import { Message } from './../../model/messages/message';
 import { Content } from 'ionic-angular';
 export class BotResources{
 

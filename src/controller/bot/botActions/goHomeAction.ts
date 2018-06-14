@@ -16,7 +16,8 @@ export class GoHomeAction extends BaseBotAction {
       .subscribe(
         position => {
           if(position== null){
-            super.sendTextBotMessage("I don't have your home poisition, i can't make you the route");
+            super.sendTextBotMessage("I don't have your home poisition, i can't make the route");
+            super.sendTextBotMessage("Remember that you can ask to change your home location in order to set it again!");
             return;
           }
           let coordinates = [
@@ -24,7 +25,8 @@ export class GoHomeAction extends BaseBotAction {
             position.coordinates.longitude
           ];
           
-          super.sendTextBotMessage("This will lead you to the route to get home");
+          super.sendTextBotMessage("I will open another application in your phone.");
+          super.sendTextBotMessage("It will show you the route");
           this.botResources
             .getLaunchNavigator()
             .navigate(coordinates)

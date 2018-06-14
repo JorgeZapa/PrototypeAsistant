@@ -1,13 +1,13 @@
 import { UserProvider } from "./../user/user";
-import { RasaEvent } from "./../../model/rasaPetition/Events/rasaEvent";
-import { ActionResponse } from "./../../model/rasaResponse/actionResponse";
+import { RasaEvent } from "./../../controller/rasaPetition/Events/rasaEvent";
+import { ActionResponse } from "./../../controller/rasaResponse/actionResponse";
 import { EndpointsProvider } from "./../endpoints/endpoints";
 import { Endpoints } from "./../../constants/endpoints";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Message } from "../../model/messages/message";
 import { Observable } from "rxjs/Observable";
-import { RasaSetSlotEvent } from "../../model/rasaPetition/Events/rasaSetSlotEvent";
+import { RasaSetSlotEvent } from "../../controller/rasaPetition/Events/rasaSetSlotEvent";
 
 @Injectable()
 export class RasaProvider {

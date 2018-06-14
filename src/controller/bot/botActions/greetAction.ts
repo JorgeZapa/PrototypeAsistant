@@ -5,9 +5,9 @@ import { BotFlowController } from './../botFlow/botFlowController';
 import { BotResources } from "./../botResources";
 import { Config } from "./../../../constants/config";
 import { BotAction } from "./botAction";
-import { Message } from "../../messages/message";
+import { Message } from "../../../model/messages/message";
 import { BaseBotAction } from "./baseBotAction";
-import { User } from "../../User/User";
+import { User } from "../../../model/User/User";
 
 export class GreetAction extends BaseBotAction {
   constructor(botResources: BotResources, botFlowController: BotFlowController) {
@@ -46,6 +46,7 @@ export class GreetAction extends BaseBotAction {
   usualGreetings(user: User) {
     super.sendTextBotMessage("Hello again, " + user.name + "!");
     super.sendTextBotMessage("Let us talk about videogames!");
+    super.sendTextBotMessage("Which videogame did you play today?");
   }
 
 }
