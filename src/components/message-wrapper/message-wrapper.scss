@@ -12,12 +12,13 @@ message-wrapper {
 
     .right{
       justify-content: flex-end;
-      button{
+      .content{
         background-color: $userMessageColor;
-        order: 1;
+        order: 2;
       }
-      p{
-        order:2;
+      button{
+        order: 1;
+        background-color: $userMessageColor;
       }
     }
 

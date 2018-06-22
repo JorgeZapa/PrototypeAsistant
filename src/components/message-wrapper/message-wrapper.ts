@@ -10,7 +10,7 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
 export class MessageWrapperComponent {
 
   @Input()
-  message: Message;
+  private message: Message;
  
 
   constructor(private textToSpeech: TextToSpeech) {

@@ -1,4 +1,4 @@
-const BASE_URL = "http://192.168.0.31:5005";
+const BASE_URL = "http://192.168.43.131:5005";
 
 export const Endpoints = {
 

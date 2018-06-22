@@ -2,10 +2,8 @@ import { UserProvider } from "./../user/user";
 import { RasaEvent } from "./../../controller/rasaPetition/Events/rasaEvent";
 import { ActionResponse } from "./../../controller/rasaResponse/actionResponse";
 import { EndpointsProvider } from "./../endpoints/endpoints";
-import { Endpoints } from "./../../constants/endpoints";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Message } from "../../model/messages/message";
 import { Observable } from "rxjs/Observable";
 import { RasaSetSlotEvent } from "../../controller/rasaPetition/Events/rasaSetSlotEvent";
 
@@ -20,7 +18,7 @@ export class RasaProvider {
   parse(text: string): Observable<ActionResponse> {
     return this.http.post<ActionResponse>(
       this.endpointsProvider.getParseTextEndpoint(
-        this.userProvider.getLoggedUser().deviceId
+        this.userProvider.getCurrentUser().deviceId
       ),
       {
         query: text
@@ -37,7 +35,7 @@ export class RasaProvider {
   ): Observable<ActionResponse> {
     return this.http.post<ActionResponse>(
       this.endpointsProvider.getContinueEndpoint(
-        this.userProvider.getLoggedUser().deviceId
+        this.userProvider.getCurrentUser().deviceId
       ),
       {
         executed_action: lastExecutedAction,
@@ -52,7 +50,7 @@ export class RasaProvider {
   sendSetSlotsEvent(rasaEvent: RasaSetSlotEvent): Observable<ActionResponse> {
     return this.http.post<ActionResponse>(
       this.endpointsProvider.getSendEventEndpoint(
-        this.userProvider.getLoggedUser().deviceId
+        this.userProvider.getCurrentUser().deviceId
       ),
       [rasaEvent.getPayload()],
       {

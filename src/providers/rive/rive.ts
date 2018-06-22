@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 /*
   Generated class for the RiveProvider provider.
@@ -12,17 +11,15 @@ const RiveScript = require('rivescript');
 const riveBot = new RiveScript();
 @Injectable()
 export class RiveProvider{
-
-  private riveBot
-  constructor(private http: HttpClient) {
+  constructor() {
     riveBot.loadFile("assets/general_data.rive", ()=>{
       console.log("training data read")
     });
   }
 
-  reply(sendedMessage: string): string{ 
+  reply(sendedUtterance: string): string{ 
     riveBot.sortReplies();
-    return riveBot.reply('local-user', sendedMessage);
+    return riveBot.reply('local-user', sendedUtterance);
   }
 
 

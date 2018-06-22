@@ -8,7 +8,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { HttpModule } from '@angular/http';
 import {IonicStorageModule} from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation'
 import { SMS } from '@ionic-native/sms';
@@ -20,7 +19,7 @@ import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 import { MyApp } from './app.component';
 import { RasaProvider } from '../providers/rasa/rasa';
 import { EndpointsProvider } from '../providers/endpoints/endpoints';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserProvider } from '../providers/user/user';
 import { LocalDataProvider } from '../providers/local-data/local-data';
 import { LocationProvider } from '../providers/location/location';

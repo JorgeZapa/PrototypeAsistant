@@ -4,7 +4,7 @@ import {
   SpeechRecognition,
   SpeechRecognitionListeningOptions
 } from "@ionic-native/speech-recognition";
-import { Component, Input, EventEmitter, Output, NgModule } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { SpeechModalComponent } from "../speech-modal/speech-modal";
 
 @Component({
@@ -12,14 +12,14 @@ import { SpeechModalComponent } from "../speech-modal/speech-modal";
   templateUrl: "speech-button.html"
 })
 export class SpeechButtonComponent {
-  private havePermision: boolean;
+  private havePermission: boolean;
   private hearing = false;
 
   private speechModal : Modal;
 
   @Output() textOutputEvent = new EventEmitter<string>();
 
-  private options: SpeechRecognitionListeningOptions = {
+  private speechOptions: SpeechRecognitionListeningOptions = {
     showPopup: false,
     language: "en"
   };
@@ -38,11 +38,7 @@ export class SpeechButtonComponent {
   }
 
   start() {
-    /*if(!this.isDevice()){
-      console.log("Can not execute speech recognition plugin as you are not in cordova device");
-      return;
-    }*/
-    if (!this.havePermision) {
+    if (!this.havePermission) {
       this.speechRecognition
         .requestPermission()
         .then(res => this.processSpeech());
@@ -54,7 +50,6 @@ export class SpeechButtonComponent {
   private processSpeech() {
     this.speechRecognition.isRecognitionAvailable().then(available => {
       if (!available) {
-        //alert aqui
         console.log("speechRecognition not available in this device");
       } else {
         this.hearing=true;
@@ -64,17 +59,15 @@ export class SpeechButtonComponent {
         })
         this.speechModal.present();
 
-        this.speechRecognition.startListening(this.options).finally(()=>{
+        this.speechRecognition.startListening(this.speechOptions).finally(()=>{
           this.hearing=false;
           this.speechModal.dismiss();
         } ).subscribe(
           interpretedText => {
-            console.log(interpretedText.join(" "));
             this.textOutputEvent.emit(interpretedText[0]);
             this.speechModal.dismiss();
           },
           error => {
-            console.log("could not retireve text form speech");
             console.log(error);
             this.events.publish(
               Config.EventSend.SEND_BOT_MESSAGE,
@@ -87,14 +80,6 @@ export class SpeechButtonComponent {
   }
 
   stop() {
-    /*if(!this.isDevice()){
-      console.log("Can not execute speech recognition plugin as you are not in cordova device");
-      return;
-    }*/
     this.speechRecognition.stopListening().then();
-  }
-
-  private isDevice() {
-    this.platform.is("cordova");
   }
 }

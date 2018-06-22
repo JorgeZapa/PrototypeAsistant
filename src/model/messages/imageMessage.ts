@@ -2,7 +2,7 @@ import { Message } from "./message";
 
 export class ImageMessage extends Message {
 
-    path: string;
+    private path: string;
 
     constructor(path: string, isBotMessage:boolean){
         super(isBotMessage);

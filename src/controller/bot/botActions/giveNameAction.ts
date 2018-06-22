@@ -1,10 +1,7 @@
 import { BotFlowController } from './../botFlow/botFlowController';
 import { Config } from './../../../constants/config';
 import { BotResources } from './../botResources';
-import { BotAction } from "./botAction";
 import { BaseBotAction } from "./baseBotAction";
-import { Message } from '../../../model/messages/message';
-import { User } from '../../../model/User/User';
 
 export class GiveNameAction extends BaseBotAction {
 
@@ -12,7 +9,7 @@ export class GiveNameAction extends BaseBotAction {
 
     constructor(botResources: BotResources, botFlowController: BotFlowController,name: string ){
         super(botResources, botFlowController);
-        this.name=this.capitalizeFirstLetter(name);
+        this.name=this.capitalizeFirstLetterName(name);
     }
 
     getRasaEncodingName(): string {
@@ -22,12 +19,12 @@ export class GiveNameAction extends BaseBotAction {
     execute() {
        super.sendTextBotMessage("Nice to meet you "+ this.name +"!");
        super.sendTextBotMessage("Now i need to know a number to send a SOS to in case you get lost!");
-       this.botResources.getUserProvider().getLoggedUser().name=this.name;
+       this.botResources.getUserProvider().getCurrentUser().name = this.name;
        super.notifyFinished();
        return null;
     }
 
-    private capitalizeFirstLetter(string): string {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+    private capitalizeFirstLetterName(name: string): string {
+        return name.charAt(0).toUpperCase() + name.slice(1);
     }
 }

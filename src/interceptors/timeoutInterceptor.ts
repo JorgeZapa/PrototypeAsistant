@@ -1,6 +1,4 @@
 import { NoConnectionModalComponent } from './../components/no-connection-modal/no-connection-modal';
-import { ChatPage } from "./../pages/chat/chat";
-import { Config } from "./../constants/config";
 import { Events } from "ionic-angular";
 import { Observable } from "rxjs/Observable";
 import { Injectable } from "@angular/core";
@@ -10,13 +8,12 @@ import 'rxjs/add/operator/retryWhen';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/expand';
 
-import { ModalController, NavParams, AlertController } from "ionic-angular";
+import { ModalController, AlertController } from "ionic-angular";
 import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
-  HttpRequest,
-  HttpErrorResponse
+  HttpRequest
 } from "@angular/common/http";
 @Injectable()
 export class TimeoutInterceptor implements HttpInterceptor {
@@ -26,9 +23,8 @@ export class TimeoutInterceptor implements HttpInterceptor {
     public alertController: AlertController
   ) {}
 
-  secToRepeat = 5;
-
-  repeateRequest: boolean;
+  private readonly secToRepeat = 5;
+  
    intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -44,7 +40,6 @@ export class TimeoutInterceptor implements HttpInterceptor {
             countdown:this.secToRepeat
           }, {enableBackdropDismiss: false})
           modal.present();
-          console.log("hey");
           /*this.events.publish(
             Config.EventSend.SEND_BOT_MESSAGE,
             "NO connection"

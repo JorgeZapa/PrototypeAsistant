@@ -1,5 +1,4 @@
 import { BotFlowController } from './../botFlow/botFlowController';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import { Config } from './../../../constants/config';
 import { BotResources } from './../botResources';
@@ -13,16 +12,20 @@ export class DistanceAction extends BaseBotAction {
     }
 
     execute(): RasaEvent {
-    this.botResources.getLocationProvider().getCurrentLocation().finally(()=> this.notifyFinished()).subscribe(result1=>{
-        this.botResources.getLocationProvider().retrieveHomeLocation()
-        .subscribe((result2)=>{
-            console.log(result1);
-            console.log(result2);
-            if(result2==null){
+        console.log("hi");
+    this.botResources.getLocationProvider().getCurrentLocation().finally(()=> this.notifyFinished()).subscribe(currentLocation=>{
+        this.botResources.getLocationProvider().getHomeLocation()
+        .subscribe((homeLocation)=>{
+            console.log("currentLocation",currentLocation);
+            console.log("homeLocation",homeLocation);
+            if(homeLocation==null){
                 super.sendTextBotMessage("You need to save your home position so i can show you the distance.");
                 super.sendTextBotMessage("Remember you can change your home location by asking so!");
+                return;
             }
-            let distance = this.botResources.getLocationProvider().distanceBetweenPositions(result2,result1);
+            let distance = this.botResources.getLocationProvider().distanceBetweenPositions(homeLocation,currentLocation);
+
+            
             if(distance>2000){
                 distance= distance/1000;
                 super.sendTextBotMessage("You are "+ distance.toFixed(2) +" kilometers from home!");

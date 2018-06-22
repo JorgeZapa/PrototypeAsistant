@@ -12,7 +12,7 @@ export class GoHomeAction extends BaseBotAction {
 
     this.botResources
       .getLocationProvider()
-      .retrieveHomeLocation()
+      .getHomeLocation()
       .subscribe(
         position => {
           if(position== null){
@@ -25,8 +25,7 @@ export class GoHomeAction extends BaseBotAction {
             position.coordinates.longitude
           ];
           
-          super.sendTextBotMessage("I will open another application in your phone.");
-          super.sendTextBotMessage("It will show you the route");
+          super.sendTextBotMessage("I will open another application in your phone to show you the route");
           this.botResources
             .getLaunchNavigator()
             .navigate(coordinates)

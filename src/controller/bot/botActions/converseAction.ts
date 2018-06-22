@@ -7,18 +7,18 @@ import { Config } from "../../../constants/config";
 
 export class ConverseAction extends BaseBotAction {
 
-    text;
+    private userUtterance: string;
 
-    constructor(botResources: BotResources, botFlowController: BotFlowController, text: string){
+    constructor(botResources: BotResources, botFlowController: BotFlowController, userUtterance: string){
         super(botResources, botFlowController);
-        this.text=text;
+        this.userUtterance=userUtterance;
     }
 
 
     execute(): RasaEvent {
 
         let messages = this.botResources.getRiveProvider()
-                                        .reply(this.text)
+                                        .reply(this.userUtterance)
                                         .split("|");
         for(let message of messages){
             super.sendTextBotMessage(message);

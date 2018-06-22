@@ -1,5 +1,5 @@
+import { BotResources } from './../../controller/bot/botResources';
 import { RiveProvider } from './../../providers/rive/rive';
-import { ErrorHanlderProvider } from './../../providers/error-hanlder/error-hanlder';
 import { Config } from './../../constants/config';
 import { LaunchNavigator } from "@ionic-native/launch-navigator";
 import { SmsProvider } from "./../../providers/sms/sms";
@@ -8,8 +8,8 @@ import { UserProvider } from "./../../providers/user/user";
 import { Bot } from "./../../controller/bot/bot";
 import { RasaProvider } from "./../../providers/rasa/rasa";
 import { Message } from "./../../model/messages/message";
-import { Component, ViewChild, NgZone } from "@angular/core";
-import { IonicPage, NavController, NavParams, Content, Events, AlertController } from "ionic-angular";
+import { Component, ViewChild, NgZone, OnInit } from "@angular/core";
+import { IonicPage, NavController, NavParams, Content, Events, AlertController, IonicTapInput } from "ionic-angular";
 import "rxjs/add/operator/finally";
 import { TextMessage } from '../../model/messages/textMessage';
 
@@ -18,18 +18,15 @@ import { TextMessage } from '../../model/messages/textMessage';
   selector: "page-chat",
   templateUrl: "chat.html"
 })
-export class ChatPage {
-  bot: Bot;
-  sentMessages: Array<Message>;
-  currentMessage: string;
-  processing = true;
-  botName= Config.botName;
+export class ChatPage implements OnInit{
+  private bot: Bot;
+   sentMessages: Array<Message>;
+  private currentMessage: string;
+  private processing = true;
 
   @ViewChild(Content) content: Content;
 
   constructor(
-    private navCtrl: NavController,
-    private navParams: NavParams,
     private rasaProvider: RasaProvider,
     private userProvider: UserProvider,
     private locationProvider: LocationProvider,
@@ -41,37 +38,41 @@ export class ChatPage {
     private riveProvider: RiveProvider
   ) {}
 
+  ngOnInit(){
+    this.sentMessages = new Array<Message>();
+    this.bot = new Bot( new BotResources(
+      this.sentMessages,
+      this.rasaProvider,
+      this.content,
+      this.userProvider,
+      this.locationProvider,
+      this.smsProvider,
+      this.launchNavigator,
+      this.events,
+      this.alertController,
+      this.riveProvider
+    )
+    );
+  }
+
   ionViewDidLoad() {
-    this.userProvider.logUserIn().subscribe(res => {
-      this.sentMessages = new Array<Message>();
+    this.userProvider.prepareUserDeviceId().subscribe(res => {
       this.initEvents();
-      this.bot = new Bot(
-        this.sentMessages,
-        this.rasaProvider,
-        this.content,
-        this.userProvider,
-        this.locationProvider,
-        this.smsProvider,
-        this.launchNavigator,
-        this.events,
-        this.alertController,
-        this.riveProvider
-      );
       this.bot.welcomeUser();
     });
     this.currentMessage = "";
 
-    window.addEventListener('native.keyboardshow', ()=> this.content.scrollToBottom().then(()=> console.log("toBottom")));
+    window.addEventListener('native.keyboardshow', ()=> this.content.scrollToBottom().then());
   }
 
   sendMessage() {
     let message = new TextMessage(this.currentMessage, false);
     this.processing = true;
-    this.showAndClearMessage(message);
+    this.addMessageAndClear(message);
     this.bot.readUserMessage(message);
   }
 
-  private showAndClearMessage(message: Message) {
+  private addMessageAndClear(message: Message) {
     this.sentMessages.push(message);
     this.currentMessage = "";
   }
@@ -93,12 +94,12 @@ export class ChatPage {
 
   }
 
-  showMessageFromText(text: string){
+  addMessageFromText(text: string){
     this.sentMessages.push(new TextMessage(text,true));
   }
 
-  initEvents(){
-    this.events.subscribe(Config.EventSend.SEND_BOT_MESSAGE, (text: string)=> this.showMessageFromText(text));
+  private initEvents(){
+    this.events.subscribe(Config.EventSend.SEND_BOT_MESSAGE, (text: string)=> this.addMessageFromText(text));
     this.events.subscribe(Config.EventFinishProcessing.FINISH_PROCESSING, ()=> this.processing=false);
   }
 

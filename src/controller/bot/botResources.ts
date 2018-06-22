@@ -13,7 +13,6 @@ export class BotResources{
     private messageList: Array<Message>;
     private rasaProvider: RasaProvider;
     private content: Content;
-    private storage: Storage;
     private userProvider: UserProvider;
     private locationProvider: LocationProvider;
     private smsProvider: SmsProvider;

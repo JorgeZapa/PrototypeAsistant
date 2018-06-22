@@ -2,44 +2,42 @@ import { UniqueDeviceID } from "@ionic-native/unique-device-id";
 import { Observable } from "rxjs/Observable";
 import { LocalDataProvider } from "./../local-data/local-data";
 import { User } from "./../../model/User/User";
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Storage } from "@ionic/storage";
 
 @Injectable()
 export class UserProvider {
-  private loggedUser: User;
+  private currentUser: User;
 
   constructor(
     private localDataProvider: LocalDataProvider,
     private uniqueDeviceID: UniqueDeviceID
   ) {}
 
-  logUserIn(): Observable<void> {
+  prepareUserDeviceId(): Observable<void> {
     return new Observable<void>(subscriber => {
       this.localDataProvider.getUser().subscribe(user => {
         if (user == null) {
-          this.loggedUser = new User();
+          this.currentUser = new User();
           this.uniqueDeviceID
             .get()
             .then(res => {
               console.log(res);
-              this.loggedUser.deviceId = res;
+              this.currentUser.deviceId=res;
               console.log("no user was logged.");
               subscriber.next();
               subscriber.complete();
             })
             .catch(err => {
               console.log(err);
-              console.log("setting Force device ID");
-              this.loggedUser.deviceId = "PC" + Math.random();
+              console.log("Setting Force device ID");
+              this.currentUser.deviceId="PC" + Math.random();
               console.log("no user was logged.");
               subscriber.next();
               subscriber.complete();
             });
         } else {
           console.log(user);
-          this.loggedUser = user;
+          this.currentUser = user;
           console.log("user was logged once before.");
           subscriber.next();
           subscriber.complete();
@@ -49,14 +47,14 @@ export class UserProvider {
   }
 
   updateUser(): Observable<any> {
-    return this.localDataProvider.saveUser(this.loggedUser);
+    return this.localDataProvider.saveUser(this.currentUser);
   }
 
-  setLoggedUser(loggedUser: User) {
-    this.loggedUser = loggedUser;
+  setCurrentUser(currentUser: User) {
+    this.currentUser = currentUser;
   }
 
-  getLoggedUser(): User {
-    return this.loggedUser;
+  getCurrentUser(): User {
+    return this.currentUser;
   }
 }

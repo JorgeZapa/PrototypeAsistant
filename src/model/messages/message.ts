@@ -1,18 +1,16 @@
 
 export abstract class Message{
-    isBotMessage: boolean;
+    private botMessage: boolean;
 
-    constructor(isBotMessage: boolean){
-        this.isBotMessage = isBotMessage;
+    constructor(botMessage: boolean){
+        this.botMessage = botMessage;
     }
 
-    abstract getContent();
+    isBotMessage(): boolean{
+        return this.botMessage;
+    }
+    
 
-    /*checkImage(content: string){
-        if(content.endsWith(".jpg") && this.isBotMessage){
-            this.content= "assets/imgs/" + content;
-            this.isImage=true;
-        }
-      }*/
+    abstract getContent();
     
 }

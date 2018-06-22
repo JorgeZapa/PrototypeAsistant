@@ -1,4 +1,3 @@
-import { UserProvider } from './../../../providers/user/user';
 import { BotFlowController } from './../botFlow/botFlowController';
 import { Config } from './../../../constants/config';
 import { BotResources } from './../botResources';
@@ -13,8 +12,8 @@ export class LostAction extends BaseBotAction {
 
     execute(): RasaEvent {
         super.sendTextBotMessage("Sending SOS message...");
-        let confirmAlert = super.createConfirmAlert("Send SMS", "I am about to send an SMS are you sure you want to send it?",
-                    ()=>this.sendSOS(),()=>this.sendTextBotMessage("Okay i won't"))
+        let confirmAlert = super.createConfirmAlert("Send lost SMS", "I am about to send an SMS to the saved SOS number. Are you sure you want me to send it?",
+                    ()=>this.sendSOS(),()=>this.sendTextBotMessage("Okay i won't send it"))
         confirmAlert.present();
         
         return null;
@@ -24,11 +23,11 @@ export class LostAction extends BaseBotAction {
         this.botResources.getSmsProvider().sendSOSSMS() .finally(()=> this.notifyFinished()).subscribe(ok=>{
             super.sendTextBotMessage("SOS SENT!!!");
             super.sendTextBotMessage("Please don't move from there, "
-                             + this.botResources.getUserProvider().getLoggedUser().name);
+                             + this.botResources.getUserProvider().getCurrentUser().name);
         }, error=>{
             console.log(error);
             super.sendTextBotMessage("I couldn't send the SMS");
-            super.sendTextBotMessage("Please try to call to the SOS number: " + this.botResources.getUserProvider().getLoggedUser().getSosNumber());
+            super.sendTextBotMessage("Please try to call to the SOS number: " + this.botResources.getUserProvider().getCurrentUser().sosNumber);
         });
     }
     getRasaEncodingName(): string {

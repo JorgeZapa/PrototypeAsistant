@@ -12,9 +12,9 @@ import { Component } from '@angular/core';
 })
 export class SpeechModalComponent {
 
-  iconName = "volume-mute";
-  iconNames = ["volume-mute", "volume-down", "volume-up"];
-  iconCounter = 0;
+  private iconName = "volume-mute";
+  private iconNames = ["volume-mute", "volume-down", "volume-up"];
+  private iconCounter = 0;
 
 
   constructor() {

@@ -2,13 +2,13 @@ import { Message } from "./message";
 
 export class TextMessage extends Message {
 
-    text: string;
+    private text: string;
 
     constructor(text: string, isBotMessage:boolean){
         super(isBotMessage);
         this.text=text;
     }
-    getContent() {
+    getContent(): string {
         return this.text;
     }
 }

@@ -47,18 +47,18 @@ export class botFlowControllerImpl implements BotFlowController {
       });
   }
 
-  processUserMessage(message: string) {
+  processUserUtterance(utterance: string) {
 
-    let rEventBeforeParse = this.action.doBeforeParsing(message, this.previousAction);
+    let rEventBeforeParse = this.action.doBeforeParsing(utterance, this.previousAction);
 
     if(rEventBeforeParse!=null){
       this.botResources.getRasaProvider().sendSetSlotsEvent(rEventBeforeParse).subscribe()
-      message = "My name is a<afxawer>a";
+      utterance = "My name is a<afxawer>a";
     }
 
     this.botResources
       .getRasaProvider()
-      .parse(message)
+      .parse(utterance)
       .subscribe(
         res => {
           this.changeAction(ActionFactory.createActionFromResponse(
@@ -98,8 +98,6 @@ export class botFlowControllerImpl implements BotFlowController {
   }
 
   private checkActionAllowed(action: BotAction) {
-    console.log(this.botFlowConfig.getAllowedActions())
-    console.log(this.botFlowConfig.getAllowedActions().indexOf(action.getRasaEncodingName()))
     return (this.botFlowConfig.getAllowedActions().indexOf(action.getRasaEncodingName()) !=-1 
       ||  this.botFlowConfig.getAllowedActions().indexOf("*") != -1);
   }
@@ -111,7 +109,7 @@ export class botFlowControllerImpl implements BotFlowController {
     return false
   }
 
-  takeNextAction(lastExecutedAction: BotAction, rEvent: RasaEvent) {
+  private takeNextAction(lastExecutedAction: BotAction, rEvent: RasaEvent) {
     this.botResources
       .getRasaProvider()
       .continue(lastExecutedAction.getRasaEncodingName(), rEvent)
@@ -126,7 +124,7 @@ export class botFlowControllerImpl implements BotFlowController {
       );
   }
 
-  recursiveProcessAction(actResponse: ActionResponse) {
+  private recursiveProcessAction(actResponse: ActionResponse) {
     this.changeAction(ActionFactory.createActionFromResponse(
       actResponse,
       this.botResources,

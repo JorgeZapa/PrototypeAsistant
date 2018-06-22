@@ -76,15 +76,15 @@
 ^ How many cups do you have?{topic=cc}
 
 + i [love] ([usually] play|played|playing) * [today|all day|all day long|yesterday|(one|a) (week|month|year) ago]
-- <set unknownGame=<star2>> <star2>?... I don't know that videogame|
+- <set unknownGame={formal}<star2>{/formal}> {formal}<star2>{/formal}?... I don't know that videogame|
 ^ Is it a new one?{topic=unknown_game}
 
 + i (love|hate) * [a lot|so bad|so much]
-- <set unknownGame=<star2>> <star2>?... I don't know that videogame|
+- <set unknownGame={formal}<star2>{/formal}> {formal}<star2>{/formal}?... I don't know that videogame|
 ^ Is it a new one?{topic=unknown_game}
 
 + my (favourite|favorite) game is *
-- <set unknownGame=<star2>> <star2>?... I don't know that videogame|
+- <set unknownGame={formal}<star2>{/formal}> {formal}<star2>{/formal}?... I don't know that videogame|
 ^ Is it a new one?{topic=unknown_game}
 
 + i (do not play|hate) [any] (@videogame){weight=5}

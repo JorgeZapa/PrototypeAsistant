@@ -12,7 +12,7 @@ import { GiveNumberAction } from "./botActions/giveNumberAction";
 import { BotResources } from "./botResources";
 import { GreetAction } from "./botActions/greetAction";
 import { Config } from "./../../constants/config";
-import { ActionResponse, Slots } from "./../rasaResponse/actionResponse";
+import { ActionResponse } from "./../rasaResponse/actionResponse";
 import { GiveNameAction } from "./botActions/giveNameAction";
 import { WrongAction } from "./botActions/wrongAction";
 import { ConverseAction } from './botActions/converseAction';
@@ -27,7 +27,7 @@ export class ActionFactory {
      return this.createActionFromName(actionResponse.next_action, botResources,botFlowController ,actionResponse.tracker);
   }
 
-  static createActionFromName(actionName: string, botResources: BotResources, botFlowController: BotFlowController, tracker : Tracker): BotAction{
+   static createActionFromName(actionName: string, botResources: BotResources, botFlowController: BotFlowController, tracker : Tracker): BotAction{
     switch (actionName) {
       case Config.rasaSupportedActions.greet:
         return new GreetAction(botResources, botFlowController);

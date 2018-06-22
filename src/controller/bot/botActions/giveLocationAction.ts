@@ -2,9 +2,7 @@ import { DefaultFlowConfig } from './../botFlow/botFlowConfig/defaultFlowConfig'
 import { BotFlowController } from './../botFlow/botFlowController';
 import { Config } from "./../../../constants/config";
 import { BotResources } from "./../botResources";
-import { BotAction } from "./botAction";
 import { BaseBotAction } from "./baseBotAction";
-import { User } from "../../../model/User/User";
 
 export class GiveLocationAction extends BaseBotAction {
   constructor(botResources: BotResources, botFlowController: BotFlowController) {
@@ -39,7 +37,6 @@ export class GiveLocationAction extends BaseBotAction {
           super.sendTextBotMessage("Have you played any videogame today?");
         },
         error => {
-          console.log(error);
           super.sendTextBotMessage(
             "Something went wrong getting your location."
           );

@@ -1,7 +1,7 @@
 import { BotFlowConfig } from './botFlowConfig/botFlowConfig';
 export interface BotFlowController{
 
-   processUserMessage(message:string);
+   processUserUtterance(utterance:string);
 
    welcome();
 

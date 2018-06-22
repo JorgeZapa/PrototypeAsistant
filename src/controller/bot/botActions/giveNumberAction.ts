@@ -19,9 +19,8 @@ export class GiveNumberAction extends BaseBotAction {
     }
     execute() {
         super.sendTextBotMessage("Ok, i registered your SOS number!");
-        this.botResources.getUserProvider().getLoggedUser().sosNumber=this.phoneNumber;
+        this.botResources.getUserProvider().getCurrentUser().sosNumber=this.phoneNumber;
         this.botResources.getUserProvider().updateUser().finally(()=> this.notifyFinished()).subscribe(ok=>{},error=>{
-            console.log(error);
             super.sendTextBotMessage("I couldn't save your data, when you come back i might not remember you...");
         });
         return new RasaRestartSlotsEvent();

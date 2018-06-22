@@ -16,14 +16,13 @@ export class ListenAction extends BaseBotAction {
         return Config.rasaSupportedActions.listen;
     }
     execute() {
-        console.log("listen");
         this.notifyFinished();
         return null;
     }
 
     doBeforeParsing(messageContent: string, previousAction: BotAction){
-    let loggedUser = this.botResources.getUserProvider().getLoggedUser();
-    if (loggedUser.name == null && messageContent.split(" ").length==1
+    let currentUser = this.botResources.getUserProvider().getCurrentUser();
+    if (currentUser.name == null && messageContent.split(" ").length==1
             && (previousAction instanceof GreetAction || previousAction instanceof NoNameAction)) {
       return new RasaSetSlotEvent("PERSON",messageContent);
     }

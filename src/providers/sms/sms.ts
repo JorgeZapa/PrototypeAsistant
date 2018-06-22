@@ -5,9 +5,7 @@ import { Config } from "./../../constants/config";
 import { Platform, Events } from "ionic-angular";
 import { SMS } from "@ionic-native/sms";
 import { LocationProvider } from "./../location/location";
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { SimpleGeoposition } from "../../model/geolocation/simpleGeolocation";
 
 /*
   Generated class for the SmsProvider provider.
@@ -35,7 +33,7 @@ export class SmsProvider {
             console.log("Message would be:\n" + smsText);
             return;
           } else {
-            let userNumber = this.userProvider.getLoggedUser().sosNumber;
+            let userNumber = this.userProvider.getCurrentUser().sosNumber;
             if (userNumber == null) {
               this.events.publish(
                 Config.EventSend.SEND_BOT_MESSAGE,
@@ -62,7 +60,7 @@ export class SmsProvider {
     });
   }
 
-  private buildSMSMessage(coord: SimpleCoordinates): string {
+  private buildSMSMessage(coord: Coordinates): string {
     return Config.templateSMSMessage
       .replace("{lat}", String(coord.latitude))
       .replace("{lon}", String(coord.longitude));

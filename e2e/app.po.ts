@@ -27,7 +27,7 @@ export class Page {
     return element.all(by.id('messages')).count();
   }
 
-  sendMessage(message: string): Promise<String>{
+  sendMessage(message: string){
     return new Promise((resolve, reject)=>{
       let textArea = element(by.css("#messageInput textArea"));
       textArea.sendKeys(message).then(()=>{

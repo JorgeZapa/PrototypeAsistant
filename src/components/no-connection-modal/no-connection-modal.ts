@@ -13,9 +13,9 @@ import { Component } from '@angular/core';
 })
 export class NoConnectionModalComponent {
 
-  countdown: number;
-  title: string;
-  message: string;
+  private countdown: number;
+  private title: string;
+  private message: string;
 
   constructor(navParams: NavParams, public viewController: ViewController) {
     this.countdown = navParams.get("countdown");
