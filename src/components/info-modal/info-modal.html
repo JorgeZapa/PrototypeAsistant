@@ -1,0 +1,32 @@
+<ion-content>
+  <div>
+  <h1> Hello!</h1>
+  <p> I am ludobot, the gamer chatbot!</p>
+
+  <h2>What can i do?</h2>
+  <p>Apart from talking with you about videogames,
+    especially my favorite ones such as Fortnite, Clash of Clans and Clash Royale,
+    i can do the following:
+  </p>
+  <table>
+    <tr>
+      <th>
+        You say something like
+      </th>
+      <th>
+        What i do
+      </th>
+    </tr>
+    <tr *ngFor="let info of functionalityInfos" >
+      <td>
+        {{info.example}}
+      </td>
+      <td>
+        {{info.description}}
+      </td>
+    </tr>
+  </table>
+
+  <p>I am currently in version {{version}} and still learning!</p>
+</div>
+</ion-content>

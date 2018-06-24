@@ -75,7 +75,7 @@
 - <set knowknGame=Clash of Clans> Oh, i love that game!|
 ^ How many cups do you have?{topic=cc}
 
-+ i [love] ([usually] play|played|playing) * [today|all day|all day long|yesterday|(one|a) (week|month|year) ago]
++ i [love|usually|use to] (play|played|playing) * [today|all day|all day long|yesterday|(one|a) (week|month|year) ago]
 - <set unknownGame={formal}<star2>{/formal}> {formal}<star2>{/formal}?... I don't know that videogame|
 ^ Is it a new one?{topic=unknown_game}
 
@@ -284,13 +284,18 @@
 - I sometimes play one player games too! So refreshing!|
 ^ Tell me more about the game!
 
-+ (in|on|it is for|you can play it on) *
++ [*] [played| play] [it] (in|on|it is for|you can play it on) *
 - <set gamePlatform=<star2>> I don't remeber if i have a <star2>.... If i have one i will give a try!|
 ^ Anyway this game sounds good!|
 ^ Tell me more about the game!
 
 + *
-* <get gamePlatform> == undefined => In which platform can you play this game called "<get unknownGame>"?
+% * which platform *
+- I didn't understand the platform you said|
+^ Try to say it in a sentence "like i play it on PC"
+
++ *
+* <get gamePlatform> == undefined => In which platform do you play this game called "<get unknownGame>"?
 - I didn't get all of it but <get unknownGame> sound interesting|
 ^ Tell me more about the game
 - <set gamePlatform=undefined> Interesting... I might give <get unknownGame> a try!|

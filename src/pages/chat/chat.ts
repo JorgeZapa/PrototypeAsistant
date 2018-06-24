@@ -1,3 +1,4 @@
+import { InfoModalComponent } from './../../components/info-modal/info-modal';
 import { BotResources } from './../../controller/bot/botResources';
 import { RiveProvider } from './../../providers/rive/rive';
 import { Config } from './../../constants/config';
@@ -9,7 +10,7 @@ import { Bot } from "./../../controller/bot/bot";
 import { RasaProvider } from "./../../providers/rasa/rasa";
 import { Message } from "./../../model/messages/message";
 import { Component, ViewChild, NgZone, OnInit } from "@angular/core";
-import { IonicPage, NavController, NavParams, Content, Events, AlertController, IonicTapInput } from "ionic-angular";
+import { IonicPage, NavController, NavParams, Content, Events, AlertController, IonicTapInput, ModalController } from "ionic-angular";
 import "rxjs/add/operator/finally";
 import { TextMessage } from '../../model/messages/textMessage';
 
@@ -35,7 +36,8 @@ export class ChatPage implements OnInit{
     private events: Events,
     private ngZone: NgZone,
     private alertController: AlertController,
-    private riveProvider: RiveProvider
+    private riveProvider: RiveProvider,
+    private modalctl: ModalController
   ) {}
 
   ngOnInit(){
@@ -96,6 +98,10 @@ export class ChatPage implements OnInit{
 
   addMessageFromText(text: string){
     this.sentMessages.push(new TextMessage(text,true));
+  }
+
+  showInfo(){
+    this.modalctl.create(InfoModalComponent,{}, {enableBackdropDismiss: true, showBackdrop:true}).present();    
   }
 
   private initEvents(){

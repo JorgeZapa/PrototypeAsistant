@@ -6,17 +6,20 @@ import { SpeechButtonComponent } from './speech-button/speech-button';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { NoConnectionModalComponent } from './no-connection-modal/no-connection-modal';
 import { SpeechModalComponent } from './speech-modal/speech-modal';
+import { InfoModalComponent } from './info-modal/info-modal';
 @NgModule({
 	declarations: [MessageWrapperComponent,
     SpeechButtonComponent,
     NoConnectionModalComponent,
-    SpeechModalComponent],
+    SpeechModalComponent,
+    InfoModalComponent],
 	imports: [SpeechRecognition,
 	LongPressModule,
     TextToSpeech],
 	exports: [MessageWrapperComponent,
     SpeechButtonComponent,
     NoConnectionModalComponent,
-    SpeechModalComponent]
+    SpeechModalComponent,
+    InfoModalComponent]
 })
 export class ComponentsModule {}

@@ -40,10 +40,6 @@ export class TimeoutInterceptor implements HttpInterceptor {
             countdown:this.secToRepeat
           }, {enableBackdropDismiss: false})
           modal.present();
-          /*this.events.publish(
-            Config.EventSend.SEND_BOT_MESSAGE,
-            "NO connection"
-          );*/
         }
       ).retryWhen(error =>{
         return error.delay(this.secToRepeat*1000+15);

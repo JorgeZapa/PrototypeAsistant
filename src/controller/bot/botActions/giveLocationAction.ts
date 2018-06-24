@@ -29,11 +29,8 @@ export class GiveLocationAction extends BaseBotAction {
         ok => {
           super.sendTextBotMessage("We are all set!");
           super.sendTextBotMessage("Want to know what i can do?")
-          super.sendTextBotMessage("-> Change your home location");
-          super.sendTextBotMessage("-> Show you the distance to your home location")
-          super.sendTextBotMessage("-> Show you the route to your home location")
-          super.sendTextBotMessage("-> Send an SOS numer to the number you registered if you get lost");
-          super.sendTextBotMessage("Just let me know, now that we are all set...");
+          super.sendTextBotMessage("Press the information button above or just explore!");
+          super.sendTextBotMessage("Now that we are all set...");
           super.sendTextBotMessage("Have you played any videogame today?");
         },
         error => {

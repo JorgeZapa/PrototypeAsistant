@@ -1,5 +1,6 @@
 export const Config = {
   botName: "Ludobot",
+  version:"1.0",
   EventErrors: {
     NO_CONNECTION: "NO_CONNECTION"
   },
@@ -31,11 +32,10 @@ export const Config = {
   },
   confidenceThreshold:{
     listen: 0,
-    lost: 0.50,
-    distance: 0.38,
-    go_home: 0.48,
-    change_location: 0.31,
-
+    lost: 0.522061735,
+    distance: 0.438319301,
+    go_home: 0.47887404,
+    change_location: 0.353202307,
   },
   StateBotAllowedActions:{
     welcome:["utter_give_location",

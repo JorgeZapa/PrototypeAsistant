@@ -18,7 +18,7 @@ export class GiveNameAction extends BaseBotAction {
 
     execute() {
        super.sendTextBotMessage("Nice to meet you "+ this.name +"!");
-       super.sendTextBotMessage("Now i need to know a number to send a SOS to in case you get lost!");
+       super.sendTextBotMessage("Now i need to know a number to send a SOS in case you get lost!");
        this.botResources.getUserProvider().getCurrentUser().name = this.name;
        super.notifyFinished();
        return null;

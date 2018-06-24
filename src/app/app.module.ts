@@ -1,3 +1,4 @@
+import { InfoModalComponent } from './../components/info-modal/info-modal';
 import { NoConnectionModalComponent } from './../components/no-connection-modal/no-connection-modal';
 import { TimeoutInterceptor } from './../interceptors/timeoutInterceptor';
 import { SpeechButtonComponent } from './../components/speech-button/speech-button';
@@ -35,7 +36,8 @@ import { SpeechModalComponent } from '../components/speech-modal/speech-modal';
     MessageWrapperComponent,
     SpeechButtonComponent,
     NoConnectionModalComponent,
-    SpeechModalComponent
+    SpeechModalComponent,
+    InfoModalComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { SpeechModalComponent } from '../components/speech-modal/speech-modal';
     MyApp,
     ChatPage,
     NoConnectionModalComponent,
-    SpeechModalComponent
+    SpeechModalComponent,
+    InfoModalComponent
   ],
   providers: [
     StatusBar,

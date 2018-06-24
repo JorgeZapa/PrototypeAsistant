@@ -1,11 +1,14 @@
 
 <ion-header>
   <div name="botPic">
-    <img src="assets/imgs/happyLudobot.png" />
+    <img class=profilePhoto src="assets/imgs/happyLudobot.png" />
   </div>
   <div class="description">
-    <div class="name">{{bot.name}}</div>
+    <img class=logoPhoto src="assets/imgs/LudobotLogoNoBg.png"/>
   </div>
+  <button id="buttonInfo" large ion-button icon-only item-right (click)="showInfo()">
+    <ion-icon name="information-circle"></ion-icon>
+  </button>
 </ion-header>
 
 

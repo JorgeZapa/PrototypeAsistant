@@ -1,0 +1,64 @@
+info-modal {
+
+    $HighLight: rgb(29, 191, 206);
+    $NormalTextColor: rgb(87, 87, 87);
+
+    div{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    ion-footer{
+        height:100%;
+    }
+
+    h1{
+        padding-top:15px;
+        font-size: 24px;
+        margin: 5px;
+        font-weight: 600;
+        line-height: 21px;
+        text-align: center;
+        text-transform: uppercase;
+        color:$HighLight;
+    }
+
+    h2{
+        font-size: 17px;
+        line-height: 25px;
+        text-align: center;
+        color:$HighLight;
+    }
+
+    p{
+        color: $NormalTextColor;
+        font-size: 14px;
+    }
+
+    table{
+        border-collapse: collapse;
+    }
+
+    th{
+        background-color: rgb(223, 255, 255);
+    }
+
+    table{
+       margin: auto;
+    }
+    table, th, td {
+        border: 1px solid rgb(41, 160, 150);
+    }
+
+    td{
+        color: $NormalTextColor;
+        padding-top:10px;
+        padding-bottom: 10px;
+    }
+    th{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+
+}
