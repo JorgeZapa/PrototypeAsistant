@@ -56,7 +56,7 @@
 
 //Starting flow -> general porpuse and asking for a game
 
-+ who are you
++ (who are you|what is your name)
 * <get askedBot> == undefined => <set askedBot= true> Let me refresh your memory!|
 ^ I am <bot name>, the incredible gamer chatbot.|
 ^ Which videogame did you play today?
@@ -93,7 +93,7 @@
 
 + (what is your|do you have any) (favourite|favorite) (@videogame)
 - <set suggestedGame=fort> Today i really liked playing Fortnite|
-^ Do you know that game?
+^ Do you know that game?{weight=80}
 - <set suggestedGame=cr> Today i really liked playing Clash Royale|
 ^ Do you know that game?
 - <set suggestedGame=cc> Today i really liked playing Clash of Clans|
@@ -121,7 +121,8 @@
 
 +*
 - I didn't understand that, try to say it in a different way!|
-^ Which game do you usually play?
+^ Remember that if you have doubts you can get information in the button above|
+^ Or you can tell me which game do you usually play
 
 
 //GAME 1 - Fortnite
@@ -140,6 +141,17 @@
 - Don't worry, i know it is difficult to win|
 ^ Took me MONTHS to win one!|
 ^ What is your favourite thing to build?
+
++[*] i [have] never (won|win) a [whole] game [*] {weight=10}
+% * won a whole *
+- Don't worry, i know it is difficult to win|
+^ Took me MONTHS to win one!|
+^ What is your favourite thing to build?
+
++ [*] (wall|walls) [*]
+% favourite thing to build
+- I love those too!|
+^ Do you play with friends?
 
 + *
 % * favourite thing to build
@@ -160,8 +172,7 @@
 
 
 + *
-- Wow you sound like an expert...|
-^ I am feeling intimidated!|
+- Wow what is interesting!|
 ^ Which other game do you usually play?{weight=70}{topic=random}
 
 < topic
@@ -186,8 +197,8 @@
 
 + [*] # [*]
 % * many legendary*
-- <set legendaryCards=<start>>you do have <star> legendary cards... That explains the arena you are in!|
-^ Do you use them frecuently?
+- <set legendaryCards=<start>>You do have <star> legendary cards... That explains why you are in that arena|
+^ Which ones are your favorites?
 
 + *
 * <get arenaLvl> == undefined => I didn't get that but...|
@@ -195,8 +206,6 @@
 * <get legendaryCards> == undefined => I am having trouble understanding you...|
 ^ You might be a genious or something!|
 ^ How many legendary cards do you have?
-- I think you know too much about the game... i can't follow!|
-^ Which other game do you usually play?{topic=random} 
 - I see...|
 ^ You are an amazing player!|
 ^ But is it just in this game or in others too?|
@@ -256,15 +265,26 @@
 
 > topic unknown_game
 
-+ [*](@affirmative| new [one|game|videogame])[*]
++ [*](new [one|game|videogame])[*]
 % *new one [*]
 - Really? Sound promissing to me|
 ^ What is it about?
 
-+ [*](@negative | old [one])[*]
++ [*] (@affirmative) [*]
+% *new one [*]
+- Really? Sound promissing to me|
+^ What is it about?
+
++ [*](old [one]|more or less)[*]
 % *new one [*]
 - For real? And i don't know about it?!|
 ^ What is it about? i need to know!
+
++ [*](@negative)[*]
+% *new one [*]
+- For real? And i don't know about it?!|
+^ What is it about? i need to know!
+
 
 + [*] about *
 - Hmmm i see, not really my favorite kind of gamestyle|
@@ -284,15 +304,21 @@
 - I sometimes play one player games too! So refreshing!|
 ^ Tell me more about the game!
 
-+ [*] [played| play] [it] (in|on|it is for|you can play it on) *
-- <set gamePlatform=<star2>> I don't remeber if i have a <star2>.... If i have one i will give a try!|
++ [*] [played| play] [it] (in|on|it is for|you can play it on) * {weight=10}
+- <set gamePlatform=<star2>> I don't remeber if i have a <star2>.... If i have one i will give it a try!|
+^ Anyway this game sounds good!|
+^ Tell me more about the game!
+
++ [*] [played| play] [it] (in|on|it is for|you can play it on) * {weight=10}
+% * which platform *
+- <set gamePlatform=<star2>> I don't remeber if i have a <star2>.... If i have one i will give it a try!|
 ^ Anyway this game sounds good!|
 ^ Tell me more about the game!
 
 + *
 % * which platform *
 - I didn't understand the platform you said|
-^ Try to say it in a sentence "like i play it on PC"
+^ Try to say it in a sentence like "i play it on PC"
 
 + *
 * <get gamePlatform> == undefined => In which platform do you play this game called "<get unknownGame>"?
@@ -314,6 +340,11 @@
 ^ My winning streak record is 10 games in a row!|
 ^ Do you have a winning streak record?
 
++ [*] (@negative) [*]
+% *solitarie[*]
+- I have never met someone that does not play ANY videogames before|
+^ What do you do in your freetime?
+
 + [*] # [*]
 % * mine is 10 *
 - <set WinningStreak=<star>> Hmmm so <star> times...|
@@ -327,32 +358,29 @@
 - You are better than me... A legend in solitarie!|
 ^ I got bored, ask a friend to talk with me about videogames!{topic=random}
 
-+ (i do not have a record|i do not know|(@negative))
-% * mine is 10 *
++ (i do not have a record|i do not know)
+% * have a winning *
+- Really? It is the most important thing in the game!|
+^ I got bored, ask a friend to talk with me about videogames!{topic=random}
+
++ [*](@negative) [*]
+% * have a winning *
 - Really? It is the most important thing in the game!|
 ^ I got bored, ask a friend to talk with me about videogames!{topic=random}
 
 + i [have] (did not|never) [ever] (count|counted) [*]
-% * mine is 10 *
+% * have a winning *
 - That is bad! You should count them!|
 ^ I got bored, ask a friend to talk with me about videogames!{topic=random}
 
-+[*] (@negative) [*]
-% * solitarie[*]
-- I am speechless!|
-^ I have never met someone that have never played a videogame before...|
-^ So... May i ask:|
-^ What do you do in your freetime?
-
-
-+ [*] i (like| prefer|love) [to] (read|reading)
++ [*] i [like| prefer|love] [to] (read|reading)
 % * never met *
 - I don't really like reading...|
 ^ I am way faster at reading than humans are!|
 ^ That is why i just want to play videogames!|
 ^ I got bored, ask a friend to talk with me about videogames!{topic=random}
 
-+ [*] i (like|prefer|love) [to] (read|reading) *
++ [*] i [like|prefer|love] [to] (read|reading) *
 % * never met *
 - I don't really like reading...|
 ^ I am way faster at reading than humans are!|

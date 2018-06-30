@@ -32,19 +32,19 @@ export const Config = {
   },
   confidenceThreshold:{
     listen: 0,
-    lost: 0.522061735,
-    distance: 0.438319301,
-    go_home: 0.47887404,
-    change_location: 0.353202307,
+    lost: 0.519032294,
+    distance: 0.434785436,
+    go_home: 0.470359587,
+    change_location: 0.313818387,
   },
-  StateBotAllowedActions:{
+  configFlowAllowedActions:{
     welcome:["utter_give_location",
     "utter_give_name","utter_give_number", "utter_no_name",
     "utter_no_number"],
     default:["action_listen", "utter_lost", "utter_distance","converse",  "utter_change_location", "utter_go_home"]
   },
   templateSMSMessage:
-    "This is a message from Demencio. \n" +
-    "As this number was registered as SOS number we are sending you the coordinates of the lost client: \n" +
+    "This is a message from Ludobot. \n" +
+    "As this number was registered as SOS number we are sending you the coordinates where {name} is: \n" +
     "Latitude: {lat} \nLongitude: {lon} ."
 };

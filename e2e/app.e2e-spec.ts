@@ -17,19 +17,19 @@ describe('App', () => {
     it('The welcome flow must work as expected', ()=>{
       page.sendMessage("My name is adascdczx<casdqw").then(()=>{
         page.getPageMessage(5).then(content=>{
-          expect(content).toEqual("I didn't understand your name...");
+          expect("I didn't understand your name...").toEqual(content);
         });
         page.sendMessage("My name is Jorge").then(()=>{
           page.getLastMessage().then(content=>{
-            expect(content).toEqual("Now i need to know a number to send a SOS to in case you get lost!");
+            expect("Now i need to know a number to send a SOS in case you get lost!").toEqual(content);
           });
           page.sendMessage("I invent my number 23").then(()=>{
             page.getLastMessage().then(content=>{
-              expect(content).toEqual("Maybe there was a mistake in it, remember that it contains 9 numbers");
+              expect("Maybe there was a mistake in it, remember that it contains 9 numbers (without spaces)").toEqual(content);
             });
             page.sendMessageWithTime("987456132",7000).then(()=>{
               page.getLastMessage().then(content=>{
-                expect(content).toEqual("Have you played any videogame today?");
+                expect("Have you played any videogame today?").toEqual(content);
               })
             })
             
@@ -45,31 +45,31 @@ describe('App', () => {
       it("A Fortnite",()=>{
           page.sendMessage("Who are you?").then(()=>{
             page.getLastMessage().then(content=>{
-              expect(content).toEqual("Which videogame did you play today?");
+              expect("Which videogame did you play today?").toEqual(content);
             })
             page.sendMessage("I haven't played any videogames today").then(()=>{
               page.getLastMessage().then(content=>{
-                expect(content).toEqual("Which game do you usually play?");
+                expect("Which game do you usually play?").toEqual(content);
               })
               page.sendMessage("I usually play Fortnite").then(()=>{
                 page.getLastMessage().then(content=>{
-                  expect(content).toEqual("Have you ever won a whole game?");
+                  expect("Have you ever won a whole game?").toEqual(content);
                 })
                 page.sendMessage("Yes").then(()=>{
                   page.getLastMessage().then((content)=>{
-                    expect(content).toEqual("What is your favourite thing to build?");
+                    expect("What is your favourite thing to build?").toEqual(content);
                   })
                   page.sendMessage("anything").then(()=>{
                     page.getLastMessage().then((content)=>{
-                      expect(content).toEqual("Do you play with friends?");
+                      expect("Do you play with friends?").toEqual(content);
                     })
                     page.sendMessage("I play with friends").then(()=>{
                       page.getLastMessage().then((content)=>{
-                        expect(content).toEqual("Tell me more about how do you play!");
+                        expect("Tell me more about how do you play!").toEqual(content);
                       })
                       page.sendMessage("anything").then(()=>{
                         page.getLastMessage().then((content)=>{
-                          expect(content).toEqual("Which other game do you usually play?");
+                          expect("Which other game do you usually play?").toEqual(content);
                         })
                       })
                     })
@@ -86,18 +86,18 @@ describe('App', () => {
 
       it("C - Clash Royale", ()=>{
         page.sendMessageGetLastOne("I love to play Clash Royale").then(content=>{
-          expect(content).toEqual("What is your arena level?");
+          expect("What is your arena level?").toEqual(content);
           page.sendMessageGetLastOne("Anything").then(content=>{
-            expect(content).toEqual("What is your arena level?");
+            expect("What is your arena level?").toEqual(content);
             //6 one more than 5 boundary value
             page.sendMessageGetLastOne("My arena level is 6").then(content=>{
-              expect(content).toEqual("How many legendary cards do you have?");
+              expect("How many legendary cards do you have?").toEqual(content);
               page.sendMessageGetLastOne("Anything").then(content=>{
-                expect(content).toEqual("How many legendary cards do you have?");
+                expect("How many legendary cards do you have?").toEqual(content);
                 page.sendMessageGetLastOne("5").then(content=>{
-                  expect(content).toEqual("Do you use them frecuently?");
+                  expect("Which ones are your favorites?").toEqual(content);
                   page.sendMessageGetLastOne("Anything").then(content=>{
-                    expect(content).toEqual("Which other game do you usually play?");
+                    expect("Which other game do you usually play?").toEqual(content);
                   })
                 })
               })
@@ -110,7 +110,7 @@ describe('App', () => {
 
       it("D - Clash Royale", ()=>{
         page.sendMessageGetLastOne("bla bla bla Clash royale bla bla !!").then(content=>{
-          expect(content).toEqual("What is your arena level?");
+          expect("What is your arena level?").toEqual(content);
           //equal to 5 boundary
           page.sendMessageGetLastOne("5").then(content=>{
             expect("Which other game do you usually play?").toEqual(content);
@@ -160,7 +160,7 @@ describe('App', () => {
               page.sendMessageGetLastOne("It is multiplayer").then(content=>{
                 expect("Tell me more about the game!").toEqual(content);
                 page.sendMessageGetLastOne("Anything").then(content=>{
-                  expect('In which platform can you play this game called "animal crossing"?').toEqual(content);
+                  expect('In which platform do you play this game called "Animal Crossing"?').toEqual(content);
                   page.sendMessageGetLastOne("You can play it on PC").then(content=>{
                     expect("Tell me more about the game!").toEqual(content);
                     page.sendMessageGetLastOne("Anything").then(content=>{
@@ -179,9 +179,9 @@ describe('App', () => {
         page.sendMessageGetLastOne("i played Animal Crossing").then(content=>{
           expect("Is it a new one?").toEqual(content);
           page.sendMessageGetLastOne("Anything").then(content=>{
-            expect('In which platform can you play this game called "animal crossing"?').toEqual(content);
+            expect('In which platform do you play this game called "Animal Crossing"?').toEqual(content);
             page.sendMessageGetLastOne("Anything").then(content=>{
-              expect('In which platform can you play this game called "animal crossing"?').toEqual(content);
+              expect('Try to say it in a sentence like "i play it on PC"').toEqual(content);
               page.sendMessageGetLastOne("On PSP").then(content=>{
                 expect("Tell me more about the game!").toEqual(content);
                 page.sendMessageGetLastOne("Anything").then(content=>{
@@ -252,13 +252,16 @@ describe('App', () => {
     //M - Start
 
     it("M - Start", ()=>{
-      page.sendMessageGetLastOne("What is your favourite game?").then(content=>{
-        expect("Do you know that game?").toEqual(content);
-        page.sendMessageGetLastOne("Nop").then(content=>{
-          expect("Which game do you usually play?").toEqual(content);
+      page.sendMessageGetLastOne("Anything").then(content=>{
+        expect("Or you can tell me which game do you usually play").toEqual(content);
+        page.sendMessageGetLastOne("What is your favourite game?").then(content=>{
+          expect("Do you know that game?").toEqual(content);
+          page.sendMessageGetLastOne("Nop").then(content=>{
+            expect("Which game do you usually play?").toEqual(content);
+          })
         })
       })
-    })
+      })
 
 
 

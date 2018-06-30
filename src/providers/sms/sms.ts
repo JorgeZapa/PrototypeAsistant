@@ -63,7 +63,8 @@ export class SmsProvider {
   private buildSMSMessage(coord: Coordinates): string {
     return Config.templateSMSMessage
       .replace("{lat}", String(coord.latitude))
-      .replace("{lon}", String(coord.longitude));
+      .replace("{lon}", String(coord.longitude))
+      .replace("{name}", this.userProvider.getCurrentUser().name);
   }
 
   private isDevice() {

@@ -39,6 +39,7 @@
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "cordova-android": "6.3.0",
+    "cordova-ios": "4.5.4",
     "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-dialogs": "^2.0.1",
@@ -102,7 +103,8 @@
       "cordova-plugin-uniquedeviceid": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

@@ -11,9 +11,12 @@ export class LostAction extends BaseBotAction {
     }
 
     execute(): RasaEvent {
-        super.sendTextBotMessage("Sending SOS message...");
+        super.sendTextBotMessage("You seem lost, want me to send an SOS SMS?");
         let confirmAlert = super.createConfirmAlert("Send lost SMS", "I am about to send an SMS to the saved SOS number. Are you sure you want me to send it?",
-                    ()=>this.sendSOS(),()=>this.sendTextBotMessage("Okay i won't send it"))
+                    ()=>{
+                        super.sendTextBotMessage("Sending SOS message...");
+                        this.sendSOS()
+                    },()=>this.sendTextBotMessage("Okay i won't send it"))
         confirmAlert.present();
         
         return null;

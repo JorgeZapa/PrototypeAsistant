@@ -7,7 +7,7 @@
     <p *ngIf="!isImage()">{{message?.getContent()}}</p> 
     <img [src]="message?.getContent()" *ngIf="isImage()"/>
   </div>
-  <button *ngIf="!isImage()" ion-button round="true" (click)=readSpeech()>
+  <button *ngIf="!isImage() && message.isBotMessage()" ion-button round="true" (click)=readSpeech()>
     <ion-icon name="headset"></ion-icon>
   </button>
   </div>
